@@ -1,4 +1,4 @@
-package course1778.mobileapp.medisafe;
+package course1778.mobileapp.medisafe.Main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,8 @@ import android.util.Log;
 
 import com.parse.ParseAnonymousUtils;
 import com.parse.ParseUser;
+
+import course1778.mobileapp.medisafe.Authentication.LoginSignupActivity;
 
 public class MainActivity extends AppCompatActivity {
 

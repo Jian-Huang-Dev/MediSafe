@@ -12,7 +12,7 @@
     https://commonsware.com/Android
  */
 
-package course1778.mobileapp.medisafe;
+package course1778.mobileapp.medisafe.Helpers;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -21,10 +21,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
   private static final String DATABASE_NAME="notification.db";
   private static final int SCHEMA=1;
-  static final String TITLE="title";
-  static final String TIME_H="time_h";
-  static final String TIME_M="time_m";
-  static final String TABLE="notification";
+  public static final String TITLE="title";
+  public static final String TIME_H="time_h";
+  public static final String TIME_M="time_m";
+  public static final String TABLE="notification";
 
   public DatabaseHelper(Context context) {
     super(context, DATABASE_NAME, null, SCHEMA);

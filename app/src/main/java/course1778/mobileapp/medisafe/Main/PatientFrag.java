@@ -1,4 +1,4 @@
-package course1778.mobileapp.medisafe;
+package course1778.mobileapp.medisafe.Main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,6 +20,10 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.List;
+
+import course1778.mobileapp.medisafe.Helpers.DatabaseHelper;
+import course1778.mobileapp.medisafe.Helpers.Helpers;
+import course1778.mobileapp.medisafe.R;
 
 /**
  * Created by jianhuang on 16-03-03.

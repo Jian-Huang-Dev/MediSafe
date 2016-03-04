@@ -1,4 +1,4 @@
-package course1778.mobileapp.medisafe;
+package course1778.mobileapp.medisafe.NotificationService;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -10,6 +10,8 @@ import android.os.SystemClock;
 import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
+
+import course1778.mobileapp.medisafe.R;
 
 /**
  * Created by lang on 28/02/16.

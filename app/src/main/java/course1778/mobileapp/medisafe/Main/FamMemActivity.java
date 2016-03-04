@@ -1,21 +1,20 @@
-package course1778.mobileapp.medisafe;
+package course1778.mobileapp.medisafe.Main;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-/**
- * Created by jianhuang on 16-03-03.
- */
-public class PatientActivity extends AppCompatActivity {
+import course1778.mobileapp.medisafe.R;
+
+public class FamMemActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.patient_activity);
+        setContentView(R.layout.fam_mem_activity);
 
-        PatientFrag patientFrag = new PatientFrag();
+        FamMemFrag listFrag = new FamMemFrag();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragmentContainer, patientFrag);
+        transaction.replace(R.id.fragmentContainer, listFrag);
         transaction.addToBackStack(null);
         // Commit the transaction
         transaction.commit();

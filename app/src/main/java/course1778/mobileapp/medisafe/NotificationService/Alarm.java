@@ -1,4 +1,4 @@
-package course1778.mobileapp.medisafe;
+package course1778.mobileapp.medisafe.NotificationService;
 
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -13,6 +13,9 @@ import android.support.v4.app.NotificationCompat;
 
 import java.io.IOException;
 import java.util.Calendar;
+
+import course1778.mobileapp.medisafe.Main.FamMemActivity;
+import course1778.mobileapp.medisafe.R;
 
 /**
  * Created by lang on 24/02/16.

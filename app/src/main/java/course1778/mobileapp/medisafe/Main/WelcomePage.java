@@ -1,4 +1,4 @@
-package course1778.mobileapp.medisafe;
+package course1778.mobileapp.medisafe.Main;
 
 /**
  * Created by jianhuang on 16-02-21.
@@ -22,6 +22,10 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.List;
+
+import course1778.mobileapp.medisafe.Authentication.LoginSignupActivity;
+import course1778.mobileapp.medisafe.Helpers.Helpers;
+import course1778.mobileapp.medisafe.R;
 
 public class WelcomePage extends Activity {
 

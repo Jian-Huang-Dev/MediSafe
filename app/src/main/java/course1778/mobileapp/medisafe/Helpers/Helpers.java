@@ -1,4 +1,4 @@
-package course1778.mobileapp.medisafe;
+package course1778.mobileapp.medisafe.Helpers;
 
 /**
  * Created by jianhuang on 16-02-21.
