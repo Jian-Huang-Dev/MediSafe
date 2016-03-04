@@ -8,7 +8,9 @@ members if the seniors do not take medications as scheduled.
 Technologies used: Android Studio IDE, Java, XML, SQLite, Facebook Parse Server
 
 Specialist: Ikbae Son (Pharmaceutical Sciences student (PhD))
+
 Programer1: Jian Huang (Computer Engineering student (MEng))
+
 Progrmmer2: Lang Qian (Communication student (MEng))
 
 
