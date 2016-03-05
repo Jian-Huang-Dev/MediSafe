@@ -24,13 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="course1778.mobileapp.safeMedicare.Authentication.LoginSignupActivity" >
+        <activity android:name=".Authentication.LoginActivity" >
         </activity>
         <activity android:name="course1778.mobileapp.safeMedicare.Main.WelcomePage" >
         </activity>
         <activity android:name="course1778.mobileapp.safeMedicare.Main.FamMemActivity" >
         </activity>
         <activity android:name="course1778.mobileapp.safeMedicare.Main.PatientActivity" >
+        </activity>
+        <activity android:name="course1778.mobileapp.safeMedicare.Authentication.SignupActivity" >
         </activity>
     </application>
 

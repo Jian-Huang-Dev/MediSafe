@@ -10,5 +10,5 @@
         android:id="@+id/pushUpdate"
         android:showAsAction="ifRoom"
         android:icon="@android:drawable/ic_popup_sync"
-        android:title="@string/pushUpdate"></item>
+        android:title="@string/push_update"></item>
 </menu>

@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
@@ -8,41 +8,37 @@
         android:id="@+id/txtusername"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Username" />
+        android:text="@string/usr_name" />
 
     <EditText
         android:id="@+id/username"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtusername"
         android:inputType="text" />
 
     <TextView
         android:id="@+id/txtpassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/username"
-        android:text="@string/Password" />
+        android:text="@string/password" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txtpassword"
         android:inputType="textPassword" />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/loginBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/password"
-        android:text="@string/LoginBtn" />
+        android:text="@string/login_btn" />
 
     <Button
-        android:id="@+id/signup"
+        android:id="@+id/signupBtn"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/login"
-        android:text="@string/SignupBtn" />
+        android:text="@string/signup_btn" />
 
-</RelativeLayout>
+</LinearLayout>
