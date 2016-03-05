@@ -12,7 +12,7 @@
     https://commonsware.com/Android
  */
 
-package course1778.mobileapp.medisafe.Helpers;
+package course1778.mobileapp.safeMedicare.Helpers;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

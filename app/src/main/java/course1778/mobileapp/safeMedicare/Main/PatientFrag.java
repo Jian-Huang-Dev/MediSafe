@@ -1,4 +1,4 @@
-package course1778.mobileapp.medisafe.Main;
+package course1778.mobileapp.safeMedicare.Main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,14 +21,14 @@ import com.parse.ParseUser;
 
 import java.util.List;
 
-import course1778.mobileapp.medisafe.Helpers.DatabaseHelper;
-import course1778.mobileapp.medisafe.Helpers.Helpers;
-import course1778.mobileapp.medisafe.R;
+import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
+import course1778.mobileapp.safeMedicare.Helpers.Helpers;
+import course1778.mobileapp.safeMedicare.R;
 
 /**
  * Created by jianhuang on 16-03-03.
  */
-public class PatientFrag extends android.support.v4.app.ListFragment {
+public class PatientFrag extends android.support.v4.app.Fragment {
 
     public TextView todos;
 

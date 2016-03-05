@@ -1,4 +1,4 @@
-package course1778.mobileapp.medisafe.ParseApplication;
+package course1778.mobileapp.safeMedicare.ParseApplication;
 
 /**
  * Created by jianhuang on 16-02-21.
@@ -9,7 +9,7 @@ import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseUser;
 
-import course1778.mobileapp.medisafe.Helpers.Helpers;
+import course1778.mobileapp.safeMedicare.Helpers.Helpers;
 
 public class ParseApplication extends Application {
 

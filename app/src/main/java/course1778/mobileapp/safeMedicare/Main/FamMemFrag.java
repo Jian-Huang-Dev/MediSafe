@@ -12,7 +12,7 @@
  * https://commonsware.com/Android
  */
 
-package course1778.mobileapp.medisafe.Main;
+package course1778.mobileapp.safeMedicare.Main;
 
 import android.app.AlertDialog;
 import android.content.ContentValues;
@@ -36,10 +36,10 @@ import android.widget.SimpleCursorAdapter;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
-import course1778.mobileapp.medisafe.Helpers.DatabaseHelper;
-import course1778.mobileapp.medisafe.Helpers.Helpers;
-import course1778.mobileapp.medisafe.NotificationService.Alarm;
-import course1778.mobileapp.medisafe.R;
+import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
+import course1778.mobileapp.safeMedicare.Helpers.Helpers;
+import course1778.mobileapp.safeMedicare.NotificationService.Alarm;
+import course1778.mobileapp.safeMedicare.R;
 
 public class FamMemFrag extends android.support.v4.app.ListFragment implements
         DialogInterface.OnClickListener {
@@ -81,13 +81,13 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         view.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), WelcomePage.class);
-                startActivity(intent);
-                return true;
-            } else {
-                return false;
-            }
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), WelcomePage.class);
+                    startActivity(intent);
+                    return true;
+                } else {
+                    return false;
+                }
             }
         });
     }
