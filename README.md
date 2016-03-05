@@ -1,5 +1,5 @@
-# MediSafe
-MediSafe Android application: 
+# SafeMedicare
+SafeMedicare Android application: 
 A team consists of two programmers and one specialist to build an Android application. 
 This app is designed for independent seniors who take medication at regular basis, 
 its features including setting alarm for scheduled medications, and notify family 
