@@ -1,4 +1,4 @@
-package course1778.mobileapp.medisafe;
+package course1778.mobileapp.safeMedicare;
 
 import org.junit.Test;
 

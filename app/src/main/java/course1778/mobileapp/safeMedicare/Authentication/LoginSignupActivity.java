@@ -1,4 +1,4 @@
-package course1778.mobileapp.medisafe.Authentication;
+package course1778.mobileapp.safeMedicare.Authentication;
 
 /**
  * Created by jianhuang on 16-02-21.
@@ -17,8 +17,8 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
-import course1778.mobileapp.medisafe.R;
-import course1778.mobileapp.medisafe.Main.WelcomePage;
+import course1778.mobileapp.safeMedicare.R;
+import course1778.mobileapp.safeMedicare.Main.WelcomePage;
 
 public class LoginSignupActivity extends Activity {
     // Declare Variables
