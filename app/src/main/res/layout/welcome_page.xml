@@ -1,84 +1,61 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="match_parent">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/welcomMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/txtwelcome"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="@string/Welcome"
-            android:paddingTop="50dp"
-            android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/txtuser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtwelcome"
-            android:layout_centerHorizontal="true" />
-
-        <TextView
-            android:id="@+id/txtInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtuser"
-            android:textSize="30sp"
-            android:layout_marginTop="30dp"
-            android:layout_centerHorizontal="true" />
-
-        <EditText
-            android:id="@+id/txtBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txtInfo"
-            android:layout_marginTop="30dp"
-            android:layout_centerHorizontal="true" />
-
-        <Button
-            android:id="@+id/updateBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="Update" />
-
-        <Button
-            android:id="@+id/syncBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_below="@+id/updateBtn"
-            android:text="Sync" />
-
-        <Button
-            android:id="@+id/logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/syncBtn"
-            android:layout_centerHorizontal="true"
-            android:text="@string/LogoutBtn" />
+    <LinearLayout
+        android:id="@+id/famMemPageBtnLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/patientPageBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
             android:text="@string/patient_btn" />
+
+    </LinearLayout>/>
+
+    <LinearLayout
+        android:id="@+id/patientPageBtnLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/famMemPageBtnLayout"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/famMemPageBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
             android:text="@string/family_member_btn" />
 
-    </RelativeLayout>/>
+    </LinearLayout>/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/patientPageBtnLayout"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/logoutBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/logout_btn" />
+
+    </LinearLayout>/>
+
+
 
 </RelativeLayout>

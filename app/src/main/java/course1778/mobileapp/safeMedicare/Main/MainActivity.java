@@ -8,7 +8,7 @@ import android.util.Log;
 import com.parse.ParseAnonymousUtils;
 import com.parse.ParseUser;
 
-import course1778.mobileapp.safeMedicare.Authentication.LoginSignupActivity;
+import course1778.mobileapp.safeMedicare.Authentication.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,9 +18,9 @@ public class MainActivity extends AppCompatActivity {
         // Determine whether the current user is an anonymous user
         if (ParseAnonymousUtils.isLinked(ParseUser.getCurrentUser())) {
             Log.d("mydebug", "anonymous user");
-            // If user is anonymous, send the user to LoginSignupActivity.class
+            // If user is anonymous, send the user to LoginActivity.class
             Intent intent = new Intent(MainActivity.this,
-                    LoginSignupActivity.class);
+                    LoginActivity.class);
             startActivity(intent);
             finish();
         } else {
@@ -35,9 +35,9 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             } else {
                 Log.d("mydebug", "else: anonymous user");
-                // Send user to LoginSignupActivity.class
+                // Send user to LoginActivity.class
                 Intent intent = new Intent(MainActivity.this,
-                        LoginSignupActivity.class);
+                        LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

@@ -7,6 +7,6 @@
     android:fitsSystemWindows="true"
     tools:context=".Main.MainActivity">
 
-    <include layout="@layout/content_main" />
+    <include layout="@layout/login_activity" />
 
 </android.support.design.widget.CoordinatorLayout>

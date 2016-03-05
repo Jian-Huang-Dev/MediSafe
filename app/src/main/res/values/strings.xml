@@ -3,19 +3,20 @@
 
     <string name="hello">Hello World!</string>
     <string name="app_name">SafeMedicare</string>
-    <string name="Username">Username</string>
-    <string name="Password">Password</string>
-    <string name="LoginBtn">Login</string>
-    <string name="SignupBtn">Sign Up</string>
-    <string name="LogoutBtn">Log Out</string>
-    <string name="Welcome">Welcome!</string>
+    <string name="usr_name">Username</string>
+    <string name="password">Password</string>
+    <string name="password2">Retype Password</string>
+    <string name="login_btn">Login</string>
+    <string name="signup_btn">Sign Up</string>
+    <string name="logout_btn">Log Out</string>
+    <string name="welcome">Welcome!</string>
     <string name="action_settings">Setting</string>
     <string name="family_member_btn">Family Member</string>
     <string name="patient_btn">Patient</string>
     <string name="msg_complete_form">Please fill up the form!</string>
-    <string name="msg_signup_successfully">Successfully Signed up, please log in!</string>
+    <string name="msg_signup_login_success">Signup Successfully</string>
     <string name="msg_signup_error">Sign up Error!</string>
-    <string name="pushUpdate">Push Update</string>
+    <string name="push_update">Push Update</string>
     <string name="sync">Sync</string>
     <string name="ok">OK</string>
     <string name="cancel">Cancel</string>
@@ -29,4 +30,7 @@
     <string name="msgcontent">
         has not been taken in 15 minutes! Please remind him/her by phone.测试短信，收到了告诉我一声
     </string>
+    <string name="register_btn">Register</string>
+    <string name="email_addr">Email Address</string>
+    <string name="msg_password_mismatch">Both password does not match</string>
 </resources>
