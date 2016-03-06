@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
+import com.parse.ParseACL;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -41,6 +42,8 @@ public class WelcomePage extends Activity {
 
         // Retrieve current user from Parse.com
         ParseUser currentUser = ParseUser.getCurrentUser();
+        // make current user's information not visible to others
+        currentUser.setACL(new ParseACL(currentUser));
         usrName = currentUser.getUsername().toString();
 
         welcomeMsg = (TextView) findViewById(R.id.welcomMsg);

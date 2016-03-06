@@ -33,4 +33,5 @@
     <string name="register_btn">Register</string>
     <string name="email_addr">Email Address</string>
     <string name="msg_password_mismatch">Both password does not match</string>
+    <string name="phone_num">Phone Number</string>
 </resources>

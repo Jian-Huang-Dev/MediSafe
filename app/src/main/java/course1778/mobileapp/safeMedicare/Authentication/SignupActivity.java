@@ -22,14 +22,15 @@ import course1778.mobileapp.safeMedicare.R;
 public class SignupActivity extends Activity {
     // Declare Variables
     Button registerBtn;
-    String usrnameTxt, pwdTxt, pwdTxt2, emailTxt;
-    EditText pwd, pwd2, usrname, email;
+    String usrnameTxt, phoneNumTxt, pwdTxt, pwdTxt2, emailTxt;
+    EditText phoneNum, pwd, pwd2, usrname, email;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_activity);
 
         usrname = (EditText) findViewById(R.id.usrname);
+        phoneNum = (EditText) findViewById(R.id.phoneNum);
         email = (EditText) findViewById(R.id.email);
         pwd = (EditText) findViewById(R.id.pwd);
         pwd2 = (EditText) findViewById(R.id.pwd2);
@@ -41,12 +42,14 @@ public class SignupActivity extends Activity {
 
             public void onClick(View arg0) {
                 usrnameTxt = usrname.getText().toString();
+                phoneNumTxt = phoneNum.getText().toString();
                 emailTxt = email.getText().toString();
                 pwdTxt = pwd.getText().toString();
                 pwdTxt2 = pwd2.getText().toString();
 
                 // Force user to fill up the form
                 if (usrnameTxt.equals("") ||
+                        phoneNumTxt.equals("") ||
                         emailTxt.equals("") ||
                         pwdTxt.equals("") ||
                         pwdTxt2.equals("")) {
@@ -63,6 +66,8 @@ public class SignupActivity extends Activity {
                     // Save new user data into Parse.com Data Storage
                     ParseUser user = new ParseUser();
                     user.setUsername(usrnameTxt);
+                    // set user phone number into user object
+                    user.put(usrnameTxt, phoneNumTxt);
                     user.setEmail(emailTxt);
                     user.setPassword(pwdTxt);
 

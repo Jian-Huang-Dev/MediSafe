@@ -17,6 +17,18 @@
         android:inputType="text" />
 
     <TextView
+        android:id="@+id/phoneNumText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/phone_num" />
+
+    <EditText
+        android:id="@+id/phoneNum"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="phone" />
+
+    <TextView
         android:id="@+id/emailTxt"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
