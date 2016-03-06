@@ -23,7 +23,8 @@ import course1778.mobileapp.safeMedicare.R;
 public class Alarm extends BroadcastReceiver {
     private final String REMINDER_BUNDLE = "MyReminderBundle";
     private MediaPlayer mPlayer;
-    private static final int NOTIFY_ID=1337;
+    //private static final int NOTIFY_ID=1337;
+    private int NOTIFY_ID = 0;
 
     // this constructor is called by the alarm manager.
     public Alarm(){ }
@@ -44,6 +45,14 @@ public class Alarm extends BroadcastReceiver {
         time.setTimeInMillis(System.currentTimeMillis());
         time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(extras.getString("time_h")));
         time.set(Calendar.MINUTE, Integer.parseInt(extras.getString("time_m")));
+        time.set(Calendar.SECOND, 0);
+        String title = extras.getString("title");
+        
+        int length = title.length();
+        for (int i = 0; i<length; i++) {
+            NOTIFY_ID = (int) title.charAt(i) + NOTIFY_ID;
+        }
+        NOTIFY_ID = Integer.parseInt(extras.getString("time_h") +extras.getString("time_m")) + 1337;
 
         alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, time.getTimeInMillis(),
                 AlarmManager.INTERVAL_DAY, pendingIntent);
