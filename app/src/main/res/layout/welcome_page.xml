@@ -9,53 +9,35 @@
 
     <LinearLayout
         android:id="@+id/famMemPageBtnLayout"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:orientation="vertical">
 
         <Button
             android:id="@+id/patientPageBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/patient_btn" />
-
-    </LinearLayout>/>
-
-    <LinearLayout
-        android:id="@+id/patientPageBtnLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_below="@+id/famMemPageBtnLayout"
-        android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/patient_btn"
+            android:layout_gravity="center_horizontal"/>
 
         <Button
             android:id="@+id/famMemPageBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/family_member_btn" />
-
-    </LinearLayout>/>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_below="@+id/patientPageBtnLayout"
-        android:orientation="vertical">
+            android:text="@string/family_member_btn"
+            android:layout_gravity="center_horizontal" />
 
         <Button
             android:id="@+id/logoutBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/logout_btn" />
+            android:text="@string/logout_btn"
+            android:layout_gravity="center_horizontal" />
 
     </LinearLayout>/>
-
-
 
 </RelativeLayout>
