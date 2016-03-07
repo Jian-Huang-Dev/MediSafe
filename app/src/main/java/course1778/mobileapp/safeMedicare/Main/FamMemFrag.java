@@ -32,6 +32,7 @@ import android.view.View;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TimePicker;
 
 import com.parse.ParseObject;
 import com.parse.ParseUser;
@@ -150,12 +151,16 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         ContentValues values = new ContentValues(3);
         AlertDialog dlg = (AlertDialog) di;
         EditText title = (EditText) dlg.findViewById(R.id.title);
-        EditText time_h = (EditText) dlg.findViewById(R.id.time_h);
-        EditText time_m = (EditText) dlg.findViewById(R.id.time_m);
+        //EditText time_h = (EditText) dlg.findViewById(R.id.time_h);
+        //EditText time_m = (EditText) dlg.findViewById(R.id.time_m);
+        TimePicker tp = (TimePicker)dlg.findViewById(R.id.timePicker);
+        tp.setIs24HourView(true);
 
         String titleStr = title.getText().toString();
-        String timeHStr = time_h.getText().toString();
-        String timeMStr = time_m.getText().toString();
+        //String timeHStr = time_h.getText().toString();
+        //String timeMStr = time_m.getText().toString();
+        String timeHStr = Integer.toString(tp.getCurrentHour());
+        String timeMStr = Integer.toString(tp.getCurrentMinute());
 
         values.put(DatabaseHelper.TITLE, titleStr);
         values.put(DatabaseHelper.TIME_H, timeHStr);
@@ -172,8 +177,8 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         Bundle bundle = new Bundle();
         // add extras here..
         bundle.putString("title", title.getText().toString());
-        bundle.putString("time_h", time_h.getText().toString());
-        bundle.putString("time_m", time_m.getText().toString());
+        bundle.putString("time_h", Integer.toString(tp.getCurrentHour()));
+        bundle.putString("time_m", Integer.toString(tp.getCurrentMinute()));
         Alarm alarm = new Alarm(getActivity().getApplicationContext(), bundle);
 
         task = new InsertTask().execute(values);
