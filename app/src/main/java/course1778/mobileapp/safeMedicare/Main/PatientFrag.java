@@ -23,6 +23,7 @@ import java.util.List;
 
 import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
 import course1778.mobileapp.safeMedicare.Helpers.Helpers;
+import course1778.mobileapp.safeMedicare.NotificationService.Alarm;
 import course1778.mobileapp.safeMedicare.R;
 
 /**
@@ -88,19 +89,31 @@ public class PatientFrag extends android.support.v4.app.Fragment {
 
     public void retrieveDataFromParse() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery(Helpers.PARSE_OBJECT);
-        query.whereEqualTo(ParseUser.getCurrentUser().getUsername(), Helpers.PARSE_OBJECT_VALUE);
+        query.whereEqualTo(Helpers.PARSE_OBJECT_USER, ParseUser.getCurrentUser().getUsername());
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> parseObjectList, ParseException e) {
                 if (e == null) {
-                    todos.setText("");
-                    for (int i = 0; i < parseObjectList.size(); i++) {
-                        todos.append("\n");
-                        todos.append(parseObjectList.get(i).getString(DatabaseHelper.TITLE));
-                        todos.append(" ");
-                        todos.append(parseObjectList.get(i).getString(DatabaseHelper.TIME_H));
-                        todos.append(" ");
-                        todos.append(parseObjectList.get(i).getString(DatabaseHelper.TIME_M));
+                    for (ParseObject parseObject : parseObjectList) {
+                        Bundle bundle = new Bundle();
+                        bundle.putString(DatabaseHelper.TITLE, parseObject.getString(DatabaseHelper.TITLE));
+                        bundle.putString(DatabaseHelper.TITLE, parseObject.getString(DatabaseHelper.TIME_H));
+                        bundle.putString(DatabaseHelper.TITLE, parseObject.getString(DatabaseHelper.TIME_M));
+
+                        Log.d("mybundle","TITLE: " + bundle.getString(DatabaseHelper.TITLE));
+                        Log.d("mybundle", "HOUR: " +bundle.getString(DatabaseHelper.TIME_H));
+                        Log.d("mybundle","MIN: " + bundle.getString(DatabaseHelper.TIME_M));
+
+                        Alarm alarm = new Alarm(getActivity().getApplicationContext(), bundle);
                     }
+//                    todos.setText("");
+//                    for (int i = 0; i < parseObjectList.size(); i++) {
+//                        todos.append("\n");
+//                        todos.append(parseObjectList.get(i).getString(DatabaseHelper.TITLE));
+//                        todos.append(" ");
+//                        todos.append(parseObjectList.get(i).getString(DatabaseHelper.TIME_H));
+//                        todos.append(" ");
+//                        todos.append(parseObjectList.get(i).getString(DatabaseHelper.TIME_M));
+//                    }
                 }
             }
         });

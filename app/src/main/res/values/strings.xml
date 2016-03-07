@@ -34,4 +34,5 @@
     <string name="email_addr">Email Address</string>
     <string name="msg_password_mismatch">Both password does not match</string>
     <string name="phone_num">Phone Number</string>
+    <string name="snooze">Snooze</string>
 </resources>

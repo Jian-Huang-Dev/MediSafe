@@ -15,6 +15,7 @@
 package course1778.mobileapp.safeMedicare.Main;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -39,7 +40,6 @@ import com.parse.ParseUser;
 
 import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
 import course1778.mobileapp.safeMedicare.Helpers.Helpers;
-import course1778.mobileapp.safeMedicare.NotificationService.Alarm;
 import course1778.mobileapp.safeMedicare.R;
 
 public class FamMemFrag extends android.support.v4.app.ListFragment implements
@@ -149,37 +149,42 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     public void onClick(DialogInterface di, int whichButton) {
         // get strings from edittext boxes, then insert them into database
         ContentValues values = new ContentValues(3);
-        AlertDialog dlg = (AlertDialog) di;
+        Dialog dlg = (Dialog) di;
         EditText title = (EditText) dlg.findViewById(R.id.title);
-        //EditText time_h = (EditText) dlg.findViewById(R.id.time_h);
-        //EditText time_m = (EditText) dlg.findViewById(R.id.time_m);
         TimePicker tp = (TimePicker)dlg.findViewById(R.id.timePicker);
+
+        tp.clearFocus();
+
+        int tpMinute = tp.getCurrentMinute();
+        int tpHour = tp.getCurrentHour();
         tp.setIs24HourView(true);
 
         String titleStr = title.getText().toString();
-        //String timeHStr = time_h.getText().toString();
-        //String timeMStr = time_m.getText().toString();
-        String timeHStr = Integer.toString(tp.getCurrentHour());
-        String timeMStr = Integer.toString(tp.getCurrentMinute());
+        String timeHStr = Integer.toString(tpHour);
+        String timeMStr = Integer.toString(tpMinute);
+        
+        Log.d("mytime",Integer.toString(tpHour));
+        Log.d("mytime",Integer.toString(tpMinute));
 
         values.put(DatabaseHelper.TITLE, titleStr);
         values.put(DatabaseHelper.TIME_H, timeHStr);
         values.put(DatabaseHelper.TIME_M, timeMStr);
-
-        // saving it into parse.com
-        ParseObject parseObject = new ParseObject(Helpers.PARSE_OBJECT);
-        parseObject.put(ParseUser.getCurrentUser().getUsername(), Helpers.PARSE_OBJECT_VALUE);
-        parseObject.put(DatabaseHelper.TITLE, titleStr);
-        parseObject.put(DatabaseHelper.TIME_H, timeHStr);
-        parseObject.put(DatabaseHelper.TIME_M, timeMStr);
-        parseObject.saveInBackground();
 
         Bundle bundle = new Bundle();
         // add extras here..
         bundle.putString("title", title.getText().toString());
         bundle.putString("time_h", Integer.toString(tp.getCurrentHour()));
         bundle.putString("time_m", Integer.toString(tp.getCurrentMinute()));
-        Alarm alarm = new Alarm(getActivity().getApplicationContext(), bundle);
+        //Alarm alarm = new Alarm(getActivity().getApplicationContext(), bundle);
+
+        // saving it into parse.com
+        ParseObject parseObject = new ParseObject(Helpers.PARSE_OBJECT);
+        parseObject.put(Helpers.PARSE_OBJECT_USER, ParseUser.getCurrentUser().getUsername());
+//        parseObject.put(Helpers.PARSE_BUNDLE, bundle);
+        parseObject.put(DatabaseHelper.TITLE, titleStr);
+        parseObject.put(DatabaseHelper.TIME_H, timeHStr);
+        parseObject.put(DatabaseHelper.TIME_M, timeMStr);
+        parseObject.saveInBackground();
 
         task = new InsertTask().execute(values);
     }
