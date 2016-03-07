@@ -47,6 +47,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     private DatabaseHelper db = null;
     private Cursor current = null;
     private AsyncTask task = null;
+    private int notifyId = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -162,7 +163,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         String titleStr = title.getText().toString();
         String timeHStr = Integer.toString(tpHour);
         String timeMStr = Integer.toString(tpMinute);
-        
+
         Log.d("mytime",Integer.toString(tpHour));
         Log.d("mytime",Integer.toString(tpMinute));
 
@@ -173,9 +174,16 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         Bundle bundle = new Bundle();
         // add extras here..
         bundle.putString("title", title.getText().toString());
-        bundle.putString("time_h", Integer.toString(tp.getCurrentHour()));
-        bundle.putString("time_m", Integer.toString(tp.getCurrentMinute()));
+        bundle.putString("time_h", timeHStr);
+        bundle.putString("time_m", timeMStr);
         //Alarm alarm = new Alarm(getActivity().getApplicationContext(), bundle);
+
+        // get unique notifyId for each alarm
+        int length = title.length();
+        for (int i = 0; i<length; i++) {
+            notifyId = (int) titleStr.charAt(i) + notifyId;
+        }
+        notifyId = Integer.parseInt(timeHStr + timeMStr);
 
         // saving it into parse.com
         ParseObject parseObject = new ParseObject(Helpers.PARSE_OBJECT);
@@ -184,6 +192,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         parseObject.put(DatabaseHelper.TITLE, titleStr);
         parseObject.put(DatabaseHelper.TIME_H, timeHStr);
         parseObject.put(DatabaseHelper.TIME_M, timeMStr);
+        parseObject.put(Helpers.NOFITY_ID, notifyId);
         parseObject.saveInBackground();
 
         task = new InsertTask().execute(values);

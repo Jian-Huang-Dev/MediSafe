@@ -10,6 +10,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -19,6 +21,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
@@ -32,6 +35,8 @@ import course1778.mobileapp.safeMedicare.R;
 public class PatientFrag extends android.support.v4.app.Fragment {
 
     public TextView todos;
+    private ListView listView;
+    private ArrayList<String> strArrList= new ArrayList<String>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,6 +54,7 @@ public class PatientFrag extends android.support.v4.app.Fragment {
                 container, false);
 
         todos = (TextView) view.findViewById(R.id.todos);
+        listView = (ListView) view.findViewById(R.id.list_view);
 
         // onBackPress key listener
         view.setFocusableInTouchMode(true);
@@ -93,15 +99,36 @@ public class PatientFrag extends android.support.v4.app.Fragment {
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> parseObjectList, ParseException e) {
                 if (e == null) {
+                    // clean up array list before syncing
+                    strArrList.clear();
+
                     for (ParseObject parseObject : parseObjectList) {
+
+                        String string;
                         Bundle bundle = new Bundle();
                         bundle.putString(DatabaseHelper.TITLE, parseObject.getString(DatabaseHelper.TITLE));
-                        bundle.putString(DatabaseHelper.TITLE, parseObject.getString(DatabaseHelper.TIME_H));
-                        bundle.putString(DatabaseHelper.TITLE, parseObject.getString(DatabaseHelper.TIME_M));
+                        bundle.putString(DatabaseHelper.TIME_H, parseObject.getString(DatabaseHelper.TIME_H));
+                        bundle.putString(DatabaseHelper.TIME_M, parseObject.getString(DatabaseHelper.TIME_M));
+                        string = "Medication: " +
+                                parseObject.getString(DatabaseHelper.TITLE) +
+                                ", At time: " +
+                                parseObject.getString(DatabaseHelper.TIME_H) +
+                                "h : " +
+                                parseObject.getString(DatabaseHelper.TIME_M) +
+                                "m";
+                        strArrList.add(string);
 
-                        Log.d("mybundle","TITLE: " + bundle.getString(DatabaseHelper.TITLE));
-                        Log.d("mybundle", "HOUR: " +bundle.getString(DatabaseHelper.TIME_H));
+
+                        Log.d("mybundle", "TITLE: " + bundle.getString(DatabaseHelper.TITLE));
+                        Log.d("mybundle", "HOUR: " + bundle.getString(DatabaseHelper.TIME_H));
                         Log.d("mybundle","MIN: " + bundle.getString(DatabaseHelper.TIME_M));
+                        Log.d("mybundle","ID: " + bundle.getInt(Helpers.NOFITY_ID));
+
+                        // list file info details
+                        ArrayAdapter<String> adapter =
+                                new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                                        R.layout.list_view_text_style, android.R.id.title, strArrList.toArray(new String[0]));
+                        listView.setAdapter(adapter);
 
                         Alarm alarm = new Alarm(getActivity().getApplicationContext(), bundle);
                     }
@@ -129,5 +156,11 @@ public class PatientFrag extends android.support.v4.app.Fragment {
                 }
             }
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        this.retrieveDataFromParse();
     }
 }
