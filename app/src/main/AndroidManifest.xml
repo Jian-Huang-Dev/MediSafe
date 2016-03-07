@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <application
         android:name="course1778.mobileapp.safeMedicare.ParseApplication.ParseApplication"
@@ -13,6 +14,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <receiver android:name=".NotificationService.Alarm" />
+        <receiver android:name=".NotificationService.Alarm_Msg" />
+        <receiver android:name=".NotificationService.Snooze" />
 
         <activity
             android:name="course1778.mobileapp.safeMedicare.Main.MainActivity"

@@ -18,7 +18,7 @@ import course1778.mobileapp.safeMedicare.R;
  */
 public class Alarm_Msg extends BroadcastReceiver {
     private final String REMINDER_BUNDLE = "MyReminderBundle";
-    private static final int NOTIFY_ID=1338;
+    private static final int NOTIFY_ID=1336;
 
     // this constructor is called by the alarm manager.
     public Alarm_Msg(){ }
@@ -53,7 +53,7 @@ public class Alarm_Msg extends BroadcastReceiver {
 
         alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 SystemClock.elapsedRealtime() +
-                        60 * 1000, pendingIntent);
+                        180 * 1000, pendingIntent);
     }
 
     @Override
@@ -70,8 +70,8 @@ public class Alarm_Msg extends BroadcastReceiver {
         Toast.makeText(context, (title+context.getString(R.string.msgcontent)), Toast.LENGTH_SHORT).show();
 
         try {
-            SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage("12896892386", null, (title+context.getString(R.string.msgcontent)), null, null);
+            //SmsManager smsManager = SmsManager.getDefault();
+            //smsManager.sendTextMessage("12896892386", null, (title+context.getString(R.string.msgcontent)), null, null);
             Toast.makeText(context, "SMS sent.", Toast.LENGTH_LONG).show();
         }
 
