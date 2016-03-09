@@ -9,16 +9,17 @@ import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseUser;
 
-import course1778.mobileapp.safeMedicare.Helpers.Helpers;
-
 public class ParseApplication extends Application {
+
+    public static final String APPLICATION_ID = "gUu8NlxygL7LVfsl6Q8gWfbznTa5LIeFJbyiN4Dc";
+    public static final String CLIENT_KEY = "W1vegki58oYEyWJznUQGjOORzLjAOpNPZ4L57EHG";
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         // Add your initialization code here
-        Parse.initialize(this, Helpers.APPLICATION_ID, Helpers.CLIENT_KEY);
+        Parse.initialize(this, APPLICATION_ID, CLIENT_KEY);
 
         ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();
