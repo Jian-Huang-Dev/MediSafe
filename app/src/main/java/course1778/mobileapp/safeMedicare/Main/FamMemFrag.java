@@ -41,6 +41,8 @@ import android.widget.TimePicker;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import org.apache.commons.io.IOUtils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -170,12 +172,12 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
 
         AutoCompleteTextView textView = (AutoCompleteTextView) addView.findViewById(R.id.title);
 
-        Cursor crs = med_db.rawQuery("SELECT * FROM Sheet1", null);
+        Cursor crs = med_db.rawQuery("SELECT * FROM Sheet2", null);
 
         String[] array = new String[crs.getCount()];
         int i = 0;
         while(crs.moveToNext()){
-            String uname = crs.getString(crs.getColumnIndex("Interactions"));
+            String uname = crs.getString(crs.getColumnIndex("DrugName"));
             array[i] = uname;
             i++;
         }
