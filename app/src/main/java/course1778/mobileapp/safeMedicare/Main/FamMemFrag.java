@@ -24,6 +24,7 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.parse.ParseObject;
@@ -47,7 +49,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
 
 import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
 import course1778.mobileapp.safeMedicare.Helpers.Helpers;
@@ -62,8 +63,10 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
 
     public static final String PREFIX = "stream2file";
     public static final String SUFFIX = ".tmp";
-    Cursor crs;
+    Cursor crsList, crsInteractions;
     SQLiteDatabase med_db;
+
+    AutoCompleteTextView textView;
 
     public static File stream2file(InputStream in) throws IOException {
         final File tempFile = File.createTempFile(PREFIX, SUFFIX);
@@ -170,20 +173,26 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
                 .setPositiveButton(R.string.ok, this)
                 .setNegativeButton(R.string.cancel, null).show();
 
-        AutoCompleteTextView textView = (AutoCompleteTextView) addView.findViewById(R.id.title);
+        // field for user adding medication name
+        textView = (AutoCompleteTextView) addView.findViewById(R.id.title);
 
-        Cursor crs = med_db.rawQuery("SELECT * FROM Sheet2", null);
+        /** sheet 1 displays all the drug interactions;
+         * sheet 2 displays the list of all drugs
+          */
+        crsList = med_db.rawQuery("SELECT * FROM Sheet2", null);
+        crsInteractions = med_db.rawQuery("SELECT * FROM Sheet1", null);
 
-        String[] array = new String[crs.getCount()];
+        String[] array = new String[crsList.getCount()];
         int i = 0;
-        while(crs.moveToNext()){
-            String uname = crs.getString(crs.getColumnIndex("DrugName"));
+        while(crsList.moveToNext()){
+            String uname = crsList.getString(crsList.getColumnIndex("DrugName"));
             array[i] = uname;
             i++;
         }
-// Create the adapter and set it to the AutoCompleteTextView
+
+        // Create the adapter and set it to the AutoCompleteTextView
         ArrayAdapter<String> adapter =
-                new ArrayAdapter<String>(FamMemActivity.getContext(), R.layout.listlayout, R.id.listTextView,array);
+                new ArrayAdapter<String>(FamMemActivity.getContext(), R.layout.listlayout, R.id.listTextView, array);
         textView.setAdapter(adapter);
 
     }
@@ -197,13 +206,69 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         myObject.saveInBackground();
     }
 
+    // listen to "ok" button state from alertDialog
     public void onClick(DialogInterface di, int whichButton) {
+
+        // loop through database
+        crsInteractions.moveToPosition(-1);
+        while(crsInteractions.moveToNext()) {
+            String drugName, interactionName, interactionResult, medNameFieldTxt;
+
+            // drug names
+            drugName = crsInteractions.
+                    getString(crsInteractions.
+                            getColumnIndex(DatabaseHelper.SHEET_1_DRUG_NAMES));
+
+
+            // corresponding interacted drugs/foods
+            interactionName = crsInteractions.
+                    getString(crsInteractions.
+                            getColumnIndex(DatabaseHelper.SHEET_1_DRUG_INTERACTIONS));
+
+            // interaction result
+            interactionResult = crsInteractions.
+                    getString(crsInteractions.
+                            getColumnIndex(DatabaseHelper.SHEET_1_INTERACTION_RESULT));
+
+            // medication name entered by user
+            medNameFieldTxt = textView.getText().toString();
+
+            // check if newly entered medication name matches current drug name
+            if(drugName.equals(medNameFieldTxt)) {
+                /**if found, check if the corresponding interaction
+                 * drug in the list of all added drugs by user
+                 */
+                if(db.isNameExitOnDB(interactionName)) {
+                    // interaction found
+                    Log.d("myinteraction", "Found Interaction");
+                    // inflate a dialog to display the drug interaction warning
+                    LayoutInflater inflater = getActivity().getLayoutInflater();
+                    View resultView = inflater.inflate(R.layout.drug_interaction_result, null);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                    builder.setTitle(R.string.drug_interaction_result_title).setView(resultView)
+                            .setPositiveButton(R.string.ok, null)
+                            .setNegativeButton(R.string.cancel, null).show();
+
+                    // html string format
+                    TextView interactionResultView = (TextView) resultView.findViewById(R.id.resultView);
+                    String htmlString = "<b>" + medNameFieldTxt + "</b>" + " and " + "<b>" +
+                            interactionName + "</b>" + " have drug interaction! " + interactionResult;
+
+                    interactionResultView.setText(Html.fromHtml(htmlString));
+                }
+            }
+        }
+
+        Log.d("mydatabase", DatabaseUtils.dumpCursorToString(db.getCursor()));
+
         // get strings from edittext boxes, then insert them into database
         ContentValues values = new ContentValues(3);
         Dialog dlg = (Dialog) di;
         EditText title = (EditText) dlg.findViewById(R.id.title);
         TimePicker tp = (TimePicker)dlg.findViewById(R.id.timePicker);
 
+        // clear focus before retrieving the min and hr
         tp.clearFocus();
 
         int tpMinute = tp.getCurrentMinute();
@@ -238,7 +303,6 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         // saving it into parse.com
         ParseObject parseObject = new ParseObject(Helpers.PARSE_OBJECT);
         parseObject.put(Helpers.PARSE_OBJECT_USER, ParseUser.getCurrentUser().getUsername());
-//        parseObject.put(Helpers.PARSE_BUNDLE, bundle);
         parseObject.put(DatabaseHelper.TITLE, titleStr);
         parseObject.put(DatabaseHelper.TIME_H, timeHStr);
         parseObject.put(DatabaseHelper.TIME_M, timeMStr);
