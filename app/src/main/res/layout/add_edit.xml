@@ -14,11 +14,12 @@
 			android:layout_height="wrap_content"
 			android:text="@string/title"/>
 
-		<EditText
+		<AutoCompleteTextView
 			android:id="@+id/title"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
-			android:inputType="text"/>
+			android:inputType="text"
+			android:completionThreshold="1"/>
 	</LinearLayout>
 
 
