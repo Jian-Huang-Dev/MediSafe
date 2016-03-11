@@ -21,6 +21,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -30,6 +31,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
@@ -37,6 +40,12 @@ import android.widget.TimePicker;
 
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
 
 import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
 import course1778.mobileapp.safeMedicare.Helpers.Helpers;
@@ -49,9 +58,31 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     private AsyncTask task = null;
     private int notifyId = 0;
 
+    public static final String PREFIX = "stream2file";
+    public static final String SUFFIX = ".tmp";
+    Cursor crs;
+    SQLiteDatabase med_db;
+
+    public static File stream2file(InputStream in) throws IOException {
+        final File tempFile = File.createTempFile(PREFIX, SUFFIX);
+        tempFile.deleteOnExit();
+        try (FileOutputStream out = new FileOutputStream(tempFile)) {
+            IOUtils.copy(in, out);
+        }
+        return tempFile;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        InputStream inputStream = getResources().openRawResource(R.raw.medicine);
+
+        try {
+            med_db = SQLiteDatabase.openOrCreateDatabase(stream2file(inputStream), null);
+        } catch (IOException e) {
+            System.out.print(e);
+        }
 
         setHasOptionsMenu(true);
         setRetainInstance(true);
@@ -136,6 +167,23 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         builder.setTitle(R.string.add_title).setView(addView)
                 .setPositiveButton(R.string.ok, this)
                 .setNegativeButton(R.string.cancel, null).show();
+
+        AutoCompleteTextView textView = (AutoCompleteTextView) addView.findViewById(R.id.title);
+
+        Cursor crs = med_db.rawQuery("SELECT * FROM Sheet1", null);
+
+        String[] array = new String[crs.getCount()];
+        int i = 0;
+        while(crs.moveToNext()){
+            String uname = crs.getString(crs.getColumnIndex("Interactions"));
+            array[i] = uname;
+            i++;
+        }
+// Create the adapter and set it to the AutoCompleteTextView
+        ArrayAdapter<String> adapter =
+                new ArrayAdapter<String>(FamMemActivity.getContext(), R.layout.listlayout, R.id.listTextView,array);
+        textView.setAdapter(adapter);
+
     }
 
     private void pushUpdate() {
