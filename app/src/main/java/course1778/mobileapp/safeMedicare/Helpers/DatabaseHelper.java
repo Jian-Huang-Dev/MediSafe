@@ -15,6 +15,7 @@
 package course1778.mobileapp.safeMedicare.Helpers;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -25,6 +26,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
   public static final String TIME_H="time_h";
   public static final String TIME_M="time_m";
   public static final String TABLE="notification";
+
+  // for preloaded database "medicine.db"
+  public static final String SHEET_1_DRUG_NAMES = "Drugs";
+  public static final String SHEET_1_DRUG_INTERACTIONS = "Interactions";
+  public static final String SHEET_1_INTERACTION_RESULT = "What_might_happen";
 
   public DatabaseHelper(Context context) {
     super(context, DATABASE_NAME, null, SCHEMA);
@@ -41,5 +47,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
   public void onUpgrade(SQLiteDatabase db, int oldVersion,
                         int newVersion) {
     throw new RuntimeException("How did we get here?");
+  }
+
+  public Cursor getCursor(){
+    SQLiteDatabase db = this.getReadableDatabase();
+    Cursor res = db.rawQuery( "select * from notification", null );
+    return res;
+  }
+
+  public Boolean isNameExitOnDB (String name) {
+    String medName;
+    Cursor cursor = this.getCursor();
+    cursor.moveToPosition(-1);
+
+    while(cursor.moveToNext()) {
+        medName = cursor.getString(cursor.getColumnIndex(TITLE));
+        if(medName.equals(name)) {
+            return true;
+        }
+    }
+      return false;
   }
 }
