@@ -21,7 +21,7 @@ import course1778.mobileapp.safeMedicare.R;
  */
 public class SignupActivity extends Activity {
     // Declare Variables
-    Button registerBtn;
+    Button registerBtn, loginBtn;
     String usrnameTxt, phoneNumTxt, pwdTxt, pwdTxt2, emailTxt;
     EditText phoneNum, pwd, pwd2, usrname, email;
 
@@ -37,6 +37,7 @@ public class SignupActivity extends Activity {
 
         // register button
         registerBtn = (Button) findViewById(R.id.registerBtn);
+        loginBtn = (Button) findViewById(R.id.loginBtn);
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
 
@@ -89,6 +90,15 @@ public class SignupActivity extends Activity {
                         }
                     });
                 }
+            }
+        });
+
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignupActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
