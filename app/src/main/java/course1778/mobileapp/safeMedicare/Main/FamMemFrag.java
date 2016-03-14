@@ -64,7 +64,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     public static final String PREFIX = "stream2file";
     public static final String SUFFIX = ".tmp";
     Cursor crsList, crsInteractions;
-    SQLiteDatabase med_db;
+    SQLiteDatabase med_interaction, med_list;
 
     AutoCompleteTextView textView;
 
@@ -81,10 +81,18 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        InputStream inputStream = getResources().openRawResource(R.raw.medicine);
+        InputStream inputStream1 = getResources().openRawResource(R.raw.med_interaction);
 
         try {
-            med_db = SQLiteDatabase.openOrCreateDatabase(stream2file(inputStream), null);
+            med_interaction = SQLiteDatabase.openOrCreateDatabase(stream2file(inputStream1), null);
+        } catch (IOException e) {
+            System.out.print(e);
+        }
+
+        InputStream inputStream2 = getResources().openRawResource(R.raw.med_list);
+
+        try {
+            med_list = SQLiteDatabase.openOrCreateDatabase(stream2file(inputStream2), null);
         } catch (IOException e) {
             System.out.print(e);
         }
@@ -179,13 +187,13 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         /** sheet 1 displays all the drug interactions;
          * sheet 2 displays the list of all drugs
           */
-        crsList = med_db.rawQuery("SELECT * FROM Sheet2", null);
-        crsInteractions = med_db.rawQuery("SELECT * FROM Sheet1", null);
+        crsList = med_list.rawQuery("SELECT * FROM Sheet1", null);
+        crsInteractions = med_interaction.rawQuery("SELECT * FROM Sheet1", null);
 
         String[] array = new String[crsList.getCount()];
         int i = 0;
         while(crsList.moveToNext()){
-            String uname = crsList.getString(crsList.getColumnIndex("DrugName"));
+            String uname = crsList.getString(crsList.getColumnIndex("Name"));
             array[i] = uname;
             i++;
         }
