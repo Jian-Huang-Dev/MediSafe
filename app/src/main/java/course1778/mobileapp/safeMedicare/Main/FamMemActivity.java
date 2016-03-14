@@ -47,16 +47,34 @@ public class FamMemActivity extends AppCompatActivity {
 
 
         drawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            FragmentTransaction transaction;
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 switch (position) {
 
                     case 0:
-                        //Add medication
+                        //Home page
+                        FamMemFrag famMemFrag = new FamMemFrag();
+                        transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragmentContainer, famMemFrag);
+                        transaction.addToBackStack(null);
+                        // Commit the transaction
+                        transaction.commit();
+                        drawerLayout.closeDrawers();
                         break;
 
                     case 1:
-                        // drag interaction
+                        // drug interaction
+                        DrugInteractions drugInterac = new DrugInteractions();
+                        transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.fragmentContainer, drugInterac);
+                        transaction.addToBackStack(null);
+                        // Commit the transaction
+                        transaction.commit();
+                        drawerLayout.closeDrawers();
                         break;
 
                     case 2:
@@ -74,9 +92,9 @@ public class FamMemActivity extends AppCompatActivity {
             }
         });
 
-        FamMemFrag listFrag = new FamMemFrag();
+        FamMemFrag famMemFrag = new FamMemFrag();
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragmentContainer, listFrag);
+        transaction.replace(R.id.fragmentContainer, famMemFrag);
         transaction.addToBackStack(null);
         // Commit the transaction
         transaction.commit();
@@ -88,7 +106,7 @@ public class FamMemActivity extends AppCompatActivity {
     }
 
     private void addDrawerItems() {
-        String[] osArray = { "Add Medication", "Drug Interactions", "Log Out", "Setting" };
+        String[] osArray = { "Home Page", "Drug Interactions", "Log Out", "Setting" };
         drawerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
         drawerList.setAdapter(drawerAdapter);
     }
