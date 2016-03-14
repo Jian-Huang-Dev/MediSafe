@@ -49,6 +49,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
 import course1778.mobileapp.safeMedicare.Helpers.Helpers;
@@ -61,9 +62,13 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     private AsyncTask task = null;
     private int notifyId = 0;
 
+    FileOutputStream outputStream;
+
     public static final String PREFIX = "stream2file";
     public static final String SUFFIX = ".tmp";
     Cursor crsList, crsInteractions;
+
+    private ArrayList<String> drug_interaction_list = new ArrayList<String>();
     SQLiteDatabase med_interaction, med_list;
 
     AutoCompleteTextView textView;
@@ -216,6 +221,8 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
 
     // listen to "ok" button state from alertDialog
     public void onClick(DialogInterface di, int whichButton) {
+        // clear array list
+        drug_interaction_list.clear();
 
         // loop through database
         crsInteractions.moveToPosition(-1);
@@ -255,18 +262,24 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
                     builder.setTitle(R.string.drug_interaction_result_title).setView(resultView)
-                            .setPositiveButton(R.string.ok, null)
-                            .setNegativeButton(R.string.cancel, null).show();
+                            .setPositiveButton(R.string.ok, null).show();
 
                     // html string format
                     TextView interactionResultView = (TextView) resultView.findViewById(R.id.resultView);
-                    String htmlString = "<b>" + medNameFieldTxt + "</b>" + " and " + "<b>" +
-                            interactionName + "</b>" + " have drug interaction! " + interactionResult;
+                    String htmlString = "<br> <b>" + medNameFieldTxt + "</b>" + " and " + "<b>" +
+                            interactionName + "</b>" + " have drug interaction! " + "<br> <br>" + interactionResult;
 
                     interactionResultView.setText(Html.fromHtml(htmlString));
+
+                    // two line spaces before add new interactoin
+                    drug_interaction_list.add(htmlString);
+                    drug_interaction_list.add("<br> <br>");
                 }
             }
         }
+
+        // write the list of drug interactions into file
+        Helpers.writeToFile(getContext(), drug_interaction_list, "drug_interaction_list");
 
         Log.d("mydatabase", DatabaseUtils.dumpCursorToString(db.getCursor()));
 

@@ -38,4 +38,6 @@
     <string name="drug_interaction_result_title">Drug Interaction Results:</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="file_format">.txt</string>
+    <string name="taken">Taken</string>
 </resources>
