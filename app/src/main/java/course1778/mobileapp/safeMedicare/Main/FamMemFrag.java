@@ -255,8 +255,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
                     builder.setTitle(R.string.drug_interaction_result_title).setView(resultView)
-                            .setPositiveButton(R.string.ok, null)
-                            .setNegativeButton(R.string.cancel, null).show();
+                            .setPositiveButton(R.string.ok, null).show();
 
                     // html string format
                     TextView interactionResultView = (TextView) resultView.findViewById(R.id.resultView);
