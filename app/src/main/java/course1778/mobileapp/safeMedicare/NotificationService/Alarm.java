@@ -12,7 +12,9 @@ import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import course1778.mobileapp.safeMedicare.Main.FamMemActivity;
 import course1778.mobileapp.safeMedicare.R;
@@ -43,6 +45,17 @@ public class Alarm extends BroadcastReceiver {
                         PendingIntent.FLAG_UPDATE_CURRENT);
         Calendar time = Calendar.getInstance();
         time.setTimeInMillis(System.currentTimeMillis());
+
+
+
+//        List<Integer> day = new ArrayList<Integer>();
+//        day.add(Calendar.FRIDAY);
+//        day.add(Calendar.MONDAY);
+//
+//        time.set(Calendar.DAY_OF_WEEK,day);
+
+
+
         time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(extras.getString("time_h")));
         time.set(Calendar.MINUTE, Integer.parseInt(extras.getString("time_m")));
         time.set(Calendar.SECOND, 0);
@@ -121,8 +134,11 @@ public class Alarm extends BroadcastReceiver {
                         context.getString(R.string.show),
                         buildPendingIntent(FamMemActivity.class, context, extras))
                 .addAction(android.R.drawable.ic_media_play,
-                        context.getString(R.string.snooze),
-                        buildPendingIntent(Snooze.class, context, extras));
+                        context.getString(R.string.taken),
+                        buildPendingIntent(Taken_Activity.class, context, extras));
+//                .addAction(android.R.drawable.ic_media_play,
+//                        context.getString(R.string.snooze),
+//                        buildPendingIntent(Snooze.class, context, extras));
         //buildPendingIntent(Settings.ACTION_SETTINGS, context));
 
         return(b);
