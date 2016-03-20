@@ -267,7 +267,8 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
                     // html string format
                     TextView interactionResultView = (TextView) resultView.findViewById(R.id.resultView);
                     String htmlString = "<br> <b>" + medNameFieldTxt + "</b>" + " and " + "<b>" +
-                            interactionName + "</b>" + " have drug interaction! " + "<br> <br>" + interactionResult;
+                            interactionName + "</b>" + " have drug interaction! " + "<br> <br>" +
+                            interactionResult + "<br> <br>" + getString(R.string.interaction_warning);
 
                     interactionResultView.setText(Html.fromHtml(htmlString));
 
