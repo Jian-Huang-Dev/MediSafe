@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.parse.LogInCallback;
@@ -21,9 +22,16 @@ import course1778.mobileapp.safeMedicare.R;
  */
 public class SignupActivity extends Activity {
     // Declare Variables
-    Button registerBtn, loginBtn;
+    Button registerBtn;
+    ImageButton loginBtn;
     String usrnameTxt, phoneNumTxt, pwdTxt, pwdTxt2, emailTxt;
     EditText phoneNum, pwd, pwd2, usrname, email;
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.slide_out_right);
+    }
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +45,7 @@ public class SignupActivity extends Activity {
 
         // register button
         registerBtn = (Button) findViewById(R.id.registerBtn);
-        loginBtn = (Button) findViewById(R.id.loginBtn);
+        loginBtn = (ImageButton) findViewById(R.id.loginBtn);
 
         registerBtn.setOnClickListener(new View.OnClickListener() {
 

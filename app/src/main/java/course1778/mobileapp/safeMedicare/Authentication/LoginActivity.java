@@ -27,6 +27,12 @@ public class LoginActivity extends Activity {
     EditText pwd;
     EditText usrname;
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.slide_out_right);
+    }
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -45,26 +51,26 @@ public class LoginActivity extends Activity {
 
                 // Send data to Parse.com for verification
                 ParseUser.logInInBackground(usrnameTxt, pwdTxt,
-                    new LogInCallback() {
-                        public void done(ParseUser user, ParseException e) {
-                            if (user != null) {
-                                // If user exist and authenticated, send user to WelcomePage.class
-                                Intent intent = new Intent(
-                                        LoginActivity.this,
-                                        WelcomePage.class);
-                                startActivity(intent);
-                                Toast.makeText(getApplicationContext(),
-                                        "Successfully Logged in",
-                                        Toast.LENGTH_LONG).show();
-                                finish();
-                            } else {
-                                Toast.makeText(
-                                        getApplicationContext(),
-                                        "No such user exist, please signup",
-                                        Toast.LENGTH_LONG).show();
+                        new LogInCallback() {
+                            public void done(ParseUser user, ParseException e) {
+                                if (user != null) {
+                                    // If user exist and authenticated, send user to WelcomePage.class
+                                    Intent intent = new Intent(
+                                            LoginActivity.this,
+                                            WelcomePage.class);
+                                    startActivity(intent);
+                                    Toast.makeText(getApplicationContext(),
+                                            "Successfully Logged in",
+                                            Toast.LENGTH_LONG).show();
+                                    finish();
+                                } else {
+                                    Toast.makeText(
+                                            getApplicationContext(),
+                                            "No such user exist, please signup",
+                                            Toast.LENGTH_LONG).show();
+                                }
                             }
-                        }
-                    });
+                        });
             }
         });
 
