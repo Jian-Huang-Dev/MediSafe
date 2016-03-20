@@ -27,6 +27,12 @@ public class SignupActivity extends Activity {
     String usrnameTxt, phoneNumTxt, pwdTxt, pwdTxt2, emailTxt;
     EditText phoneNum, pwd, pwd2, usrname, email;
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.slide_out_right);
+    }
+
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.signup_activity);
