@@ -18,7 +18,7 @@ import course1778.mobileapp.safeMedicare.R;
  */
 public class Alarm_Msg extends BroadcastReceiver {
     private final String REMINDER_BUNDLE = "MyReminderBundle";
-    private static final int NOTIFY_ID=1336;
+    private int NOTIFY_ID = 1;
 
     // this constructor is called by the alarm manager.
     public Alarm_Msg(){ }
@@ -47,13 +47,16 @@ public class Alarm_Msg extends BroadcastReceiver {
         AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, Alarm_Msg.class);
         intent.putExtra(REMINDER_BUNDLE, extras);
+        Bundle getBundle = intent.getBundleExtra(REMINDER_BUNDLE);
+        NOTIFY_ID = NOTIFY_ID + getBundle.getInt("id");
+        //Toast.makeText(context, Integer.toString(NOTIFY_ID), Toast.LENGTH_LONG).show();
         PendingIntent pendingIntent =
-                PendingIntent.getBroadcast(context, 0, intent,
+                PendingIntent.getBroadcast(context, NOTIFY_ID, intent,
                         PendingIntent.FLAG_UPDATE_CURRENT);
 
         alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
                 SystemClock.elapsedRealtime() +
-                        180 * 1000, pendingIntent);
+                        60 * 1000, pendingIntent);
     }
 
     @Override
