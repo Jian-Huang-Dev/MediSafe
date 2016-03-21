@@ -11,6 +11,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.NotificationCompat;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -22,9 +23,9 @@ import course1778.mobileapp.safeMedicare.R;
  */
 public class Snooze extends BroadcastReceiver {
     private final String REMINDER_BUNDLE = "MyReminderBundle";
-    private MediaPlayer player;
+    public static MediaPlayer player;
     //private static final int NOTIFY_ID=1337;
-    private int NOTIFY_ID = 1;
+    private int NOTIFY_ID = 0;
 
     // this constructor is called by the alarm manager.
     public Snooze(){ }
@@ -34,14 +35,15 @@ public class Snooze extends BroadcastReceiver {
     //  any extras you'd like to get later when triggered
     //  and the timeout
     public Snooze(Context context, Bundle extras){
-        Alarm.mPlayer.stop();
+        //Alarm.mPlayer.stop();
 
 
         AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, Snooze.class);
         intent.putExtra(REMINDER_BUNDLE, extras);
+        Bundle getBundle = intent.getBundleExtra(REMINDER_BUNDLE);
         PendingIntent pendingIntent =
-                PendingIntent.getBroadcast(context, 0, intent,
+                PendingIntent.getBroadcast(context, getBundle.getInt("id"), intent,
                         PendingIntent.FLAG_UPDATE_CURRENT);
 
         alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
@@ -68,7 +70,9 @@ public class Snooze extends BroadcastReceiver {
         player.start();
 
         String title = getBundle.getString("title");
-        NOTIFY_ID = NOTIFY_ID + getBundle.getInt("id");
+        NOTIFY_ID = getBundle.getInt("id");
+
+        //Toast.makeText(context, Integer.toString(NOTIFY_ID), Toast.LENGTH_LONG).show();
         //Bundle bundle = new Bundle();
 // add extras here..
         //bundle.putString("title", title);
@@ -111,7 +115,10 @@ public class Snooze extends BroadcastReceiver {
                         buildPendingIntent(FamMemActivity.class, context, extras))
                 .addAction(android.R.drawable.ic_media_play,
                         context.getString(R.string.snooze),
-                        buildPendingIntent(Snooze.class, context, extras));
+                        buildPendingIntent(Snooze_Snooze_Act.class, context, extras))
+                .addAction(android.R.drawable.ic_media_play,
+                        context.getString(R.string.taken),
+                        buildPendingIntent(Snooze_Taken_Act.class, context, extras));
         //buildPendingIntent(Settings.ACTION_SETTINGS, context));
 
         return(b);

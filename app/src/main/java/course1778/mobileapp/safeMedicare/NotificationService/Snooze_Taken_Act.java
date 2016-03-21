@@ -7,14 +7,13 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import course1778.mobileapp.safeMedicare.Main.PatientActivity;
 
 /**
- * Created by lang on 07/03/16.
+ * Created by lang on 14/03/16.
  */
-public class Taken_Activity extends Activity {
+public class Snooze_Taken_Act extends Activity {
     Context context = PatientActivity.getContext();
     //Context context = getActivity().getApplicationContext();
     //Intent intent = getIntent();
@@ -23,10 +22,9 @@ public class Taken_Activity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //int id = intent.getBundleExtra(REMINDER_BUNDLE).getInt("");
-        //Toast.makeText(context, Integer.toString(getIntent().getBundleExtra(REMINDER_BUNDLE).getInt("id")), Toast.LENGTH_LONG).show();
 
         cancelNotification(context, getIntent().getBundleExtra(REMINDER_BUNDLE).getInt("id"));
-        Alarm.mPlayer.stop();
+        Snooze.player.stop();
 
         AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, Alarm_Msg.class);

@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,22 +41,11 @@ public class Alarm extends BroadcastReceiver {
                 (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, Alarm.class);
         intent.putExtra(REMINDER_BUNDLE, extras);
-        PendingIntent pendingIntent =
-                PendingIntent.getBroadcast(context, 0, intent,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
+//        PendingIntent pendingIntent =
+//                PendingIntent.getBroadcast(context, 0, intent,
+//                        PendingIntent.FLAG_UPDATE_CURRENT);
         Calendar time = Calendar.getInstance();
         time.setTimeInMillis(System.currentTimeMillis());
-
-
-
-//        List<Integer> day = new ArrayList<Integer>();
-//        day.add(Calendar.FRIDAY);
-//        day.add(Calendar.MONDAY);
-//
-//        time.set(Calendar.DAY_OF_WEEK,day);
-
-
-
         time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(extras.getString("time_h")));
         time.set(Calendar.MINUTE, Integer.parseInt(extras.getString("time_m")));
         time.set(Calendar.SECOND, 0);
@@ -66,7 +56,15 @@ public class Alarm extends BroadcastReceiver {
             NOTIFY_ID = (int) title.charAt(i) + NOTIFY_ID;
         }
         NOTIFY_ID = Integer.parseInt(extras.getString("time_h") +extras.getString("time_m"));
+
+
+        //Toast.makeText(context, Integer.toString(NOTIFY_ID), Toast.LENGTH_LONG).show();
+
         extras.putInt("id", NOTIFY_ID);
+
+        PendingIntent pendingIntent =
+                PendingIntent.getBroadcast(context, NOTIFY_ID, intent,
+                        PendingIntent.FLAG_UPDATE_CURRENT);
 
 
         alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, time.getTimeInMillis(),
@@ -92,6 +90,7 @@ public class Alarm extends BroadcastReceiver {
         mPlayer.start();
 
         String title = getBundle.getString("title");
+        int id  = getBundle.getInt("id");
         //Bundle bundle = new Bundle();
 // add extras here..
         //bundle.putString("title", title);
@@ -102,7 +101,7 @@ public class Alarm extends BroadcastReceiver {
         NotificationCompat.InboxStyle notification=
                 new NotificationCompat.InboxStyle(normal);
 
-        mgr.notify(NOTIFY_ID,
+        mgr.notify(id,
                 notification
                         .addLine(title)
                         .addLine(context.getString(R.string.description))
@@ -118,12 +117,14 @@ public class Alarm extends BroadcastReceiver {
 
     private NotificationCompat.Builder buildNormal(Context context, String title, Bundle extras) {
         NotificationCompat.Builder b=new NotificationCompat.Builder(context);
-        Snooze snooze = new Snooze();
+        //Snooze snooze = new Snooze();
 
         b.setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setContentTitle(context.getString(R.string.getmed))
                 .setVisibility(Notification.VISIBILITY_PUBLIC)
+                .setCategory("alarm")
+                .setPriority(2)
                         //.setContentText(title)
                         //.setContentIntent(buildPendingIntent(Settings.ACTION_SECURITY_SETTINGS, context))
                 .setSmallIcon(R.drawable.medicine_notify)
@@ -133,6 +134,9 @@ public class Alarm extends BroadcastReceiver {
                 .addAction(android.R.drawable.ic_media_play,
                         context.getString(R.string.show),
                         buildPendingIntent(FamMemActivity.class, context, extras))
+                .addAction(android.R.drawable.ic_media_play,
+                        context.getString(R.string.snooze),
+                        buildPendingIntent(Snooze_Act.class, context, extras))
                 .addAction(android.R.drawable.ic_media_play,
                         context.getString(R.string.taken),
                         buildPendingIntent(Taken_Activity.class, context, extras));
