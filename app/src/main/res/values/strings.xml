@@ -49,4 +49,5 @@
     <string name="Fri">F</string>
     <string name="Sat">Sa</string>
     <string name="Sun">S</string>
+    <string name="reminderTime">Reminder Time : </string>
 </resources>

@@ -23,12 +23,32 @@
 			android:completionThreshold="1"/>
 	</LinearLayout>
 
-	<TimePicker
+	<LinearLayout
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:id="@+id/timePicker"
-		android:layout_gravity="center_horizontal"
-		android:timePickerMode="spinner" />
+		android:orientation="vertical">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/reminderTime"
+			android:textStyle="bold|italic" />
+
+
+		<Spinner
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/spinner" />
+
+		<TimePicker
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/timePicker"
+			android:layout_gravity="center_horizontal"
+			android:timePickerMode="spinner" />
+
+	</LinearLayout>
+
 
 	<LinearLayout
 		android:layout_width="wrap_content"
@@ -52,49 +72,56 @@
 				android:layout_height="wrap_content"
 				android:text="@string/Mon"
 				android:layout_weight="1"
-				android:id="@+id/MonCheck"/>
+				android:id="@+id/MonCheck"
+				android:checked="true" />
 
 			<CheckBox
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/Tue"
 				android:layout_weight="1"
-				android:id="@+id/TueCheck"/>
+				android:id="@+id/TueCheck"
+				android:checked="true" />
 
 			<CheckBox
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/Wed"
 				android:layout_weight="1"
-				android:id="@+id/WedCheck"/>
+				android:id="@+id/WedCheck"
+				android:checked="true" />
 
 			<CheckBox
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/Thu"
 				android:layout_weight="1"
-				android:id="@+id/ThuCheck"/>
+				android:id="@+id/ThuCheck"
+				android:checked="true" />
 
 			<CheckBox
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/Fri"
 				android:layout_weight="1"
-				android:id="@+id/FriCheck"/>
+				android:id="@+id/FriCheck"
+				android:checked="true" />
 
 			<CheckBox
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/Sat"
 				android:layout_weight="1"
-				android:id="@+id/SatCheck"/>
+				android:id="@+id/SatCheck"
+				android:checked="true" />
 
 			<CheckBox
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:text="@string/Sun"
 				android:layout_weight="1"
-				android:id="@+id/SunCheck"/>
+				android:id="@+id/SunCheck"
+				android:checked="true" />
 
 		</LinearLayout>
 

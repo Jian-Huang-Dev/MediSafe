@@ -32,11 +32,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -61,6 +63,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     private Cursor current = null;
     private AsyncTask task = null;
     private int notifyId = 0;
+    private static final String[] items = {"Once a Day", "Twice a Day", "Three Times a Day", "Four Times a Day", "Five Times a Day", "Six Times a Day", "Seven Times a Day", "Eight Times a Day", "Nine Times a Day", "Ten Times a Day"};
 
     FileOutputStream outputStream;
 
@@ -109,17 +112,21 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //String format = "%1$02d"; // two digits
 
         SimpleCursorAdapter adapter =
             new SimpleCursorAdapter(getActivity(), R.layout.fam_mem_frag,
                 current, new String[]{
                 DatabaseHelper.TITLE,
+                    //String.format(format, DatabaseHelper.TIME_H),
                 DatabaseHelper.TIME_H,
+                    //String.format(format, DatabaseHelper.TIME_M)},
                 DatabaseHelper.TIME_M},
                 new int[]{R.id.title, R.id.time_h, R.id.time_m},
-                0);
+                    0);
 
         setListAdapter(adapter);
+
 
         if (current == null) {
             db = new DatabaseHelper(getActivity());
@@ -185,6 +192,13 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         builder.setTitle(R.string.add_title).setView(addView)
                 .setPositiveButton(R.string.ok, this)
                 .setNegativeButton(R.string.cancel, null).show();
+
+        Spinner spin=(Spinner)addView.findViewById(R.id.spinner);
+        //spin.setOnItemSelectedListener(FamMemActivity.getContext());
+        ArrayAdapter<String> aa=new ArrayAdapter<String>(FamMemActivity.getContext(),android.R.layout.simple_spinner_item,items);
+        aa.setDropDownViewResource(
+                android.R.layout.simple_spinner_dropdown_item);
+        spin.setAdapter(aa);
 
         // field for user adding medication name
         textView = (AutoCompleteTextView) addView.findViewById(R.id.title);
