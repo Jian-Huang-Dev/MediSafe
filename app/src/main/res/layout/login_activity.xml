@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#0073e6"
+    android:background="@color/colorDarkBlue"
     android:orientation="vertical"
     android:padding="10dip">
 
@@ -15,7 +15,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/activity_vertical_margin">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -25,6 +26,7 @@
                 android:paddingRight="@dimen/fab_margin"
                 android:text="@string/app_name"
                 android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="#ffffff"
                 android:textStyle="bold" />
 
             <ImageView
@@ -39,15 +41,19 @@
             android:id="@+id/username"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:hint="@string/usr_name"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColorHint="@color/colorWhite" />
 
         <EditText
             android:id="@+id/password"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:hint="@string/password"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:textColorHint="@color/colorWhite" />
 
         <LinearLayout
             android:layout_width="match_parent"
