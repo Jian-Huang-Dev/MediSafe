@@ -41,4 +41,12 @@
     <string name="file_format">.txt</string>
     <string name="taken">Taken</string>
     <string name="interaction_warning">Please consult with your physician or pharmacist to assess potential risks!</string>
+    <string name="schedule">Schedule : </string>
+    <string name="Mon">M</string>
+    <string name="Tue">T</string>
+    <string name="Wed">W</string>
+    <string name="Thu">Th</string>
+    <string name="Fri">F</string>
+    <string name="Sat">Sa</string>
+    <string name="Sun">S</string>
 </resources>
