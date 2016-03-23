@@ -1,7 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#0073e6"
+    android:background="@color/colorDarkBlue"
     android:orientation="vertical"
     android:padding="10dip">
 
@@ -20,16 +20,17 @@
                 android:id="@+id/loginBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="#0073e6"
-                android:src="@drawable/left_arrow"/>
+                android:background="@color/colorDarkBlue"
+                android:src="@drawable/left_arrow" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_vertical_margin"
                 android:text="@string/login_btn"
-                android:textStyle="bold"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:layout_marginLeft="@dimen/activity_vertical_margin"/>
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold" />
 
         </LinearLayout>
 
@@ -37,40 +38,54 @@
             android:id="@+id/usrname"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:hint="@string/usr_name"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColorHint="@color/colorWhite" />
 
         <EditText
             android:id="@+id/phoneNum"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:hint="@string/phone_num"
             android:inputType="phone"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:textColorHint="@color/colorWhite" />
+
 
         <EditText
             android:id="@+id/email"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:hint="@string/email_addr"
             android:inputType="textEmailAddress"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:textColorHint="@color/colorWhite" />
+
 
         <EditText
             android:id="@+id/pwd"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:hint="@string/password"
             android:inputType="textPassword"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:textColorHint="@color/colorWhite" />
+
 
         <EditText
             android:id="@+id/pwd2"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:hint="@string/password2"
             android:inputType="textPassword"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:textColorHint="@color/colorWhite" />
+
 
         <LinearLayout
             android:layout_width="match_parent"

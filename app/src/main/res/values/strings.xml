@@ -33,7 +33,7 @@
     <string name="register_btn">Register</string>
     <string name="email_addr">Email Address</string>
     <string name="msg_password_mismatch">Both password does not match</string>
-    <string name="phone_num">Phone Number</string>
+    <string name="phone_num">Caregiver Number</string>
     <string name="snooze">Snooze</string>
     <string name="drug_interaction_result_title">Drug Interaction Results:</string>
     <string name="drawer_open">Open navigation drawer</string>
