@@ -26,6 +26,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -187,7 +188,8 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     private void add() {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View addView = inflater.inflate(R.layout.add_edit, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        //AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.AlertDialogCustom));
 
         builder.setTitle(R.string.add_title).setView(addView)
                 .setPositiveButton(R.string.ok, this)
