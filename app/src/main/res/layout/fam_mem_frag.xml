@@ -10,7 +10,8 @@
 		android:layout_height="wrap_content"
 		android:id="@+id/fem_date"
 		android:text="DTAE"
-		android:background="#447cd5" />
+		android:background="#447cd5"
+		android:textStyle="italic" />
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -51,7 +52,7 @@
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:textSize="20sp"
-			android:textStyle="bold"
+			android:textStyle="bold|italic"
 			android:layout_weight="6"
 			android:gravity="center" />
 

@@ -25,6 +25,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
   public static final String TITLE="title";
   public static final String TIME_H="time_h";
   public static final String TIME_M="time_m";
+  public static final String FREQUENCY="frequency";
+  public static final String DAY="day";
+//  public static final String MONDAY="monday";
+//  public static final String TUESDAY="tuesday";
+//  public static final String WEDNESDAY="wednesday";
+//  public static final String THURSDAY="thursday";
+//  public static final String FRIDAY="friday";
+//  public static final String SATURDAY="saturday";
+//  public static final String SUNDAY="sunday";
   public static final String TABLE="notification";
 
   // for preloaded database "medicine.db"
@@ -38,7 +47,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
   @Override
   public void onCreate(SQLiteDatabase db) {
-    db.execSQL("CREATE TABLE notification (title TEXT, time_h REAL, time_m REAL);");
+    db.execSQL("CREATE TABLE notification (title TEXT, time_h REAL, time_m REAL, frequency INTEGER, day INTEGER);");
+    //monday INTEGER, tuesday INTEGER, wednesday INTEGER, thursday INTEGER, friday INTEGER, saturday INTEGER, sunday INTEGER,);");
 
 
   }

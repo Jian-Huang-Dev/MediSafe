@@ -36,6 +36,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
 import android.widget.SimpleCursorAdapter;
@@ -54,6 +55,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -67,7 +69,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     private Cursor current = null;
     private AsyncTask task = null;
     private int notifyId = 0;
-    private static final String[] items = {"Please Choose a Frequency Here", "Once a Day", "Twice a Day", "Three Times a Day", "Four Times a Day", "Five Times a Day", "Six Times a Day", "Seven Times a Day", "Eight Times a Day", "Nine Times a Day", "Ten Times a Day"};
+    private static final String[] items = {"Once a Day", "Twice a Day", "Three Times a Day", "Four Times a Day", "Five Times a Day", "Six Times a Day", "Seven Times a Day", "Eight Times a Day", "Nine Times a Day", "Ten Times a Day"};
 
     FileOutputStream outputStream;
 
@@ -118,7 +120,13 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         super.onViewCreated(view, savedInstanceState);
         //String format = "%1$02d"; // two digits
 
-        //String dateString = DateFormat.getDateTimeInstance().format(new Date());
+//        Calendar c = Calendar.getInstance();
+//
+//        String sDate = c.get(Calendar.YEAR) + "-"
+//                + c.get(Calendar.MONTH)
+//                + "-" + c.get(Calendar.DAY_OF_MONTH)
+//                + " at " + c.get(Calendar.HOUR_OF_DAY)
+//                + ":" + c.get(Calendar.MINUTE);
 
         SimpleCursorAdapter adapter =
             new SimpleCursorAdapter(getActivity(), R.layout.fam_mem_frag,
@@ -313,10 +321,59 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         Log.d("mydatabase", DatabaseUtils.dumpCursorToString(db.getCursor()));
 
         // get strings from edittext boxes, then insert them into database
-        ContentValues values = new ContentValues(3);
+        ContentValues values = new ContentValues(5);
         Dialog dlg = (Dialog) di;
         EditText title = (EditText) dlg.findViewById(R.id.title);
         TimePicker tp = (TimePicker)dlg.findViewById(R.id.timePicker);
+        Spinner mySpinner=(Spinner) dlg.findViewById(R.id.spinner);
+        String fre = mySpinner.getSelectedItem().toString();
+        int Fre;
+        int day = 0;
+
+        if (fre == "Ten Times a Day"){
+            Fre = 10;
+        } else if (fre == "Twice a Day"){
+            Fre = 2;
+        } else if (fre == "Three Times a Day"){
+            Fre = 3;
+        } else if (fre == "Four Times a Day"){
+            Fre = 4;
+        } else if (fre == "Five Times a Day"){
+            Fre = 5;
+        } else if (fre == "Six Times a Day"){
+            Fre = 6;
+        } else if (fre == "Seven Times a Day"){
+            Fre = 7;
+        } else if (fre == "Eight Times a Day"){
+            Fre = 8;
+        } else if (fre == "Nine Times a Day"){
+            Fre = 9;
+        } else {
+            Fre = 1;
+        }
+
+
+        if (((CheckBox) dlg.findViewById(R.id.MonCheck)).isChecked()){
+            day = day + 1;
+        }
+        if (((CheckBox) dlg.findViewById(R.id.TueCheck)).isChecked()){
+            day = day + 2;
+        }
+        if (((CheckBox) dlg.findViewById(R.id.WedCheck)).isChecked()){
+            day = day + 4;
+        }
+        if (((CheckBox) dlg.findViewById(R.id.ThuCheck)).isChecked()){
+            day = day + 8;
+        }
+        if (((CheckBox) dlg.findViewById(R.id.FriCheck)).isChecked()){
+            day = day + 16;
+        }
+        if (((CheckBox) dlg.findViewById(R.id.SatCheck)).isChecked()){
+            day = day + 32;
+        }
+        if (((CheckBox) dlg.findViewById(R.id.SunCheck)).isChecked()){
+            day = day + 64;
+        }
 
         // clear focus before retrieving the min and hr
         tp.clearFocus();
@@ -335,12 +392,16 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         values.put(DatabaseHelper.TITLE, titleStr);
         values.put(DatabaseHelper.TIME_H, timeHStr);
         values.put(DatabaseHelper.TIME_M, timeMStr);
+        values.put(DatabaseHelper.FREQUENCY, Fre);
+        values.put(DatabaseHelper.DAY, day);
 
         Bundle bundle = new Bundle();
         // add extras here..
         bundle.putString("title", title.getText().toString());
         bundle.putString("time_h", timeHStr);
         bundle.putString("time_m", timeMStr);
+        bundle.putInt("frequency", Fre);
+        bundle.putInt("day", day);
         //Alarm alarm = new Alarm(getActivity().getApplicationContext(), bundle);
 
         // get unique notifyId for each alarm
