@@ -195,9 +195,9 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
 
         Spinner spin=(Spinner)addView.findViewById(R.id.spinner);
         //spin.setOnItemSelectedListener(FamMemActivity.getContext());
-        ArrayAdapter<String> aa=new ArrayAdapter<String>(FamMemActivity.getContext(),android.R.layout.simple_spinner_item,items);
+        ArrayAdapter<String> aa=new ArrayAdapter<String>(FamMemActivity.getContext(),R.layout.spinner_item_text,items);
         aa.setDropDownViewResource(
-                android.R.layout.simple_spinner_dropdown_item);
+                R.layout.spinner_dropdown_item);
         spin.setAdapter(aa);
 
         // field for user adding medication name
