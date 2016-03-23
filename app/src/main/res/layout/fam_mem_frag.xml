@@ -2,42 +2,60 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	android:weightSum="11"
-	android:orientation="horizontal"
-    android:gravity="bottom"
-	android:longClickable="true">
+	android:orientation="vertical"
+    android:gravity="top">
 
 	<TextView
-		android:id="@+id/title"
-		android:layout_width="0dp"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:textSize="20sp"
-		android:textStyle="bold"
-		android:layout_weight="6"/>
+		android:id="@+id/fem_date"
+		android:text="DTAE"
+		android:background="#447cd5" />
 
-	<TextView
-		android:id="@+id/time_h"
-		android:layout_width="0dp"
-		android:layout_height="wrap_content"
-		android:textSize="20sp"
-        android:textStyle="bold"
-		android:layout_weight="2"/>
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:weightSum="11"
+		android:orientation="horizontal"
+		android:gravity="bottom"
+		android:longClickable="true"
+		android:background="#beefef">
 
-	<TextView
-		android:layout_width="0dp"
-		android:layout_height="wrap_content"
-		android:text=":"
-		android:id="@+id/text_colon"
-		android:textSize="20sp"
-		android:textStyle="bold"
-		android:layout_weight="1"/>
+		<TextView
+			android:id="@+id/time_h"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:textSize="20sp"
+			android:textStyle="bold"
+			android:layout_weight="2"/>
 
-	<TextView
-		android:id="@+id/time_m"
-		android:layout_width="0dp"
-		android:layout_height="wrap_content"
-		android:textSize="20sp"
-		android:textStyle="bold"
-		android:layout_weight="2"/>
+		<TextView
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:text=":"
+			android:id="@+id/text_colon"
+			android:textSize="20sp"
+			android:textStyle="bold"
+			android:layout_weight="1"/>
+
+		<TextView
+			android:id="@+id/time_m"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:textSize="20sp"
+			android:textStyle="bold"
+			android:layout_weight="2"/>
+
+		<TextView
+			android:id="@+id/title"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:textSize="20sp"
+			android:textStyle="bold"
+			android:layout_weight="6"
+			android:gravity="center" />
+
+	</LinearLayout>
+
 
 </LinearLayout>

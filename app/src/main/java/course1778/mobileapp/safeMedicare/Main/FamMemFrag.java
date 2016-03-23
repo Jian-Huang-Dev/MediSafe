@@ -52,7 +52,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
 
 import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
 import course1778.mobileapp.safeMedicare.Helpers.Helpers;
@@ -64,7 +67,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     private Cursor current = null;
     private AsyncTask task = null;
     private int notifyId = 0;
-    private static final String[] items = {"Once a Day", "Twice a Day", "Three Times a Day", "Four Times a Day", "Five Times a Day", "Six Times a Day", "Seven Times a Day", "Eight Times a Day", "Nine Times a Day", "Ten Times a Day"};
+    private static final String[] items = {"Please Choose a Frequency Here", "Once a Day", "Twice a Day", "Three Times a Day", "Four Times a Day", "Five Times a Day", "Six Times a Day", "Seven Times a Day", "Eight Times a Day", "Nine Times a Day", "Ten Times a Day"};
 
     FileOutputStream outputStream;
 
@@ -115,6 +118,8 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         super.onViewCreated(view, savedInstanceState);
         //String format = "%1$02d"; // two digits
 
+        //String dateString = DateFormat.getDateTimeInstance().format(new Date());
+
         SimpleCursorAdapter adapter =
             new SimpleCursorAdapter(getActivity(), R.layout.fam_mem_frag,
                 current, new String[]{
@@ -125,6 +130,13 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
                 DatabaseHelper.TIME_M},
                 new int[]{R.id.title, R.id.time_h, R.id.time_m},
                     0);
+
+//        TextView textView = new TextView(getContext());
+//        textView.setText("Date");
+//
+//        adapter.addHeaderView(textView);
+
+
 
         setListAdapter(adapter);
 
