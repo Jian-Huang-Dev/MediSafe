@@ -29,6 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
   public static final String DAY="day";
   public static final String DOSAGE="dosage";
   public static final String INSTRUCTION="instruction";
+  public static final String SHAPE="shape";
 //  public static final String MONDAY="monday";
 //  public static final String TUESDAY="tuesday";
 //  public static final String WEDNESDAY="wednesday";
@@ -49,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
   @Override
   public void onCreate(SQLiteDatabase db) {
-    db.execSQL("CREATE TABLE notification (title TEXT, time_h REAL, time_m REAL, dosage REAL, frequency INTEGER, day INTEGER, instruction TEXT);");
+    db.execSQL("CREATE TABLE notification (title TEXT, time_h REAL, time_m REAL, dosage REAL, frequency INTEGER, day INTEGER, instruction TEXT, shape INTEGER);");
     //monday INTEGER, tuesday INTEGER, wednesday INTEGER, thursday INTEGER, friday INTEGER, saturday INTEGER, sunday INTEGER,);");
 
 

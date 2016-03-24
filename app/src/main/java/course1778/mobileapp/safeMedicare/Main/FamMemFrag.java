@@ -39,6 +39,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -135,7 +136,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
                     //String.format(format, DatabaseHelper.TIME_H),
                 DatabaseHelper.TIME_H,
                     //String.format(format, DatabaseHelper.TIME_M)},
-                DatabaseHelper.TIME_M},
+                    DatabaseHelper.TIME_M},
                 new int[]{R.id.title, R.id.time_h, R.id.time_m},
                     0);
 
@@ -321,7 +322,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         Log.d("mydatabase", DatabaseUtils.dumpCursorToString(db.getCursor()));
 
         // get strings from edittext boxes, then insert them into database
-        ContentValues values = new ContentValues(6);
+        ContentValues values = new ContentValues(7);
         Dialog dlg = (Dialog) di;
         EditText title = (EditText) dlg.findViewById(R.id.title);
         TimePicker tp = (TimePicker)dlg.findViewById(R.id.timePicker);
@@ -329,6 +330,10 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         String fre = mySpinner.getSelectedItem().toString();
         EditText dosage = (EditText) dlg.findViewById(R.id.dosage);
         EditText instruction = (EditText) dlg.findViewById(R.id.instruction);
+        RadioGroup radioButtonGroup = (RadioGroup) dlg.findViewById(R.id.radioGroup);
+        int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
+        View radioButton = radioButtonGroup.findViewById(radioButtonID);
+        int shape = radioButtonGroup.indexOfChild(radioButton)/2;
         int Fre;
         int day = 0;
 
@@ -400,6 +405,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         values.put(DatabaseHelper.DAY, day);
         values.put(DatabaseHelper.DOSAGE, dosageStr);
         values.put(DatabaseHelper.INSTRUCTION, instructionStr);
+        values.put(DatabaseHelper.SHAPE,shape);
 
         Bundle bundle = new Bundle();
         // add extras here..
@@ -410,6 +416,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         bundle.putInt("day", day);
         bundle.putString("dosage", dosageStr);
         bundle.putString("instruction", instructionStr);
+        bundle.putInt("shape", shape);
         //Alarm alarm = new Alarm(getActivity().getApplicationContext(), bundle);
 
         // get unique notifyId for each alarm
@@ -447,7 +454,8 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
                         new String[]{"ROWID AS _id",
                             DatabaseHelper.TITLE,
                             DatabaseHelper.TIME_H,
-                            DatabaseHelper.TIME_M},
+                            DatabaseHelper.TIME_M,
+                        DatabaseHelper.SHAPE},
                         null, null, null, null, DatabaseHelper.TITLE);
 
             result.getCount();
