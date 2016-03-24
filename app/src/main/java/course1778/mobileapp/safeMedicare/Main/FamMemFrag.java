@@ -321,12 +321,13 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         Log.d("mydatabase", DatabaseUtils.dumpCursorToString(db.getCursor()));
 
         // get strings from edittext boxes, then insert them into database
-        ContentValues values = new ContentValues(5);
+        ContentValues values = new ContentValues(6);
         Dialog dlg = (Dialog) di;
         EditText title = (EditText) dlg.findViewById(R.id.title);
         TimePicker tp = (TimePicker)dlg.findViewById(R.id.timePicker);
         Spinner mySpinner=(Spinner) dlg.findViewById(R.id.spinner);
         String fre = mySpinner.getSelectedItem().toString();
+        EditText dosage = (EditText) dlg.findViewById(R.id.dosage);
         int Fre;
         int day = 0;
 
@@ -385,6 +386,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         String titleStr = title.getText().toString();
         String timeHStr = Integer.toString(tpHour);
         String timeMStr = Integer.toString(tpMinute);
+        String dosageStr = dosage.getText().toString();
 
         Log.d("mytime",Integer.toString(tpHour));
         Log.d("mytime",Integer.toString(tpMinute));
@@ -394,6 +396,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         values.put(DatabaseHelper.TIME_M, timeMStr);
         values.put(DatabaseHelper.FREQUENCY, Fre);
         values.put(DatabaseHelper.DAY, day);
+        values.put(DatabaseHelper.DOSAGE, dosageStr);
 
         Bundle bundle = new Bundle();
         // add extras here..
@@ -402,6 +405,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         bundle.putString("time_m", timeMStr);
         bundle.putInt("frequency", Fre);
         bundle.putInt("day", day);
+        bundle.putString("dosage", dosageStr);
         //Alarm alarm = new Alarm(getActivity().getApplicationContext(), bundle);
 
         // get unique notifyId for each alarm
@@ -439,7 +443,8 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
                         new String[]{"ROWID AS _id",
                             DatabaseHelper.TITLE,
                             DatabaseHelper.TIME_H,
-                            DatabaseHelper.TIME_M},
+                            DatabaseHelper.TIME_M,
+                                DatabaseHelper.DOSAGE},
                         null, null, null, null, DatabaseHelper.TITLE);
 
             result.getCount();

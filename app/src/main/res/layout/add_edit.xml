@@ -25,6 +25,25 @@
 	</LinearLayout>
 
 	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/dosage"
+			android:textStyle="bold|italic" />
+
+		<EditText
+			android:id="@+id/dosage"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:enabled="true"
+			android:inputType="number|numberDecimal" />
+	</LinearLayout>
+
+	<LinearLayout
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
 		android:orientation="vertical">
