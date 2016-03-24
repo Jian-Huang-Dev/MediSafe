@@ -156,6 +156,104 @@
 
 	</LinearLayout>
 
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/shape"
+					android:textStyle="bold|italic" />
+
+
+
+
+					<RadioGroup
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:orientation="horizontal"
+						android:weightSum="12">
+
+						<ImageView
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:background="@drawable/capsule"
+							android:layout_weight="1"/>
+
+
+						<RadioButton
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:id="@+id/radioButton"
+							android:layout_weight="1"
+							android:checked="true" />
+
+						<ImageView
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:background="@drawable/tablet"
+							android:layout_weight="1"/>
+
+						<RadioButton
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:id="@+id/radioButton2"
+							android:layout_weight="1" />
+
+						<ImageView
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:background="@drawable/needle"
+							android:layout_weight="1"/>
+
+						<RadioButton
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:id="@+id/radioButton3"
+							android:layout_weight="1" />
+
+						<ImageView
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:background="@drawable/three"
+							android:layout_weight="1"/>
+
+						<RadioButton
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:id="@+id/radioButton4"
+							android:layout_weight="1" />
+
+						<ImageView
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:background="@drawable/powder"
+							android:layout_weight="1"/>
+
+						<RadioButton
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:id="@+id/radioButton5"
+							android:layout_weight="1" />
+
+						<ImageView
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:background="@drawable/plaster"
+							android:layout_weight="1"/>
+
+						<RadioButton
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:id="@+id/radioButton6"
+							android:layout_weight="1" />
+					</RadioGroup>
+
+
+			</LinearLayout>
+
 	<LinearLayout
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"

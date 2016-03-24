@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#447cd5">
+    android:background="@color/colorDarkBlue">
 
     <TextView
         android:id="@+id/welcomMsg"
@@ -17,7 +17,7 @@
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:orientation="vertical"
-        android:background="#437bd4">
+        android:background="@color/colorDarkBlue">
 
         <ImageButton
             android:id="@+id/patientPageBtn"
