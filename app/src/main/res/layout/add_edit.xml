@@ -4,6 +4,14 @@
 	android:layout_height="wrap_content"
 	android:orientation="vertical"
 	android:background="#beefef">
+	<ScrollView
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -146,7 +154,26 @@
 
 		</LinearLayout>
 
-
 	</LinearLayout>
 
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/instruction"
+			android:textStyle="bold|italic" />
+
+		<EditText
+			android:id="@+id/instruction"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:enabled="true"
+			android:inputType="textMultiLine" />
+	</LinearLayout>
+		</LinearLayout>
+	</ScrollView>
 </LinearLayout>

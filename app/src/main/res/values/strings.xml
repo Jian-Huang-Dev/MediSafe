@@ -51,4 +51,5 @@
     <string name="Sun">S</string>
     <string name="reminderTime">Reminder Time : </string>
     <string name="dosage">Dosage : </string>
+    <string name="instruction">Instruction : </string>
 </resources>

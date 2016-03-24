@@ -25,7 +25,7 @@
     <style name="AlertDialogCustom" parent="@android:style/Theme.Dialog">
         <item name="android:textColor">#ff0015</item>
         <item name="android:typeface">monospace</item>
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:windowBackground">@color/colorPrimary</item>
         <item name="android:colorBackground">@color/colorPrimary</item>
     </style>

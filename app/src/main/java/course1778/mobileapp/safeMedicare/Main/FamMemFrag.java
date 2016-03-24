@@ -328,6 +328,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         Spinner mySpinner=(Spinner) dlg.findViewById(R.id.spinner);
         String fre = mySpinner.getSelectedItem().toString();
         EditText dosage = (EditText) dlg.findViewById(R.id.dosage);
+        EditText instruction = (EditText) dlg.findViewById(R.id.instruction);
         int Fre;
         int day = 0;
 
@@ -387,6 +388,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         String timeHStr = Integer.toString(tpHour);
         String timeMStr = Integer.toString(tpMinute);
         String dosageStr = dosage.getText().toString();
+        String instructionStr = instruction.getText().toString();
 
         Log.d("mytime",Integer.toString(tpHour));
         Log.d("mytime",Integer.toString(tpMinute));
@@ -397,6 +399,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         values.put(DatabaseHelper.FREQUENCY, Fre);
         values.put(DatabaseHelper.DAY, day);
         values.put(DatabaseHelper.DOSAGE, dosageStr);
+        values.put(DatabaseHelper.INSTRUCTION, instructionStr);
 
         Bundle bundle = new Bundle();
         // add extras here..
@@ -406,6 +409,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         bundle.putInt("frequency", Fre);
         bundle.putInt("day", day);
         bundle.putString("dosage", dosageStr);
+        bundle.putString("instruction", instructionStr);
         //Alarm alarm = new Alarm(getActivity().getApplicationContext(), bundle);
 
         // get unique notifyId for each alarm
@@ -443,8 +447,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
                         new String[]{"ROWID AS _id",
                             DatabaseHelper.TITLE,
                             DatabaseHelper.TIME_H,
-                            DatabaseHelper.TIME_M,
-                                DatabaseHelper.DOSAGE},
+                            DatabaseHelper.TIME_M},
                         null, null, null, null, DatabaseHelper.TITLE);
 
             result.getCount();
