@@ -454,8 +454,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
                         new String[]{"ROWID AS _id",
                             DatabaseHelper.TITLE,
                             DatabaseHelper.TIME_H,
-                            DatabaseHelper.TIME_M,
-                        DatabaseHelper.SHAPE},
+                            DatabaseHelper.TIME_M},
                         null, null, null, null, DatabaseHelper.TITLE);
 
             result.getCount();
