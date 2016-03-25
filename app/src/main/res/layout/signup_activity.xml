@@ -50,7 +50,9 @@
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:hint="@string/phone_num"
             android:inputType="phone"
+            android:layout_marginTop="20dp"
             android:textColorHint="@color/colorWhite" />
+
 
         <EditText
             android:id="@+id/email"
@@ -59,7 +61,9 @@
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:hint="@string/email_addr"
             android:inputType="textEmailAddress"
+            android:layout_marginTop="20dp"
             android:textColorHint="@color/colorWhite" />
+
 
         <EditText
             android:id="@+id/pwd"
@@ -68,7 +72,9 @@
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:hint="@string/password"
             android:inputType="textPassword"
+            android:layout_marginTop="20dp"
             android:textColorHint="@color/colorWhite" />
+
 
         <EditText
             android:id="@+id/pwd2"
@@ -77,7 +83,9 @@
             android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:hint="@string/password2"
             android:inputType="textPassword"
+            android:layout_marginTop="20dp"
             android:textColorHint="@color/colorWhite" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -88,7 +96,8 @@
                 android:id="@+id/registerBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/register_btn" />
+                android:text="@string/register_btn"
+                android:layout_marginTop="40dp" />
 
         </LinearLayout>
 

@@ -17,6 +17,7 @@ import android.widget.ListView;
 import com.parse.ParseUser;
 
 import course1778.mobileapp.safeMedicare.Authentication.LoginActivity;
+import course1778.mobileapp.safeMedicare.Helpers.CustomAdapter;
 import course1778.mobileapp.safeMedicare.R;
 
 public class FamMemActivity extends AppCompatActivity {
@@ -77,7 +78,7 @@ public class FamMemActivity extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         break;
 
-                    case 2:
+                    case 5:
                         // log out
                         ParseUser.logOut();
                         Intent intent = new Intent(getApplication(),
@@ -106,9 +107,10 @@ public class FamMemActivity extends AppCompatActivity {
     }
 
     private void addDrawerItems() {
-        String[] osArray = { "Home Page", "Drug Interactions", "Log Out", "Setting" };
-        drawerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
-        drawerList.setAdapter(drawerAdapter);
+        String[] osArray = { "Medication List", "Drug Interaction", "Food Interaction", "Supplement Interaction","Setting  ", "Log Out "  };
+        //drawerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
+        int[] picArray = {R.drawable.patient, R.drawable.exclamation, R.drawable.food, R.drawable.supplement, R.drawable.setting, R.drawable.setting};
+        drawerList.setAdapter(new CustomAdapter(this, osArray,picArray));
     }
 
     private void setupDrawer() {

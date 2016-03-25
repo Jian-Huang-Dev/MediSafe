@@ -2,7 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:orientation="vertical">
+	android:orientation="vertical"
+	android:background="#beefef">
+	<ScrollView
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content">
+
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical">
 
 	<LinearLayout
 		android:layout_width="match_parent"
@@ -12,7 +21,8 @@
 		<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:text="@string/title"/>
+			android:text="@string/title"
+			android:textStyle="bold|italic" />
 
 		<AutoCompleteTextView
 			android:id="@+id/title"
@@ -22,10 +32,247 @@
 			android:completionThreshold="1"/>
 	</LinearLayout>
 
-	<TimePicker
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/dosage"
+			android:textStyle="bold|italic" />
+
+		<EditText
+			android:id="@+id/dosage"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:enabled="true"
+			android:inputType="number|numberDecimal" />
+	</LinearLayout>
+
+	<LinearLayout
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:id="@+id/timePicker"
-		android:layout_gravity="center_horizontal" />
+		android:orientation="vertical">
 
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/reminderTime"
+			android:textStyle="bold|italic" />
+
+
+		<Spinner
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/spinner"
+			android:layout_gravity="center" />
+
+		<TimePicker
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/timePicker"
+			android:layout_gravity="center"
+			android:timePickerMode="spinner" />
+
+	</LinearLayout>
+
+
+	<LinearLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:orientation="vertical">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/schedule"
+			android:textStyle="bold|italic" />
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			android:weightSum="7">
+
+			<CheckBox
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/Mon"
+				android:layout_weight="1"
+				android:id="@+id/MonCheck"
+				android:checked="true" />
+
+			<CheckBox
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/Tue"
+				android:layout_weight="1"
+				android:id="@+id/TueCheck"
+				android:checked="true" />
+
+			<CheckBox
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/Wed"
+				android:layout_weight="1"
+				android:id="@+id/WedCheck"
+				android:checked="true" />
+
+			<CheckBox
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/Thu"
+				android:layout_weight="1"
+				android:id="@+id/ThuCheck"
+				android:checked="true" />
+
+			<CheckBox
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/Fri"
+				android:layout_weight="1"
+				android:id="@+id/FriCheck"
+				android:checked="true" />
+
+			<CheckBox
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/Sat"
+				android:layout_weight="1"
+				android:id="@+id/SatCheck"
+				android:checked="true" />
+
+			<CheckBox
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:text="@string/Sun"
+				android:layout_weight="1"
+				android:id="@+id/SunCheck"
+				android:checked="true" />
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="vertical">
+
+				<TextView
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@string/shape"
+					android:textStyle="bold|italic" />
+
+
+
+
+					<RadioGroup
+						android:layout_width="match_parent"
+						android:layout_height="match_parent"
+						android:orientation="horizontal"
+						android:id="@+id/radioGroup"
+						android:weightSum="12">
+
+						<ImageView
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:background="@drawable/capsule"
+							android:layout_weight="1"/>
+
+
+						<RadioButton
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:id="@+id/radioButton"
+							android:layout_weight="1"
+							android:checked="true" />
+
+						<ImageView
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:background="@drawable/tablet"
+							android:layout_weight="1"/>
+
+						<RadioButton
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:id="@+id/radioButton2"
+							android:layout_weight="1" />
+
+						<ImageView
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:background="@drawable/needle"
+							android:layout_weight="1"/>
+
+						<RadioButton
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:id="@+id/radioButton3"
+							android:layout_weight="1" />
+
+						<ImageView
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:background="@drawable/three"
+							android:layout_weight="1"/>
+
+						<RadioButton
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:id="@+id/radioButton4"
+							android:layout_weight="1" />
+
+						<ImageView
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:background="@drawable/powder"
+							android:layout_weight="1"/>
+
+						<RadioButton
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:id="@+id/radioButton5"
+							android:layout_weight="1" />
+
+						<ImageView
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:background="@drawable/plaster"
+							android:layout_weight="1"/>
+
+						<RadioButton
+							android:layout_width="40dp"
+							android:layout_height="40dp"
+							android:id="@+id/radioButton6"
+							android:layout_weight="1" />
+					</RadioGroup>
+
+
+			</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/instruction"
+			android:textStyle="bold|italic" />
+
+		<EditText
+			android:id="@+id/instruction"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:enabled="true"
+			android:inputType="textMultiLine" />
+	</LinearLayout>
+		</LinearLayout>
+	</ScrollView>
 </LinearLayout>

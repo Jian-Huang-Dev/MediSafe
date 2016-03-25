@@ -26,17 +26,24 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.CheckBox;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.RadioGroup;
 import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -49,7 +56,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
 
 import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
 import course1778.mobileapp.safeMedicare.Helpers.Helpers;
@@ -61,6 +72,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     private Cursor current = null;
     private AsyncTask task = null;
     private int notifyId = 0;
+    private static final String[] items = {"Once a Day", "Twice a Day", "Three Times a Day", "Four Times a Day", "Five Times a Day", "Six Times a Day", "Seven Times a Day", "Eight Times a Day", "Nine Times a Day", "Ten Times a Day"};
 
     FileOutputStream outputStream;
 
@@ -72,6 +84,8 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     SQLiteDatabase med_interaction, med_list;
 
     AutoCompleteTextView textView;
+
+    ListView listView;
 
     public static File stream2file(InputStream in) throws IOException {
         final File tempFile = File.createTempFile(PREFIX, SUFFIX);
@@ -85,6 +99,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         InputStream inputStream1 = getResources().openRawResource(R.raw.med_interaction);
 
@@ -107,26 +122,109 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fam_mem_main_frag,
+                container, false);
+
+        TextView date = (TextView) view.findViewById(R.id.date);
+        //listView = (ListView) view.findViewById(R.id.listView);
+        //ListView listView = (ListView) view.findViewById(R.id.list_view);
+        Calendar c = Calendar.getInstance();
+        String day;
+        if (c.get(Calendar.DAY_OF_WEEK) == 1){
+            day = "Sunday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 2){
+            day = "Monday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 3){
+            day = "Tuesday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 4){
+            day = "Wednesday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 5){
+            day = "Thursday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 6){
+            day = "Friday";
+        } else {
+            day = "Saturday";
+        }
+
+        String sDate = c.get(Calendar.YEAR) + "-"
+                + c.get(Calendar.MONTH)
+                + "-" + c.get(Calendar.DAY_OF_MONTH)
+                + "   " + day;
+
+        date.setText(sDate);
+
+
+//        SimpleCursorAdapter adapter =
+//                new SimpleCursorAdapter(getActivity(), R.layout.fam_mem_frag,
+//                        current, new String[]{
+//                        DatabaseHelper.TITLE,
+//                        //String.format(format, DatabaseHelper.TIME_H),
+//                        DatabaseHelper.TIME_H,
+//                        //String.format(format, DatabaseHelper.TIME_M)},
+//                        DatabaseHelper.TIME_M},
+//                        new int[]{R.id.title, R.id.time_h, R.id.time_m},
+//                        0);
+//
+//        listView.setAdapter(adapter);
+//
+//        if (current == null) {
+//            db = new DatabaseHelper(getActivity());
+//            task = new LoadCursorTask().execute();
+//        }
+//
+//        // onBackPress key listener
+//        view.setFocusableInTouchMode(true);
+//        view.requestFocus();
+//        view.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                if (keyCode == KeyEvent.KEYCODE_BACK) {
+//                    Intent intent = new Intent(getActivity().getApplicationContext(), WelcomePage.class);
+//                    startActivity(intent);
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//            }
+//        });
+        return view;
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //ListView listView = (ListView) view.findViewById(R.id.list_view);
+
+
+
 
         SimpleCursorAdapter adapter =
             new SimpleCursorAdapter(getActivity(), R.layout.fam_mem_frag,
                 current, new String[]{
                 DatabaseHelper.TITLE,
+                    //String.format(format, DatabaseHelper.TIME_H),
                 DatabaseHelper.TIME_H,
-                DatabaseHelper.TIME_M},
+                    //String.format(format, DatabaseHelper.TIME_M)},
+                    DatabaseHelper.TIME_M},
                 new int[]{R.id.title, R.id.time_h, R.id.time_m},
-                0);
+                    0);
+
+
+
 
         setListAdapter(adapter);
+        //listView.setAdapter(adapter);
+
 
         if (current == null) {
             db = new DatabaseHelper(getActivity());
             task = new LoadCursorTask().execute();
         }
 
-        // onBackPress key listener
+
         view.setFocusableInTouchMode(true);
         view.requestFocus();
         view.setOnKeyListener(new View.OnKeyListener() {
@@ -180,11 +278,19 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     private void add() {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View addView = inflater.inflate(R.layout.add_edit, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        //AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getContext(), R.style.AlertDialogCustom));
 
         builder.setTitle(R.string.add_title).setView(addView)
                 .setPositiveButton(R.string.ok, this)
                 .setNegativeButton(R.string.cancel, null).show();
+
+        Spinner spin=(Spinner)addView.findViewById(R.id.spinner);
+        //spin.setOnItemSelectedListener(FamMemActivity.getContext());
+        ArrayAdapter<String> aa=new ArrayAdapter<String>(FamMemActivity.getContext(),R.layout.spinner_item_text,items);
+        aa.setDropDownViewResource(
+                R.layout.spinner_dropdown_item);
+        spin.setAdapter(aa);
 
         // field for user adding medication name
         textView = (AutoCompleteTextView) addView.findViewById(R.id.title);
@@ -285,10 +391,65 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         Log.d("mydatabase", DatabaseUtils.dumpCursorToString(db.getCursor()));
 
         // get strings from edittext boxes, then insert them into database
-        ContentValues values = new ContentValues(3);
+        ContentValues values = new ContentValues(7);
         Dialog dlg = (Dialog) di;
         EditText title = (EditText) dlg.findViewById(R.id.title);
         TimePicker tp = (TimePicker)dlg.findViewById(R.id.timePicker);
+        Spinner mySpinner=(Spinner) dlg.findViewById(R.id.spinner);
+        String fre = mySpinner.getSelectedItem().toString();
+        EditText dosage = (EditText) dlg.findViewById(R.id.dosage);
+        EditText instruction = (EditText) dlg.findViewById(R.id.instruction);
+        RadioGroup radioButtonGroup = (RadioGroup) dlg.findViewById(R.id.radioGroup);
+        int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
+        View radioButton = radioButtonGroup.findViewById(radioButtonID);
+        int shape = radioButtonGroup.indexOfChild(radioButton)/2;
+        int Fre;
+        int day = 0;
+
+        if (fre == "Ten Times a Day"){
+            Fre = 10;
+        } else if (fre == "Twice a Day"){
+            Fre = 2;
+        } else if (fre == "Three Times a Day"){
+            Fre = 3;
+        } else if (fre == "Four Times a Day"){
+            Fre = 4;
+        } else if (fre == "Five Times a Day"){
+            Fre = 5;
+        } else if (fre == "Six Times a Day"){
+            Fre = 6;
+        } else if (fre == "Seven Times a Day"){
+            Fre = 7;
+        } else if (fre == "Eight Times a Day"){
+            Fre = 8;
+        } else if (fre == "Nine Times a Day"){
+            Fre = 9;
+        } else {
+            Fre = 1;
+        }
+
+
+        if (((CheckBox) dlg.findViewById(R.id.MonCheck)).isChecked()){
+            day = day + 1;
+        }
+        if (((CheckBox) dlg.findViewById(R.id.TueCheck)).isChecked()){
+            day = day + 2;
+        }
+        if (((CheckBox) dlg.findViewById(R.id.WedCheck)).isChecked()){
+            day = day + 4;
+        }
+        if (((CheckBox) dlg.findViewById(R.id.ThuCheck)).isChecked()){
+            day = day + 8;
+        }
+        if (((CheckBox) dlg.findViewById(R.id.FriCheck)).isChecked()){
+            day = day + 16;
+        }
+        if (((CheckBox) dlg.findViewById(R.id.SatCheck)).isChecked()){
+            day = day + 32;
+        }
+        if (((CheckBox) dlg.findViewById(R.id.SunCheck)).isChecked()){
+            day = day + 64;
+        }
 
         // clear focus before retrieving the min and hr
         tp.clearFocus();
@@ -300,6 +461,8 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         String titleStr = title.getText().toString();
         String timeHStr = Integer.toString(tpHour);
         String timeMStr = Integer.toString(tpMinute);
+        String dosageStr = dosage.getText().toString();
+        String instructionStr = instruction.getText().toString();
 
         Log.d("mytime",Integer.toString(tpHour));
         Log.d("mytime",Integer.toString(tpMinute));
@@ -307,12 +470,22 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         values.put(DatabaseHelper.TITLE, titleStr);
         values.put(DatabaseHelper.TIME_H, timeHStr);
         values.put(DatabaseHelper.TIME_M, timeMStr);
+        values.put(DatabaseHelper.FREQUENCY, Fre);
+        values.put(DatabaseHelper.DAY, day);
+        values.put(DatabaseHelper.DOSAGE, dosageStr);
+        values.put(DatabaseHelper.INSTRUCTION, instructionStr);
+        values.put(DatabaseHelper.SHAPE,shape);
 
         Bundle bundle = new Bundle();
         // add extras here..
         bundle.putString("title", title.getText().toString());
         bundle.putString("time_h", timeHStr);
         bundle.putString("time_m", timeMStr);
+        bundle.putInt("frequency", Fre);
+        bundle.putInt("day", day);
+        bundle.putString("dosage", dosageStr);
+        bundle.putString("instruction", instructionStr);
+        bundle.putInt("shape", shape);
         //Alarm alarm = new Alarm(getActivity().getApplicationContext(), bundle);
 
         // get unique notifyId for each alarm
