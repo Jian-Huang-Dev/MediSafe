@@ -31,7 +31,7 @@ public class WelcomePage extends Activity {
 
     // Declare Variable
     ImageButton  famMemPageBtn, patientPageBtn;
-    Button logoutBtn;
+//    Button logoutBtn;
     TextView welcomeMsg;
     String usrName;
 //    EditText mTxtBox;
@@ -53,23 +53,23 @@ public class WelcomePage extends Activity {
         // family member page and patient page buttons
         famMemPageBtn = (ImageButton) findViewById(R.id.famMemPageBtn);
         patientPageBtn = (ImageButton) findViewById(R.id.patientPageBtn);
-        logoutBtn = (Button) findViewById(R.id.logoutBtn);
+//        logoutBtn = (Button) findViewById(R.id.logoutBtn);
 
         // display welcome message
         welcomeMsg.setText("Welcome: " + usrName);
 
         // Logout Button Click Listener
-        logoutBtn.setOnClickListener(new OnClickListener() {
-
-            public void onClick(View arg0) {
-                // Logout current user
-                ParseUser.logOut();
-                Intent intent = new Intent(getApplication(),
-                        LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+//        logoutBtn.setOnClickListener(new OnClickListener() {
+//
+//            public void onClick(View arg0) {
+//                // Logout current user
+//                ParseUser.logOut();
+//                Intent intent = new Intent(getApplication(),
+//                        LoginActivity.class);
+//                startActivity(intent);
+//                finish();
+//            }
+//        });
 
         // direct to family member page upon click
         famMemPageBtn.setOnClickListener(new OnClickListener() {

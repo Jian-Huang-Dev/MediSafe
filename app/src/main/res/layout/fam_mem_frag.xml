@@ -9,7 +9,7 @@
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:id="@+id/fem_date"
-		android:text="DATE"
+		android:text="STATUS"
 		android:background="#447cd5"
 		android:textStyle="italic" />
 

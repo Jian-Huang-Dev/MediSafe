@@ -33,12 +33,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
 import android.widget.CursorAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.RadioGroup;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
@@ -83,6 +85,8 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
 
     AutoCompleteTextView textView;
 
+    ListView listView;
+
     public static File stream2file(InputStream in) throws IOException {
         final File tempFile = File.createTempFile(PREFIX, SUFFIX);
         tempFile.deleteOnExit();
@@ -95,6 +99,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
 
         InputStream inputStream1 = getResources().openRawResource(R.raw.med_interaction);
 
@@ -117,17 +122,84 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     }
 
     @Override
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fam_mem_main_frag,
+                container, false);
+
+        TextView date = (TextView) view.findViewById(R.id.date);
+        //listView = (ListView) view.findViewById(R.id.listView);
+        //ListView listView = (ListView) view.findViewById(R.id.list_view);
+        Calendar c = Calendar.getInstance();
+        String day;
+        if (c.get(Calendar.DAY_OF_WEEK) == 1){
+            day = "Sunday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 2){
+            day = "Monday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 3){
+            day = "Tuesday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 4){
+            day = "Wednesday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 5){
+            day = "Thursday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 6){
+            day = "Friday";
+        } else {
+            day = "Saturday";
+        }
+
+        String sDate = c.get(Calendar.YEAR) + "-"
+                + c.get(Calendar.MONTH)
+                + "-" + c.get(Calendar.DAY_OF_MONTH)
+                + "   " + day;
+
+        date.setText(sDate);
+
+
+//        SimpleCursorAdapter adapter =
+//                new SimpleCursorAdapter(getActivity(), R.layout.fam_mem_frag,
+//                        current, new String[]{
+//                        DatabaseHelper.TITLE,
+//                        //String.format(format, DatabaseHelper.TIME_H),
+//                        DatabaseHelper.TIME_H,
+//                        //String.format(format, DatabaseHelper.TIME_M)},
+//                        DatabaseHelper.TIME_M},
+//                        new int[]{R.id.title, R.id.time_h, R.id.time_m},
+//                        0);
+//
+//        listView.setAdapter(adapter);
+//
+//        if (current == null) {
+//            db = new DatabaseHelper(getActivity());
+//            task = new LoadCursorTask().execute();
+//        }
+//
+//        // onBackPress key listener
+//        view.setFocusableInTouchMode(true);
+//        view.requestFocus();
+//        view.setOnKeyListener(new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View v, int keyCode, KeyEvent event) {
+//                if (keyCode == KeyEvent.KEYCODE_BACK) {
+//                    Intent intent = new Intent(getActivity().getApplicationContext(), WelcomePage.class);
+//                    startActivity(intent);
+//                    return true;
+//                } else {
+//                    return false;
+//                }
+//            }
+//        });
+        return view;
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //String format = "%1$02d"; // two digits
+        //ListView listView = (ListView) view.findViewById(R.id.list_view);
 
-//        Calendar c = Calendar.getInstance();
-//
-//        String sDate = c.get(Calendar.YEAR) + "-"
-//                + c.get(Calendar.MONTH)
-//                + "-" + c.get(Calendar.DAY_OF_MONTH)
-//                + " at " + c.get(Calendar.HOUR_OF_DAY)
-//                + ":" + c.get(Calendar.MINUTE);
+
+
 
         SimpleCursorAdapter adapter =
             new SimpleCursorAdapter(getActivity(), R.layout.fam_mem_frag,
@@ -140,14 +212,11 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
                 new int[]{R.id.title, R.id.time_h, R.id.time_m},
                     0);
 
-//        TextView textView = new TextView(getContext());
-//        textView.setText("Date");
-//
-//        adapter.addHeaderView(textView);
 
 
 
         setListAdapter(adapter);
+        //listView.setAdapter(adapter);
 
 
         if (current == null) {
@@ -155,7 +224,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
             task = new LoadCursorTask().execute();
         }
 
-        // onBackPress key listener
+
         view.setFocusableInTouchMode(true);
         view.requestFocus();
         view.setOnKeyListener(new View.OnKeyListener() {
