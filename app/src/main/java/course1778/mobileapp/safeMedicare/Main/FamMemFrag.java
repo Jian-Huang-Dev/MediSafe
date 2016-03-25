@@ -299,7 +299,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
          * sheet 2 displays the list of all drugs
           */
         crsList = med_list.rawQuery("SELECT * FROM Sheet1", null);
-        crsInteractions = med_interaction.rawQuery("SELECT * FROM Sheet1", null);
+        crsInteractions = med_interaction.rawQuery("SELECT * FROM Drug-Drug", null);
 
         String[] array = new String[crsList.getCount()];
         int i = 0;
