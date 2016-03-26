@@ -14,7 +14,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CursorAdapter;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
@@ -105,9 +104,7 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
                 new SimpleCursorAdapter(getActivity(), R.layout.fam_mem_frag,
                         current, new String[]{
                         DatabaseHelper.TITLE,
-                        //String.format(format, DatabaseHelper.TIME_H),
                         DatabaseHelper.TIME_H,
-                        //String.format(format, DatabaseHelper.TIME_M)},
                         DatabaseHelper.TIME_M},
                         new int[]{R.id.title, R.id.time_h, R.id.time_m},
                         0);
@@ -201,13 +198,14 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
                         strArrList.add(string);
                     }
                     // list items on screen in list_view fashion
-                    ArrayAdapter<String> adapter =
-                            new ArrayAdapter<String>(getActivity().getApplicationContext(),
-                                    R.layout.list_view_text_style, android.R.id.title, strArrList.toArray(new String[0]));
-                    setListAdapter(adapter);
+//                    ArrayAdapter<String> adapter =
+//                            new ArrayAdapter<String>(getActivity().getApplicationContext(),
+//                                    R.layout.list_view_text_style, android.R.id.title, strArrList.toArray(new String[0]));
+//                    setListAdapter(adapter);
                 }
             }
         });
+        retrieveDataFromLocalDatabase();
     }
 
     protected void retrieveDataFromLocalDatabase() {
