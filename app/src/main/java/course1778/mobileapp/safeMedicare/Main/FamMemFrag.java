@@ -47,6 +47,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.parse.ParseObject;
 import com.parse.ParseUser;
@@ -130,7 +131,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         //listView = (ListView) view.findViewById(R.id.listView);
         //ListView listView = (ListView) view.findViewById(R.id.list_view);
         Calendar c = Calendar.getInstance();
-        String day;
+        String day, month;
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -156,11 +157,35 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
             day = "Saturday";
         }
 
-        String sDate = c.get(Calendar.YEAR) + "-"
-                + c.get(Calendar.MONTH)
-                + "-" + c.get(Calendar.DAY_OF_MONTH)
-                + "   " + day;
+        if (c.get(Calendar.MONTH) == 0){
+            month = "January";
+        } else if (c.get(Calendar.MONTH) == 1){
+            month = "February";
+        } else if (c.get(Calendar.MONTH) == 2){
+            month = "March";
+        } else if (c.get(Calendar.MONTH) == 3){
+            month = "April";
+        } else if (c.get(Calendar.MONTH) == 4){
+            month = "May";
+        } else if (c.get(Calendar.MONTH) == 5) {
+            month = "June";
+        } else if (c.get(Calendar.MONTH) == 6){
+            month = "July";
+        } else if (c.get(Calendar.MONTH) == 7) {
+            month = "August";
+        } else if (c.get(Calendar.MONTH) == 8) {
+            month = "September";
+        } else if (c.get(Calendar.MONTH) == 9) {
+            month = "October";
+        } else if (c.get(Calendar.MONTH) == 10) {
+            month = "November";
+        } else {
+            month = "December";
+        }
 
+        String sDate = day + ",  "
+                + month
+                + "  " + c.get(Calendar.DAY_OF_MONTH);
         date.setText(sDate);
 
 
