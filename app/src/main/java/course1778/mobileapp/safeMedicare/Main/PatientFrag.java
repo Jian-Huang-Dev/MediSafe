@@ -50,7 +50,7 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        retrieveDataFromLocalDatabase();
+        //retrieveDataFromLocalDatabase();
 
         setHasOptionsMenu(true);
         setRetainInstance(true);
@@ -122,7 +122,7 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
         final ContentValues values = new ContentValues(DatabaseHelper.CONTENT_VALUE_COUNT);
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery(Helpers.PARSE_OBJECT);
-        query.whereEqualTo(Helpers.PARSE_OBJECT_USER, ParseUser.getCurrentUser().getUsername());
+        query.whereEqualTo(DatabaseHelper.USRNAME, ParseUser.getCurrentUser().getUsername());
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> parseObjectList, ParseException e) {
                 if (e == null) {
@@ -145,6 +145,7 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
                         bundle.putString(DatabaseHelper.INSTRUCTION, parseObject.getString(DatabaseHelper.INSTRUCTION));
 
                         // saving data for local database use
+                        values.put(DatabaseHelper.USRNAME, parseObject.getString(DatabaseHelper.USRNAME));
                         values.put(DatabaseHelper.TITLE, parseObject.getString(DatabaseHelper.TITLE));
                         values.put(DatabaseHelper.TIME_H, parseObject.getString(DatabaseHelper.TIME_H));
                         values.put(DatabaseHelper.TIME_M, parseObject.getString(DatabaseHelper.TIME_M));
@@ -153,9 +154,12 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
                         values.put(DatabaseHelper.DOSAGE, parseObject.getString(DatabaseHelper.DOSAGE));
                         values.put(DatabaseHelper.SHAPE, parseObject.getString(DatabaseHelper.SHAPE));
                         values.put(DatabaseHelper.INSTRUCTION, parseObject.getString(DatabaseHelper.INSTRUCTION));
+                        // values.put(DatabaseHelper.NOFITY_ID, parseObject.getString(DatabaseHelper.NOFITY_ID));
 
                         // saving to local database
-                        task = new InsertTask().execute(values);
+                        //task = new InsertTask().execute(values);
+                        db.getWritableDatabase().insert(DatabaseHelper.TABLE,
+                                DatabaseHelper.USRNAME, values);
 
                         string = "Medication: " +
                                 parseObject.getString(DatabaseHelper.TITLE) +
@@ -169,15 +173,14 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
                         Log.d("mybundle", "TITLE: " + bundle.getString(DatabaseHelper.TITLE));
                         Log.d("mybundle", "HOUR: " + bundle.getString(DatabaseHelper.TIME_H));
                         Log.d("mybundle","MIN: " + bundle.getString(DatabaseHelper.TIME_M));
-                        Log.d("mybundle","ID: " + bundle.getInt(Helpers.NOFITY_ID));
+//                        Log.d("mybundle","ID: " + bundle.getInt(Helpers.NOFITY_ID));
 
                         Alarm alarm = new Alarm(getActivity().getApplicationContext(), bundle);
                     }
-                    // list file info details
+                    // list items on screen in list_view fashion
                     ArrayAdapter<String> adapter =
                             new ArrayAdapter<String>(getActivity().getApplicationContext(),
                                     R.layout.list_view_text_style, android.R.id.title, strArrList.toArray(new String[0]));
-//                    listView.setAdapter(adapter);
                     setListAdapter(adapter);
                 }
             }
@@ -239,7 +242,7 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
         @Override
         protected Cursor doInBackground(ContentValues... values) {
             db.getWritableDatabase().insert(DatabaseHelper.TABLE,
-                    DatabaseHelper.TITLE, values[0]);
+                    DatabaseHelper.USRNAME, values[1]);
 
             return (doQuery());
         }
