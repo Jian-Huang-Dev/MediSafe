@@ -34,7 +34,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.CheckBox;
@@ -47,6 +46,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -56,11 +56,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-
 
 import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
 import course1778.mobileapp.safeMedicare.Helpers.Helpers;
@@ -198,9 +195,6 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         super.onViewCreated(view, savedInstanceState);
         //ListView listView = (ListView) view.findViewById(R.id.list_view);
 
-
-
-
         SimpleCursorAdapter adapter =
             new SimpleCursorAdapter(getActivity(), R.layout.fam_mem_frag,
                 current, new String[]{
@@ -219,10 +213,10 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         //listView.setAdapter(adapter);
 
 
-        if (current == null) {
+//        if (current == null) {
             db = new DatabaseHelper(getActivity());
             task = new LoadCursorTask().execute();
-        }
+//        }
 
 
         view.setFocusableInTouchMode(true);
@@ -327,6 +321,22 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
 
     // listen to "ok" button state from alertDialog
     public void onClick(DialogInterface di, int whichButton) {
+        // get strings from edittext boxes, then insert them into database
+        ContentValues values = new ContentValues(DatabaseHelper.CONTENT_VALUE_COUNT);
+        Dialog dlg = (Dialog) di;
+        EditText title = (EditText) dlg.findViewById(R.id.title);
+        TimePicker tp = (TimePicker)dlg.findViewById(R.id.timePicker);
+        Spinner mySpinner=(Spinner) dlg.findViewById(R.id.spinner);
+        String fre = mySpinner.getSelectedItem().toString();
+        EditText dosage = (EditText) dlg.findViewById(R.id.dosage);
+        EditText instruction = (EditText) dlg.findViewById(R.id.instruction);
+        RadioGroup radioButtonGroup = (RadioGroup) dlg.findViewById(R.id.radioGroup);
+        int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
+        View radioButton = radioButtonGroup.findViewById(radioButtonID);
+        int shape = radioButtonGroup.indexOfChild(radioButton)/2;
+        int Fre;
+        int day = 0;
+
         // clear array list
         drug_interaction_list.clear();
 
@@ -390,22 +400,6 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
 
         Log.d("mydatabase", DatabaseUtils.dumpCursorToString(db.getCursor()));
 
-        // get strings from edittext boxes, then insert them into database
-        ContentValues values = new ContentValues(7);
-        Dialog dlg = (Dialog) di;
-        EditText title = (EditText) dlg.findViewById(R.id.title);
-        TimePicker tp = (TimePicker)dlg.findViewById(R.id.timePicker);
-        Spinner mySpinner=(Spinner) dlg.findViewById(R.id.spinner);
-        String fre = mySpinner.getSelectedItem().toString();
-        EditText dosage = (EditText) dlg.findViewById(R.id.dosage);
-        EditText instruction = (EditText) dlg.findViewById(R.id.instruction);
-        RadioGroup radioButtonGroup = (RadioGroup) dlg.findViewById(R.id.radioGroup);
-        int radioButtonID = radioButtonGroup.getCheckedRadioButtonId();
-        View radioButton = radioButtonGroup.findViewById(radioButtonID);
-        int shape = radioButtonGroup.indexOfChild(radioButton)/2;
-        int Fre;
-        int day = 0;
-
         if (fre == "Ten Times a Day"){
             Fre = 10;
         } else if (fre == "Twice a Day"){
@@ -467,6 +461,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         Log.d("mytime",Integer.toString(tpHour));
         Log.d("mytime",Integer.toString(tpMinute));
 
+        values.put(DatabaseHelper.USRNAME, ParseUser.getCurrentUser().getUsername());
         values.put(DatabaseHelper.TITLE, titleStr);
         values.put(DatabaseHelper.TIME_H, timeHStr);
         values.put(DatabaseHelper.TIME_M, timeMStr);
@@ -474,7 +469,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         values.put(DatabaseHelper.DAY, day);
         values.put(DatabaseHelper.DOSAGE, dosageStr);
         values.put(DatabaseHelper.INSTRUCTION, instructionStr);
-        values.put(DatabaseHelper.SHAPE,shape);
+        values.put(DatabaseHelper.SHAPE, shape);
 
         Bundle bundle = new Bundle();
         // add extras here..
@@ -501,6 +496,11 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         parseObject.put(DatabaseHelper.TITLE, titleStr);
         parseObject.put(DatabaseHelper.TIME_H, timeHStr);
         parseObject.put(DatabaseHelper.TIME_M, timeMStr);
+        parseObject.put(DatabaseHelper.FREQUENCY, Fre);
+        parseObject.put(DatabaseHelper.DAY, day);
+        parseObject.put(DatabaseHelper.DOSAGE, dosageStr);
+        parseObject.put(DatabaseHelper.INSTRUCTION, instructionStr);
+        parseObject.put(DatabaseHelper.SHAPE, shape);
         parseObject.put(Helpers.NOFITY_ID, notifyId);
         parseObject.saveInBackground();
 
@@ -524,7 +524,8 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
                             DatabaseHelper.TITLE,
                             DatabaseHelper.TIME_H,
                             DatabaseHelper.TIME_M},
-                        null, null, null, null, DatabaseHelper.TITLE);
+                            "usr_name=\'"+ParseUser.getCurrentUser().getUsername()+"\'",
+                            null, null, null, DatabaseHelper.TITLE);
 
             result.getCount();
 

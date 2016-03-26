@@ -22,6 +22,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class DatabaseHelper extends SQLiteOpenHelper {
   private static final String DATABASE_NAME="notification.db";
   private static final int SCHEMA=1;
+  public static final String USRNAME = "usr_name";
   public static final String TITLE="title";
   public static final String TIME_H="time_h";
   public static final String TIME_M="time_m";
@@ -43,6 +44,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
   public static final String SHEET_1_DRUG_NAMES = "Drugs";
   public static final String SHEET_1_DRUG_INTERACTIONS = "Interactions";
   public static final String SHEET_1_INTERACTION_RESULT = "What_might_happen";
+  public static final int CONTENT_VALUE_COUNT = 8;
 
   public DatabaseHelper(Context context) {
     super(context, DATABASE_NAME, null, SCHEMA);
@@ -50,7 +52,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
   @Override
   public void onCreate(SQLiteDatabase db) {
-    db.execSQL("CREATE TABLE notification (title TEXT, time_h REAL, time_m REAL, dosage REAL, frequency INTEGER, day INTEGER, instruction TEXT, shape INTEGER);");
+    db.execSQL("CREATE TABLE notification (title TEXT, usr_name TEXT, time_h REAL, time_m REAL, dosage REAL, frequency INTEGER, day INTEGER, instruction TEXT, shape INTEGER);");
     //monday INTEGER, tuesday INTEGER, wednesday INTEGER, thursday INTEGER, friday INTEGER, saturday INTEGER, sunday INTEGER,);");
 
 
