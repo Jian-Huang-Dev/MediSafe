@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorDarkBlue">
+    android:background="#5b9bd5">
 
     <TextView
         android:id="@+id/welcomMsg"
@@ -17,39 +17,65 @@
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:orientation="vertical"
-        android:background="@color/colorDarkBlue">
+        android:background="#5b9bd5">
 
-        <ImageButton
+        <LinearLayout
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:background="#ffffff"
             android:id="@+id/patientPageBtn"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:text="@string/patient_btn"
+            android:clickable="true">
+
+
+            <ImageButton
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:text="@string/patient_btn"
+                android:layout_gravity="center_horizontal"
+                android:background = "@drawable/patient"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Patient"
+                android:id="@+id/textView"
+                android:layout_gravity="center"
+                android:textSize="32dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:orientation="vertical"
             android:layout_gravity="center_horizontal"
-            android:background = "@drawable/patient"/>
+            android:background="#ffffff"
+            android:layout_marginTop="27dp"
+            android:clickable="true"
+            android:id="@+id/famMemPageBtn">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Patient"
-            android:id="@+id/textView"
-            android:layout_gravity="center"
-            android:textSize="32dp" />
+            <ImageButton
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:text="@string/family_member_btn"
+                android:layout_gravity="center_horizontal"
+                android:background = "@drawable/familymember"/>
 
-        <ImageButton
-            android:id="@+id/famMemPageBtn"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:text="@string/family_member_btn"
-            android:layout_gravity="center_horizontal"
-            android:background = "@drawable/familymember"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Caregiver"
+                android:id="@+id/textView2"
+                android:layout_gravity="center"
+                android:textSize="32dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Caregiver"
-            android:id="@+id/textView2"
-            android:layout_gravity="center"
-            android:textSize="32dp" />
+        </LinearLayout>
+
+
+
+
 
 
 

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.parse.FindCallback;
@@ -30,7 +31,7 @@ import course1778.mobileapp.safeMedicare.R;
 public class WelcomePage extends Activity {
 
     // Declare Variable
-    ImageButton  famMemPageBtn, patientPageBtn;
+    LinearLayout famMemPageBtn, patientPageBtn;
 //    Button logoutBtn;
     TextView welcomeMsg;
     String usrName;
@@ -51,8 +52,8 @@ public class WelcomePage extends Activity {
         welcomeMsg = (TextView) findViewById(R.id.welcomMsg);
 
         // family member page and patient page buttons
-        famMemPageBtn = (ImageButton) findViewById(R.id.famMemPageBtn);
-        patientPageBtn = (ImageButton) findViewById(R.id.patientPageBtn);
+        famMemPageBtn = (LinearLayout) findViewById(R.id.famMemPageBtn);
+        patientPageBtn = (LinearLayout) findViewById(R.id.patientPageBtn);
 //        logoutBtn = (Button) findViewById(R.id.logoutBtn);
 
         // display welcome message
