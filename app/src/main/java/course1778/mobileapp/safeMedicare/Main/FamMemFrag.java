@@ -24,6 +24,8 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
@@ -133,6 +135,15 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         //ListView listView = (ListView) view.findViewById(R.id.list_view);
         Calendar c = Calendar.getInstance();
         String day;
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                add();
+            }
+        });
+
         if (c.get(Calendar.DAY_OF_WEEK) == 1){
             day = "Sunday";
         } else if (c.get(Calendar.DAY_OF_WEEK) == 2){
@@ -299,7 +310,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
          * sheet 2 displays the list of all drugs
           */
         crsList = med_list.rawQuery("SELECT * FROM Sheet1", null);
-        crsInteractions = med_interaction.rawQuery("SELECT * FROM Drug-Drug", null);
+        crsInteractions = med_interaction.rawQuery("SELECT * FROM DrugDrug", null);
 
         String[] array = new String[crsList.getCount()];
         int i = 0;

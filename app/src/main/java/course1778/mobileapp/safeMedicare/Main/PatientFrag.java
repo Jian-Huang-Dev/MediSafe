@@ -22,6 +22,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
@@ -50,11 +51,42 @@ public class PatientFrag extends android.support.v4.app.Fragment {
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.patient_frag,
+//        View view = inflater.inflate(R.layout.patient_frag,
+//                container, false);
+//
+//        todos = (TextView) view.findViewById(R.id.todos);
+//        listView = (ListView) view.findViewById(R.id.list_view);
+
+        View view = inflater.inflate(R.layout.fam_mem_main_frag,
                 container, false);
 
-        todos = (TextView) view.findViewById(R.id.todos);
-        listView = (ListView) view.findViewById(R.id.list_view);
+        TextView date = (TextView) view.findViewById(R.id.date);
+        //listView = (ListView) view.findViewById(R.id.listView);
+        //ListView listView = (ListView) view.findViewById(R.id.list_view);
+        Calendar c = Calendar.getInstance();
+        String day;
+        if (c.get(Calendar.DAY_OF_WEEK) == 1){
+            day = "Sunday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 2){
+            day = "Monday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 3){
+            day = "Tuesday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 4){
+            day = "Wednesday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 5){
+            day = "Thursday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 6){
+            day = "Friday";
+        } else {
+            day = "Saturday";
+        }
+
+        String sDate = c.get(Calendar.YEAR) + "-"
+                + c.get(Calendar.MONTH)
+                + "-" + c.get(Calendar.DAY_OF_MONTH)
+                + "   " + day;
+
+        date.setText(sDate);
 
         // onBackPress key listener
         view.setFocusableInTouchMode(true);
