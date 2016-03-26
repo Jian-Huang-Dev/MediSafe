@@ -272,9 +272,9 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
                 add();
                 break;
 
-            case R.id.pushUpdate:
-                pushUpdate();
-                break;
+//            case R.id.pushUpdate:
+//                pushUpdate();
+//                break;
         }
 
         return (super.onOptionsItemSelected(item));
@@ -517,7 +517,6 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
 
         task = new InsertTask().execute(values);
     }
-
 
     abstract private class BaseTask<T> extends AsyncTask<T, Void, Cursor> {
         @Override

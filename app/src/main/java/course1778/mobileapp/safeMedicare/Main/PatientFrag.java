@@ -166,35 +166,30 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
 
                     for (ParseObject parseObject : parseObjectList) {
 
+                        String currTitle = parseObject.getString(DatabaseHelper.TITLE);
+                        String currHour = parseObject.getString(DatabaseHelper.TIME_H);
+                        String currMin = parseObject.getString(DatabaseHelper.TIME_M);
+
+                        if (!db.isNameExitOnDB(currTitle) || !db.isHourExitOnDB(currHour) || !db.isMinOnDB(currMin)) {
+                            // if local database does not have this item, then add it to local database
+
+                            // saving data for alarm use
+                            Bundle bundle = new Bundle();
+                            bundle = getBundle(bundle, parseObject);
+
+                            // saving data for local database use
+                            ContentValues contentValues = new ContentValues(DatabaseHelper.CONTENT_VALUE_COUNT);
+                            contentValues = getValues(values, parseObject);
+
+                            // saving to local database
+                            //task = new InsertTask().execute(values);
+                            db.getWritableDatabase().insert(DatabaseHelper.TABLE,
+                                    DatabaseHelper.USRNAME, contentValues);
+
+                            Alarm alarm = new Alarm(getActivity().getApplicationContext(), bundle);
+                        }
+
                         String string;
-
-                        // saving data for alarm use
-                        Bundle bundle = new Bundle();
-                        bundle.putString(DatabaseHelper.TITLE, parseObject.getString(DatabaseHelper.TITLE));
-                        bundle.putString(DatabaseHelper.TIME_H, parseObject.getString(DatabaseHelper.TIME_H));
-                        bundle.putString(DatabaseHelper.TIME_M, parseObject.getString(DatabaseHelper.TIME_M));
-                        bundle.putString(DatabaseHelper.FREQUENCY, parseObject.getString(DatabaseHelper.FREQUENCY));
-                        bundle.putString(DatabaseHelper.DAY, parseObject.getString(DatabaseHelper.DAY));
-                        bundle.putString(DatabaseHelper.DOSAGE, parseObject.getString(DatabaseHelper.DOSAGE));
-                        bundle.putString(DatabaseHelper.SHAPE, parseObject.getString(DatabaseHelper.SHAPE));
-                        bundle.putString(DatabaseHelper.INSTRUCTION, parseObject.getString(DatabaseHelper.INSTRUCTION));
-
-                        // saving data for local database use
-                        values.put(DatabaseHelper.USRNAME, parseObject.getString(DatabaseHelper.USRNAME));
-                        values.put(DatabaseHelper.TITLE, parseObject.getString(DatabaseHelper.TITLE));
-                        values.put(DatabaseHelper.TIME_H, parseObject.getString(DatabaseHelper.TIME_H));
-                        values.put(DatabaseHelper.TIME_M, parseObject.getString(DatabaseHelper.TIME_M));
-                        values.put(DatabaseHelper.FREQUENCY, parseObject.getString(DatabaseHelper.FREQUENCY));
-                        values.put(DatabaseHelper.DAY, parseObject.getString(DatabaseHelper.DAY));
-                        values.put(DatabaseHelper.DOSAGE, parseObject.getString(DatabaseHelper.DOSAGE));
-                        values.put(DatabaseHelper.SHAPE, parseObject.getString(DatabaseHelper.SHAPE));
-                        values.put(DatabaseHelper.INSTRUCTION, parseObject.getString(DatabaseHelper.INSTRUCTION));
-                        // values.put(DatabaseHelper.NOFITY_ID, parseObject.getString(DatabaseHelper.NOFITY_ID));
-
-                        // saving to local database
-                        //task = new InsertTask().execute(values);
-                        db.getWritableDatabase().insert(DatabaseHelper.TABLE,
-                                DatabaseHelper.USRNAME, values);
 
                         string = "Medication: " +
                                 parseObject.getString(DatabaseHelper.TITLE) +
@@ -204,13 +199,6 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
                                 parseObject.getString(DatabaseHelper.TIME_M) +
                                 "m";
                         strArrList.add(string);
-
-                        Log.d("mybundle", "TITLE: " + bundle.getString(DatabaseHelper.TITLE));
-                        Log.d("mybundle", "HOUR: " + bundle.getString(DatabaseHelper.TIME_H));
-                        Log.d("mybundle", "MIN: " + bundle.getString(DatabaseHelper.TIME_M));
-//                        Log.d("mybundle","ID: " + bundle.getInt(Helpers.NOFITY_ID));
-
-                        Alarm alarm = new Alarm(getActivity().getApplicationContext(), bundle);
                     }
                     // list items on screen in list_view fashion
                     ArrayAdapter<String> adapter =
@@ -281,6 +269,33 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
 
             return (doQuery());
         }
+    }
+
+    private Bundle getBundle(Bundle bundle, ParseObject parseObject) {
+        bundle.putString(DatabaseHelper.TITLE, parseObject.getString(DatabaseHelper.TITLE));
+        bundle.putString(DatabaseHelper.TIME_H, parseObject.getString(DatabaseHelper.TIME_H));
+        bundle.putString(DatabaseHelper.TIME_M, parseObject.getString(DatabaseHelper.TIME_M));
+        bundle.putString(DatabaseHelper.FREQUENCY, parseObject.getString(DatabaseHelper.FREQUENCY));
+        bundle.putString(DatabaseHelper.DAY, parseObject.getString(DatabaseHelper.DAY));
+        bundle.putString(DatabaseHelper.DOSAGE, parseObject.getString(DatabaseHelper.DOSAGE));
+        bundle.putString(DatabaseHelper.SHAPE, parseObject.getString(DatabaseHelper.SHAPE));
+        bundle.putString(DatabaseHelper.INSTRUCTION, parseObject.getString(DatabaseHelper.INSTRUCTION));
+
+        return bundle;
+    }
+
+    private ContentValues getValues(ContentValues values, ParseObject parseObject) {
+        values.put(DatabaseHelper.USRNAME, parseObject.getString(DatabaseHelper.USRNAME));
+        values.put(DatabaseHelper.TITLE, parseObject.getString(DatabaseHelper.TITLE));
+        values.put(DatabaseHelper.TIME_H, parseObject.getString(DatabaseHelper.TIME_H));
+        values.put(DatabaseHelper.TIME_M, parseObject.getString(DatabaseHelper.TIME_M));
+        values.put(DatabaseHelper.FREQUENCY, parseObject.getString(DatabaseHelper.FREQUENCY));
+        values.put(DatabaseHelper.DAY, parseObject.getString(DatabaseHelper.DAY));
+        values.put(DatabaseHelper.DOSAGE, parseObject.getString(DatabaseHelper.DOSAGE));
+        values.put(DatabaseHelper.SHAPE, parseObject.getString(DatabaseHelper.SHAPE));
+        values.put(DatabaseHelper.INSTRUCTION, parseObject.getString(DatabaseHelper.INSTRUCTION));
+        // values.put(DatabaseHelper.NOFITY_ID, parseObject.getString(DatabaseHelper.NOFITY_ID));
+        return values;
     }
 
     @Override
