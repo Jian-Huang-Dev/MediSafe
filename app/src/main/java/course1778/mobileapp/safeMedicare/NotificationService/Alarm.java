@@ -96,7 +96,7 @@ public class Alarm extends BroadcastReceiver {
         //bundle.putString("title", title);
 
         NotificationManager mgr=
-                (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+                (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         NotificationCompat.Builder normal=buildNormal(context, title, getBundle);
         NotificationCompat.InboxStyle notification=
                 new NotificationCompat.InboxStyle(normal);
