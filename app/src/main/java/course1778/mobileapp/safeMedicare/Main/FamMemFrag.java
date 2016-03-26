@@ -24,8 +24,8 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.text.Html;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
@@ -48,7 +48,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.parse.Parse;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
@@ -461,6 +460,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
 
         int tpMinute = tp.getCurrentMinute();
         int tpHour = tp.getCurrentHour();
+        int orderNum = tpHour * 60 + tpMinute;
         tp.setIs24HourView(true);
 
         String titleStr = title.getText().toString();
@@ -481,17 +481,19 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         values.put(DatabaseHelper.DOSAGE, dosageStr);
         values.put(DatabaseHelper.INSTRUCTION, instructionStr);
         values.put(DatabaseHelper.SHAPE, shape);
+        values.put(DatabaseHelper.ORDER_NUM, orderNum);
 
         Bundle bundle = new Bundle();
         // add extras here..
-        bundle.putString("title", title.getText().toString());
-        bundle.putString("time_h", timeHStr);
-        bundle.putString("time_m", timeMStr);
-        bundle.putInt("frequency", Fre);
-        bundle.putInt("day", day);
-        bundle.putString("dosage", dosageStr);
-        bundle.putString("instruction", instructionStr);
-        bundle.putInt("shape", shape);
+        bundle.putString(DatabaseHelper.TITLE, title.getText().toString());
+        bundle.putString(DatabaseHelper.TIME_H, timeHStr);
+        bundle.putString(DatabaseHelper.TIME_M, timeMStr);
+        bundle.putInt(DatabaseHelper.FREQUENCY, Fre);
+        bundle.putInt(DatabaseHelper.DAY, day);
+        bundle.putString(DatabaseHelper.DOSAGE, dosageStr);
+        bundle.putString(DatabaseHelper.INSTRUCTION, instructionStr);
+        bundle.putInt(DatabaseHelper.SHAPE, shape);
+        bundle.putInt(DatabaseHelper.ORDER_NUM, orderNum);
         //Alarm alarm = new Alarm(getActivity().getApplicationContext(), bundle);
 
         // get unique notifyId for each alarm
@@ -513,6 +515,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         parseObject.put(DatabaseHelper.INSTRUCTION, instructionStr);
         parseObject.put(DatabaseHelper.SHAPE, shape);
         parseObject.put(DatabaseHelper.NOFITY_ID, notifyId);
+        parseObject.put(DatabaseHelper.ORDER_NUM, orderNum);
         parseObject.saveInBackground();
 
         task = new InsertTask().execute(values);
@@ -535,7 +538,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
                             DatabaseHelper.TIME_H,
                             DatabaseHelper.TIME_M},
                             "usr_name=\'"+ParseUser.getCurrentUser().getUsername()+"\'",
-                            null, null, null, DatabaseHelper.TITLE);
+                            null, null, null, DatabaseHelper.ORDER_NUM);
 
             result.getCount();
 

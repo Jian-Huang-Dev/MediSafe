@@ -185,23 +185,7 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
 
                             Alarm alarm = new Alarm(getActivity().getApplicationContext(), bundle);
                         }
-
-                        String string;
-
-                        string = "Medication: " +
-                                parseObject.getString(DatabaseHelper.TITLE) +
-                                ", At time: " +
-                                parseObject.getString(DatabaseHelper.TIME_H) +
-                                "h : " +
-                                parseObject.getString(DatabaseHelper.TIME_M) +
-                                "m";
-                        strArrList.add(string);
                     }
-                    // list items on screen in list_view fashion
-//                    ArrayAdapter<String> adapter =
-//                            new ArrayAdapter<String>(getActivity().getApplicationContext(),
-//                                    R.layout.list_view_text_style, android.R.id.title, strArrList.toArray(new String[0]));
-//                    setListAdapter(adapter);
                 }
             }
         });
@@ -242,7 +226,7 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
                                             DatabaseHelper.TIME_H,
                                             DatabaseHelper.TIME_M},
                                     "usr_name=\'"+ParseUser.getCurrentUser().getUsername()+"\'",
-                                    null, null, null, DatabaseHelper.TITLE);
+                                    null, null, null, DatabaseHelper.ORDER_NUM);
 
             result.getCount();
 
@@ -278,6 +262,7 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
         bundle.putString(DatabaseHelper.DOSAGE, parseObject.getString(DatabaseHelper.DOSAGE));
         bundle.putString(DatabaseHelper.SHAPE, parseObject.getString(DatabaseHelper.SHAPE));
         bundle.putString(DatabaseHelper.INSTRUCTION, parseObject.getString(DatabaseHelper.INSTRUCTION));
+        bundle.putString(DatabaseHelper.ORDER_NUM, parseObject.getString(DatabaseHelper.ORDER_NUM));
 
         return bundle;
     }
@@ -292,6 +277,7 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
         values.put(DatabaseHelper.DOSAGE, parseObject.getString(DatabaseHelper.DOSAGE));
         values.put(DatabaseHelper.SHAPE, parseObject.getString(DatabaseHelper.SHAPE));
         values.put(DatabaseHelper.INSTRUCTION, parseObject.getString(DatabaseHelper.INSTRUCTION));
+        values.put(DatabaseHelper.ORDER_NUM, parseObject.getString(DatabaseHelper.ORDER_NUM));
         // values.put(DatabaseHelper.NOFITY_ID, parseObject.getString(DatabaseHelper.NOFITY_ID));
         return values;
     }
