@@ -94,4 +94,32 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
       return false;
   }
+
+    public Boolean isHourExitOnDB (String hour) {
+        String medHour;
+        Cursor cursor = this.getCursor();
+        cursor.moveToPosition(-1);
+
+        while(cursor.moveToNext()) {
+            medHour = cursor.getString(cursor.getColumnIndex(TIME_H));
+            if(medHour.equals(hour)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Boolean isMinOnDB (String min) {
+        String medMin;
+        Cursor cursor = this.getCursor();
+        cursor.moveToPosition(-1);
+
+        while(cursor.moveToNext()) {
+            medMin = cursor.getString(cursor.getColumnIndex(TIME_M));
+            if(medMin.equals(min)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
