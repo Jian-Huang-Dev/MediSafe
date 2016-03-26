@@ -492,7 +492,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
 
         // saving it into parse.com
         ParseObject parseObject = new ParseObject(Helpers.PARSE_OBJECT);
-        parseObject.put(Helpers.PARSE_OBJECT_USER, ParseUser.getCurrentUser().getUsername());
+        parseObject.put(DatabaseHelper.USRNAME, ParseUser.getCurrentUser().getUsername());
         parseObject.put(DatabaseHelper.TITLE, titleStr);
         parseObject.put(DatabaseHelper.TIME_H, timeHStr);
         parseObject.put(DatabaseHelper.TIME_M, timeMStr);
@@ -501,7 +501,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         parseObject.put(DatabaseHelper.DOSAGE, dosageStr);
         parseObject.put(DatabaseHelper.INSTRUCTION, instructionStr);
         parseObject.put(DatabaseHelper.SHAPE, shape);
-        parseObject.put(Helpers.NOFITY_ID, notifyId);
+        parseObject.put(DatabaseHelper.NOFITY_ID, notifyId);
         parseObject.saveInBackground();
 
         task = new InsertTask().execute(values);
