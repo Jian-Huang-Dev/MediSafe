@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorDarkBlue">
+    android:background="#99d9de">
 
     <TextView
         android:id="@+id/date"
@@ -12,21 +12,16 @@
         android:layout_height="wrap_content"
         android:textSize="36dp"
         android:textStyle="bold"
-        android:background="@color/colorDarkBlue" />
+        android:background="#99d9de" />
 
     <ListView
         android:id="@+id/android:list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-    </ListView>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_add" />
+        android:divider="#99d9de"
+        android:dividerHeight="30.0dp"
+        android:background="#ffffff">
+    </ListView>
 
 
 </LinearLayout>

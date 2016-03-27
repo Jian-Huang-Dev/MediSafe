@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
+import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 
@@ -66,7 +67,7 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
 //        todos = (TextView) view.findViewById(R.id.todos);
 //        listView = (ListView) view.findViewById(R.id.list_view);
 
-        View view = inflater.inflate(R.layout.fam_mem_main_frag,
+        View view = inflater.inflate(R.layout.patient_main_frag,
                 container, false);
 
         TextView date = (TextView) view.findViewById(R.id.date);
@@ -123,15 +124,17 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
 
         date.setText(sDate);
 
-        //listView = (ListView) view.findViewById(R.id.list_view);
+
 
         SimpleCursorAdapter adapter =
-                new SimpleCursorAdapter(getActivity(), R.layout.fam_mem_frag,
+                new SimpleCursorAdapter(getActivity(), R.layout.patient_item,
                         current, new String[]{
                         DatabaseHelper.TITLE,
                         DatabaseHelper.TIME_H,
-                        DatabaseHelper.TIME_M},
-                        new int[]{R.id.title, R.id.time_h, R.id.time_m},
+                        DatabaseHelper.TIME_M,
+                DatabaseHelper.DOSAGE,
+                DatabaseHelper.INSTRUCTION},
+                        new int[]{R.id.name, R.id.time_h, R.id.time_m, R.id.dosage,R.id.instruction},
                         0);
 
         setListAdapter(adapter);

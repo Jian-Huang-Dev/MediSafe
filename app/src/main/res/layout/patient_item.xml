@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25dp"
+            android:textSize="40dp"
             android:id="@+id/name"/>
     </LinearLayout>
 
@@ -36,6 +36,12 @@
             android:layout_height="wrap_content"
             android:textSize="21dp"
             android:id="@+id/time_h"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="21dp"
+            android:text=" : "/>
 
         <TextView
             android:layout_width="wrap_content"
