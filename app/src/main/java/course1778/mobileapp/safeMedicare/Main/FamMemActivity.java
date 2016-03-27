@@ -109,7 +109,7 @@ public class FamMemActivity extends AppCompatActivity {
     private void addDrawerItems() {
         String[] osArray = { "Medication List", "Drug Interaction", "Food Interaction", "Supplement Interaction","Setting  ", "Log Out "  };
         //drawerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, osArray);
-        int[] picArray = {R.drawable.patient, R.drawable.exclamation, R.drawable.food, R.drawable.supplement, R.drawable.setting, R.drawable.setting};
+        int[] picArray = {R.drawable.patient, R.drawable.exclamation, R.drawable.food, R.drawable.supplement, R.drawable.setting, R.drawable.logout};
         drawerList.setAdapter(new CustomAdapter(this, osArray,picArray));
     }
 
