@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -173,6 +174,14 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
                 } else {
                     return false;
                 }
+            }
+        });
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                retrieveDataFromParse();
             }
         });
 
