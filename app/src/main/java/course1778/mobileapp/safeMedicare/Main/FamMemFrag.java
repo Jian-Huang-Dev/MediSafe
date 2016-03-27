@@ -370,7 +370,8 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         View radioButton = radioButtonGroup.findViewById(radioButtonID);
         int shape = radioButtonGroup.indexOfChild(radioButton)/2;
         int Fre;
-        int day = 0;
+        //int day = 0;
+        int monday = 0, tuesday=0, wednesday=0, thursday=0, friday=0, saturday=0, sunday=0;
 
         // clear array list
         drug_interaction_list.clear();
@@ -458,26 +459,27 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         }
 
 
+        //give different
         if (((CheckBox) dlg.findViewById(R.id.MonCheck)).isChecked()){
-            day = day + 1;
+            monday = monday + 1;
         }
         if (((CheckBox) dlg.findViewById(R.id.TueCheck)).isChecked()){
-            day = day + 2;
+            tuesday = tuesday + 1;
         }
         if (((CheckBox) dlg.findViewById(R.id.WedCheck)).isChecked()){
-            day = day + 4;
+            wednesday = wednesday + 1;
         }
         if (((CheckBox) dlg.findViewById(R.id.ThuCheck)).isChecked()){
-            day = day + 8;
+            thursday = thursday + 1;
         }
         if (((CheckBox) dlg.findViewById(R.id.FriCheck)).isChecked()){
-            day = day + 16;
+            friday = friday + 1;
         }
         if (((CheckBox) dlg.findViewById(R.id.SatCheck)).isChecked()){
-            day = day + 32;
+            saturday = saturday + 1;
         }
         if (((CheckBox) dlg.findViewById(R.id.SunCheck)).isChecked()){
-            day = day + 64;
+            sunday = sunday + 1;
         }
 
         // clear focus before retrieving the min and hr
@@ -494,15 +496,24 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         String dosageStr = dosage.getText().toString();
         String instructionStr = instruction.getText().toString();
 
-        Log.d("mytime",Integer.toString(tpHour));
-        Log.d("mytime",Integer.toString(tpMinute));
+        Log.d("mytime", Integer.toString(tpHour));
+        Log.d("mytime", Integer.toString(tpMinute));
 
         values.put(DatabaseHelper.USRNAME, ParseUser.getCurrentUser().getUsername());
         values.put(DatabaseHelper.TITLE, titleStr);
         values.put(DatabaseHelper.TIME_H, timeHStr);
         values.put(DatabaseHelper.TIME_M, timeMStr);
         values.put(DatabaseHelper.FREQUENCY, Fre);
-        values.put(DatabaseHelper.DAY, day);
+        //values.put(DatabaseHelper.DAY, day);
+
+        values.put(DatabaseHelper.MONDAY, monday);
+        values.put(DatabaseHelper.TUESDAY, tuesday);
+        values.put(DatabaseHelper.WEDNESDAY, wednesday);
+        values.put(DatabaseHelper.THURSDAY, thursday);
+        values.put(DatabaseHelper.FRIDAY, friday);
+        values.put(DatabaseHelper.SATURDAY,saturday);
+        values.put(DatabaseHelper.SUNDAY,sunday);
+
         values.put(DatabaseHelper.DOSAGE, dosageStr);
         values.put(DatabaseHelper.INSTRUCTION, instructionStr);
         values.put(DatabaseHelper.SHAPE, shape);
@@ -514,7 +525,16 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         bundle.putString(DatabaseHelper.TIME_H, timeHStr);
         bundle.putString(DatabaseHelper.TIME_M, timeMStr);
         bundle.putInt(DatabaseHelper.FREQUENCY, Fre);
-        bundle.putInt(DatabaseHelper.DAY, day);
+        //bundle.putInt(DatabaseHelper.DAY, day);
+
+        bundle.putInt(DatabaseHelper.MONDAY, monday);
+        bundle.putInt(DatabaseHelper.TUESDAY, tuesday);
+        bundle.putInt(DatabaseHelper.WEDNESDAY, wednesday);
+        bundle.putInt(DatabaseHelper.THURSDAY, thursday);
+        bundle.putInt(DatabaseHelper.FRIDAY, friday);
+        bundle.putInt(DatabaseHelper.SATURDAY, saturday);
+        bundle.putInt(DatabaseHelper.SUNDAY, sunday);
+
         bundle.putString(DatabaseHelper.DOSAGE, dosageStr);
         bundle.putString(DatabaseHelper.INSTRUCTION, instructionStr);
         bundle.putInt(DatabaseHelper.SHAPE, shape);
@@ -535,7 +555,16 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         parseObject.put(DatabaseHelper.TIME_H, timeHStr);
         parseObject.put(DatabaseHelper.TIME_M, timeMStr);
         parseObject.put(DatabaseHelper.FREQUENCY, Fre);
-        parseObject.put(DatabaseHelper.DAY, day);
+        //parseObject.put(DatabaseHelper.DAY, day);
+
+        parseObject.put(DatabaseHelper.MONDAY, monday);
+        parseObject.put(DatabaseHelper.TUESDAY, tuesday);
+        parseObject.put(DatabaseHelper.WEDNESDAY, wednesday);
+        parseObject.put(DatabaseHelper.THURSDAY, thursday);
+        parseObject.put(DatabaseHelper.FRIDAY, friday);
+        parseObject.put(DatabaseHelper.SATURDAY,saturday);
+        parseObject.put(DatabaseHelper.SUNDAY,sunday);
+
         parseObject.put(DatabaseHelper.DOSAGE, dosageStr);
         parseObject.put(DatabaseHelper.INSTRUCTION, instructionStr);
         parseObject.put(DatabaseHelper.SHAPE, shape);

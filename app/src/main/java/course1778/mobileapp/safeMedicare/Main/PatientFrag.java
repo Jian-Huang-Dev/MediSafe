@@ -318,7 +318,16 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
         bundle.putString(DatabaseHelper.TIME_H, parseObject.getString(DatabaseHelper.TIME_H));
         bundle.putString(DatabaseHelper.TIME_M, parseObject.getString(DatabaseHelper.TIME_M));
         bundle.putString(DatabaseHelper.FREQUENCY, parseObject.getString(DatabaseHelper.FREQUENCY));
-        bundle.putString(DatabaseHelper.DAY, parseObject.getString(DatabaseHelper.DAY));
+        //bundle.putString(DatabaseHelper.DAY, parseObject.getString(DatabaseHelper.DAY));
+
+        bundle.putString(DatabaseHelper.MONDAY, parseObject.getString(DatabaseHelper.MONDAY));
+        bundle.putString(DatabaseHelper.TUESDAY, parseObject.getString(DatabaseHelper.TUESDAY));
+        bundle.putString(DatabaseHelper.WEDNESDAY, parseObject.getString(DatabaseHelper.WEDNESDAY));
+        bundle.putString(DatabaseHelper.THURSDAY, parseObject.getString(DatabaseHelper.THURSDAY));
+        bundle.putString(DatabaseHelper.FRIDAY, parseObject.getString(DatabaseHelper.FRIDAY));
+        bundle.putString(DatabaseHelper.SATURDAY, parseObject.getString(DatabaseHelper.SATURDAY));
+        bundle.putString(DatabaseHelper.SUNDAY, parseObject.getString(DatabaseHelper.SUNDAY));
+
         bundle.putString(DatabaseHelper.DOSAGE, parseObject.getString(DatabaseHelper.DOSAGE));
         bundle.putString(DatabaseHelper.SHAPE, parseObject.getString(DatabaseHelper.SHAPE));
         bundle.putString(DatabaseHelper.INSTRUCTION, parseObject.getString(DatabaseHelper.INSTRUCTION));
@@ -334,7 +343,16 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
         values.put(DatabaseHelper.TIME_H, parseObject.getString(DatabaseHelper.TIME_H));
         values.put(DatabaseHelper.TIME_M, parseObject.getString(DatabaseHelper.TIME_M));
         values.put(DatabaseHelper.FREQUENCY, parseObject.getString(DatabaseHelper.FREQUENCY));
-        values.put(DatabaseHelper.DAY, parseObject.getString(DatabaseHelper.DAY));
+        //values.put(DatabaseHelper.DAY, parseObject.getString(DatabaseHelper.DAY));
+
+        values.put(DatabaseHelper.MONDAY, parseObject.getString(DatabaseHelper.MONDAY));
+        values.put(DatabaseHelper.TUESDAY, parseObject.getString(DatabaseHelper.TUESDAY));
+        values.put(DatabaseHelper.WEDNESDAY, parseObject.getString(DatabaseHelper.WEDNESDAY));
+        values.put(DatabaseHelper.THURSDAY, parseObject.getString(DatabaseHelper.THURSDAY));
+        values.put(DatabaseHelper.FRIDAY, parseObject.getString(DatabaseHelper.FRIDAY));
+        values.put(DatabaseHelper.SATURDAY, parseObject.getString(DatabaseHelper.SATURDAY));
+        values.put(DatabaseHelper.SUNDAY, parseObject.getString(DatabaseHelper.SUNDAY));
+
         values.put(DatabaseHelper.DOSAGE, parseObject.getString(DatabaseHelper.DOSAGE));
         values.put(DatabaseHelper.SHAPE, parseObject.getString(DatabaseHelper.SHAPE));
         values.put(DatabaseHelper.INSTRUCTION, parseObject.getString(DatabaseHelper.INSTRUCTION));
