@@ -24,7 +24,6 @@ import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
 import android.text.Html;
 import android.util.Log;
@@ -47,7 +46,6 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.parse.ParseObject;
 import com.parse.ParseUser;
@@ -487,12 +485,13 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
 
         int tpMinute = tp.getCurrentMinute();
         int tpHour = tp.getCurrentHour();
+        // an order number to order the list view items
         int orderNum = tpHour * 60 + tpMinute;
         tp.setIs24HourView(true);
 
         String titleStr = title.getText().toString();
-        String timeHStr = Integer.toString(tpHour);
-        String timeMStr = Integer.toString(tpMinute);
+        String timeHStr = Helpers.StringFormatter(tpHour, "00");
+        String timeMStr = Helpers.StringFormatter(tpMinute, "00");
         String dosageStr = dosage.getText().toString();
         String instructionStr = instruction.getText().toString();
 

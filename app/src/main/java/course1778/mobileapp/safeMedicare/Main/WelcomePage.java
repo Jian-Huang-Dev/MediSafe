@@ -102,7 +102,7 @@ public class WelcomePage extends Activity {
         patientBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WelcomePage.this, FamMemActivity.class);
+                Intent intent = new Intent(WelcomePage.this, PatientActivity.class);
                 startActivity(intent);
             }
         });
