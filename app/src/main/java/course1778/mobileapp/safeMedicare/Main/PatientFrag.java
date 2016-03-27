@@ -1,11 +1,15 @@
 package course1778.mobileapp.safeMedicare.Main;
 
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -32,6 +36,8 @@ import java.util.List;
 import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
 import course1778.mobileapp.safeMedicare.Helpers.Helpers;
 import course1778.mobileapp.safeMedicare.NotificationService.Alarm;
+import course1778.mobileapp.safeMedicare.NotificationService.Snooze_Act;
+import course1778.mobileapp.safeMedicare.NotificationService.Taken_Activity;
 import course1778.mobileapp.safeMedicare.R;
 
 /**
@@ -177,6 +183,7 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
 
         return (super.onOptionsItemSelected(item));
     }
+
 
     public void retrieveDataFromParse() {
         final ContentValues values = new ContentValues(DatabaseHelper.CONTENT_VALUE_COUNT);

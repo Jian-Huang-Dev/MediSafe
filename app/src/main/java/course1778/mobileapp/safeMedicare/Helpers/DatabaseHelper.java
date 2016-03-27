@@ -68,7 +68,7 @@ public static final String TABLE = "notification";
                     //"day INTEGER," +
                     "instruction TEXT," +
                     "shape INTEGER," +
-                    "order_num INTEGER, monday INTEGER, tuesday INTEGER, wednesday INTEGER, thursday INTEGER, friday INTEGER, saturday INTEGER, sunday INTEGER,);");
+                    "order_num INTEGER, monday INTEGER, tuesday INTEGER, wednesday INTEGER, thursday INTEGER, friday INTEGER, saturday INTEGER, sunday INTEGER);");
 
 
   }

@@ -54,7 +54,7 @@
 			android:textSize="20sp"
 			android:textStyle="bold|italic"
 			android:layout_weight="6"
-			android:gravity="center" />
+			android:gravity="left" />
 
 	</LinearLayout>
 

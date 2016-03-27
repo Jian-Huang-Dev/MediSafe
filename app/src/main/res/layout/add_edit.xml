@@ -48,7 +48,8 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"
 			android:enabled="true"
-			android:inputType="number|numberDecimal" />
+			android:inputType="text|number|numberDecimal"
+			android:text="1 Pill" />
 	</LinearLayout>
 
 	<LinearLayout
@@ -180,7 +181,7 @@
 						<ImageView
 							android:layout_width="40dp"
 							android:layout_height="40dp"
-							android:background="@drawable/capsule"
+							android:background="@drawable/tablet"
 							android:layout_weight="1"/>
 
 
@@ -194,7 +195,7 @@
 						<ImageView
 							android:layout_width="40dp"
 							android:layout_height="40dp"
-							android:background="@drawable/tablet"
+							android:background="@drawable/capsule"
 							android:layout_weight="1"/>
 
 						<RadioButton
