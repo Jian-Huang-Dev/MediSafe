@@ -35,6 +35,7 @@ import java.util.List;
 
 import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
 import course1778.mobileapp.safeMedicare.Helpers.Helpers;
+import course1778.mobileapp.safeMedicare.Helpers.MySimpleCursorAdapter;
 import course1778.mobileapp.safeMedicare.NotificationService.Alarm;
 import course1778.mobileapp.safeMedicare.NotificationService.Snooze_Act;
 import course1778.mobileapp.safeMedicare.NotificationService.Taken_Activity;
@@ -131,16 +132,29 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
 
 
 
-        SimpleCursorAdapter adapter =
-                new SimpleCursorAdapter(getActivity(), R.layout.patient_item,
+//        SimpleCursorAdapter adapter =
+//                new SimpleCursorAdapter(getActivity(), R.layout.patient_item,
+//                        current, new String[]{
+//                        DatabaseHelper.TITLE,
+//                        DatabaseHelper.TIME_H,
+//                        DatabaseHelper.TIME_M,
+//                        DatabaseHelper.DOSAGE,
+//                        DatabaseHelper.INSTRUCTION},
+//                        new int[]{R.id.name, R.id.time_h, R.id.time_m, R.id.dosage,R.id.instruction},
+//                        0);
+//
+//        setListAdapter(adapter);
+
+        MySimpleCursorAdapter adapter =
+                new MySimpleCursorAdapter(getActivity(), R.layout.patient_item,
                         current, new String[]{
                         DatabaseHelper.TITLE,
                         DatabaseHelper.TIME_H,
                         DatabaseHelper.TIME_M,
+                        DatabaseHelper.SHAPE,
                         DatabaseHelper.DOSAGE,
                         DatabaseHelper.INSTRUCTION},
-                        new int[]{R.id.name, R.id.time_h, R.id.time_m, R.id.dosage,R.id.instruction},
-                        0);
+                        new int[]{R.id.name, R.id.time_h, R.id.time_m, R.id.shape, R.id.dosage,R.id.instruction});
 
         setListAdapter(adapter);
 
