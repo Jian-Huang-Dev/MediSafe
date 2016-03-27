@@ -181,7 +181,7 @@
 						<ImageView
 							android:layout_width="40dp"
 							android:layout_height="40dp"
-							android:background="@drawable/capsule"
+							android:background="@drawable/tablet"
 							android:layout_weight="1"/>
 
 
@@ -195,7 +195,7 @@
 						<ImageView
 							android:layout_width="40dp"
 							android:layout_height="40dp"
-							android:background="@drawable/tablet"
+							android:background="@drawable/capsule"
 							android:layout_weight="1"/>
 
 						<RadioButton
