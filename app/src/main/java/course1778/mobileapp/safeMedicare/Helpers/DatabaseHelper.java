@@ -40,13 +40,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 //  public static final String FRIDAY="friday";
 //  public static final String SATURDAY="saturday";
 //  public static final String SUNDAY="sunday";
-  public static final String TABLE="notification";
+public static final String TABLE = "notification";
 
-  // for preloaded database "medicine.db"
-  public static final String SHEET_1_DRUG_NAMES = "Drugs";
-  public static final String SHEET_1_DRUG_INTERACTIONS = "Interactions";
-  public static final String SHEET_1_INTERACTION_RESULT = "What_might_happen";
-  public static final int CONTENT_VALUE_COUNT = 10;
+    // for preloaded database "medicine.db"
+    public static final String SHEET_1_DRUG_NAMES = "Drugs";
+    public static final String SHEET_1_DRUG_INTERACTIONS = "Interactions";
+    public static final String SHEET_1_INTERACTION_RESULT = "What_might_happen";
+    public static final int CONTENT_VALUE_COUNT = 10;
+    public static long nextNumRows;
+    public static long preNumRows;
+    public static boolean dbModified = false;
 
   public DatabaseHelper(Context context) {
     super(context, DATABASE_NAME, null, SCHEMA);

@@ -147,11 +147,18 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
                 break;
         }
 
+
         return (super.onOptionsItemSelected(item));
     }
 
     public void retrieveDataFromParse() {
         final ContentValues values = new ContentValues(DatabaseHelper.CONTENT_VALUE_COUNT);
+        // get current number of rows in database table
+        DatabaseHelper.preNumRows =
+                DatabaseUtils.queryNumEntries(
+                        db.getReadableDatabase(), DatabaseHelper.TABLE);
+        // set new num of rows in database table same as current one
+        DatabaseHelper.nextNumRows = DatabaseHelper.preNumRows;
 
         ParseQuery<ParseObject> query = ParseQuery.getQuery(Helpers.PARSE_OBJECT);
         query.whereEqualTo(DatabaseHelper.USRNAME, ParseUser.getCurrentUser().getUsername());
@@ -179,17 +186,39 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
                             contentValues = getValues(values, parseObject);
 
                             // saving to local database
-                            //task = new InsertTask().execute(values);
-                            db.getWritableDatabase().insert(DatabaseHelper.TABLE,
-                                    DatabaseHelper.USRNAME, contentValues);
+                            task = new InsertTask().execute(values);
+//                            db.getWritableDatabase().insert(DatabaseHelper.TABLE,
+//                                    DatabaseHelper.USRNAME, contentValues);
 
-                            Alarm alarm = new Alarm(getActivity().getApplicationContext(), bundle);
+                            // indicator
+                            DatabaseHelper.dbModified = true;
+
+                            DatabaseHelper.nextNumRows =
+                                    DatabaseUtils.queryNumEntries(
+                                            db.getReadableDatabase(), DatabaseHelper.TABLE);
+
+                            // set new alarm for this medication
+                            new Alarm(getActivity().getApplicationContext(), bundle);
                         }
                     }
                 }
             }
         });
-        retrieveDataFromLocalDatabase();
+
+//        if (DatabaseHelper.dbModified) {
+//            while (DatabaseHelper.nextNumRows == DatabaseHelper.preNumRows) {
+//                // database has not being updated yet, wait till it gets updated
+//                DatabaseHelper.nextNumRows =
+//                        DatabaseUtils.queryNumEntries(
+//                                db.getReadableDatabase(), DatabaseHelper.TABLE);
+//            }
+//        }
+
+        // display the database list on screen (list_view)
+//        retrieveDataFromLocalDatabase();
+
+        // reset indicator back to false
+//        DatabaseHelper.dbModified = false;
     }
 
     protected void retrieveDataFromLocalDatabase() {
@@ -247,12 +276,13 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
         @Override
         protected Cursor doInBackground(ContentValues... values) {
             db.getWritableDatabase().insert(DatabaseHelper.TABLE,
-                    DatabaseHelper.USRNAME, values[1]);
+                    DatabaseHelper.USRNAME, values[0]);
 
             return (doQuery());
         }
     }
 
+    // get bundle for alarm
     private Bundle getBundle(Bundle bundle, ParseObject parseObject) {
         bundle.putString(DatabaseHelper.TITLE, parseObject.getString(DatabaseHelper.TITLE));
         bundle.putString(DatabaseHelper.TIME_H, parseObject.getString(DatabaseHelper.TIME_H));
@@ -267,6 +297,7 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
         return bundle;
     }
 
+    // get values for local database
     private ContentValues getValues(ContentValues values, ParseObject parseObject) {
         values.put(DatabaseHelper.USRNAME, parseObject.getString(DatabaseHelper.USRNAME));
         values.put(DatabaseHelper.TITLE, parseObject.getString(DatabaseHelper.TITLE));
@@ -278,7 +309,7 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
         values.put(DatabaseHelper.SHAPE, parseObject.getString(DatabaseHelper.SHAPE));
         values.put(DatabaseHelper.INSTRUCTION, parseObject.getString(DatabaseHelper.INSTRUCTION));
         values.put(DatabaseHelper.ORDER_NUM, parseObject.getString(DatabaseHelper.ORDER_NUM));
-        // values.put(DatabaseHelper.NOFITY_ID, parseObject.getString(DatabaseHelper.NOFITY_ID));
+
         return values;
     }
 
