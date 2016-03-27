@@ -27,19 +27,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TIME_H = "time_h";
     public static final String TIME_M = "time_m";
     public static final String FREQUENCY = "frequency";
-    public static final String DAY = "day";
+    //public static final String DAY = "day";
     public static final String DOSAGE = "dosage";
     public static final String INSTRUCTION = "instruction";
     public static final String SHAPE = "shape";
     public static final String NOFITY_ID = "notify_id";
     public static final String ORDER_NUM = "order_num";
-//  public static final String MONDAY="monday";
-//  public static final String TUESDAY="tuesday";
-//  public static final String WEDNESDAY="wednesday";
-//  public static final String THURSDAY="thursday";
-//  public static final String FRIDAY="friday";
-//  public static final String SATURDAY="saturday";
-//  public static final String SUNDAY="sunday";
+  public static final String MONDAY="monday";
+  public static final String TUESDAY="tuesday";
+  public static final String WEDNESDAY="wednesday";
+  public static final String THURSDAY="thursday";
+  public static final String FRIDAY="friday";
+  public static final String SATURDAY="saturday";
+  public static final String SUNDAY="sunday";
 public static final String TABLE = "notification";
 
     // for preloaded database "medicine.db"
@@ -61,15 +61,14 @@ public static final String TABLE = "notification";
             "CREATE TABLE notification " +
                     "(usr_name TEXT, " +
                     "title TEXT, " +
-                    "time_h REAL, " +
-                    "time_m REAL, " +
+                    "time_h TEXT, " +
+                    "time_m TEXT, " +
                     "dosage REAL, " +
                     "frequency INTEGER," +
-                    "day INTEGER," +
+                    //"day INTEGER," +
                     "instruction TEXT," +
                     "shape INTEGER," +
-                    "order_num INTEGER);");
-    //monday INTEGER, tuesday INTEGER, wednesday INTEGER, thursday INTEGER, friday INTEGER, saturday INTEGER, sunday INTEGER,);");
+                    "order_num INTEGER, monday INTEGER, tuesday INTEGER, wednesday INTEGER, thursday INTEGER, friday INTEGER, saturday INTEGER, sunday INTEGER,);");
 
 
   }
