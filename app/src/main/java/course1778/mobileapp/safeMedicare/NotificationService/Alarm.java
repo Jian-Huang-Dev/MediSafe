@@ -138,6 +138,7 @@ public class Alarm extends BroadcastReceiver {
                         //.setLargeIcon(R.drawable.medicine)
                 .setTicker(context.getString(R.string.getmed) + title)
                 .setPriority(Notification.PRIORITY_HIGH)
+                .setOngoing(true)
                 .addAction(android.R.drawable.ic_media_play,
                         context.getString(R.string.show),
                         buildPendingIntent(FamMemActivity.class, context, extras))
