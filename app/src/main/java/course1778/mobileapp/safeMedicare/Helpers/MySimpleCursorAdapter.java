@@ -19,15 +19,15 @@ public class MySimpleCursorAdapter extends SimpleCursorAdapter {
 
     @Override public void setViewImage(ImageView iv, String text)
     {
-        if (text.equals("6")) {
+        if (text.equals("5")) {
             iv.setImageResource(R.drawable.plaster);
-        } else if (text.equals("2")) {
+        } else if (text.equals("1")) {
         iv.setImageResource(R.drawable.capsule);
-        } else if (text.equals("3")) {
+        } else if (text.equals("2")) {
             iv.setImageResource(R.drawable.needle);
-        } else if (text.equals("4")) {
+        } else if (text.equals("3")) {
             iv.setImageResource(R.drawable.three);
-        } else if (text.equals("5")) {
+        } else if (text.equals("4")) {
             iv.setImageResource(R.drawable.powder);
         } else {
             iv.setImageResource(R.drawable.tablet);
