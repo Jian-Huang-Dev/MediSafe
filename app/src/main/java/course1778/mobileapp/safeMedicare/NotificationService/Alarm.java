@@ -13,10 +13,9 @@ import android.support.v4.app.NotificationCompat;
 import android.widget.Toast;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 
+import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
 import course1778.mobileapp.safeMedicare.Main.FamMemActivity;
 import course1778.mobileapp.safeMedicare.R;
 
@@ -46,10 +45,17 @@ public class Alarm extends BroadcastReceiver {
 //                        PendingIntent.FLAG_UPDATE_CURRENT);
         Calendar time = Calendar.getInstance();
         time.setTimeInMillis(System.currentTimeMillis());
-        time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(extras.getString("time_h")));
-        time.set(Calendar.MINUTE, Integer.parseInt(extras.getString("time_m")));
+        time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(extras.getString(DatabaseHelper.TIME_H)));
+        // if alarm set at 3:20, then actual alarm goes off at 3:21, hence minus 1 for the minute
+        time.set(Calendar.MINUTE, Integer.parseInt(extras.getString(DatabaseHelper.TIME_M)) - 1);
         time.set(Calendar.SECOND, 0);
         String title = extras.getString("title");
+
+        Toast.makeText(context,
+                "Set alarm at: " +
+                Integer.parseInt(extras.getString(DatabaseHelper.TIME_H)) + ": " +
+                Integer.parseInt(extras.getString(DatabaseHelper.TIME_M)), Toast.LENGTH_LONG).show();
+        
         //NOTIFY_ID = Integer.parseInt(extras.getString("title")+ extras.getString("time_h") +extras.getString("time_m"));
         int length = title.length();
         for (int i = 0; i<length; i++) {
@@ -75,6 +81,9 @@ public class Alarm extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         // here you can get the extras you passed in when creating the alarm
         //intent.getBundleExtra(REMINDER_BUNDLE));
+
+        Toast.makeText(context,
+                "Time to take medication!", Toast.LENGTH_LONG).show();
 
         Bundle getBundle = intent.getBundleExtra(REMINDER_BUNDLE);
 
@@ -109,8 +118,6 @@ public class Alarm extends BroadcastReceiver {
 
 
         Alarm_Msg alarm_msg = new Alarm_Msg(context, getBundle);
-
-
 
         //Toast.makeText(context, "Alarm went off", Toast.LENGTH_SHORT).show();
     }
@@ -157,7 +164,6 @@ public class Alarm extends BroadcastReceiver {
 
         return(PendingIntent.getActivity(context, 0, intent, 0));
     }
-
 
 
     public static void cancelNotification(Context ctx, int notifyId) {
