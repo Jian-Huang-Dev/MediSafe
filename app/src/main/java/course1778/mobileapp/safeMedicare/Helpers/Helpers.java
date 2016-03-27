@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -22,6 +23,11 @@ public class Helpers {
     public static final String PARSE_OBJECT_VALUE = "my_value";
     public static final String PARSE_OBJECT_DATA_KEY = "data";
 //    public static final String NOFITY_ID = "notify_id";
+
+    public static String StringFormatter(int num, String formatStyle) {
+        DecimalFormat formatter = new DecimalFormat(formatStyle);
+        return formatter.format(num);
+    }
 
     /**
      * Read details from a file

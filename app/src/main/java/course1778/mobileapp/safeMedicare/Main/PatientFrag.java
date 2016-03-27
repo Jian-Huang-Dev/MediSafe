@@ -131,8 +131,8 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
                         DatabaseHelper.TITLE,
                         DatabaseHelper.TIME_H,
                         DatabaseHelper.TIME_M,
-                DatabaseHelper.DOSAGE,
-                DatabaseHelper.INSTRUCTION},
+                        DatabaseHelper.DOSAGE,
+                        DatabaseHelper.INSTRUCTION},
                         new int[]{R.id.name, R.id.time_h, R.id.time_m, R.id.dosage,R.id.instruction},
                         0);
 
@@ -281,11 +281,11 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
                                             DatabaseHelper.TITLE,
                                             DatabaseHelper.TIME_H,
                                             DatabaseHelper.TIME_M,
-                                    DatabaseHelper.SHAPE,
-                                    DatabaseHelper.DOSAGE,
-                                    DatabaseHelper.INSTRUCTION},
-                                    "usr_name=\'"+ParseUser.getCurrentUser().getUsername()+"\'",
-                                    null, null, null, DatabaseHelper.ORDER_NUM);
+                                            DatabaseHelper.SHAPE,
+                                            DatabaseHelper.DOSAGE,
+                                            DatabaseHelper.INSTRUCTION},
+                                            "usr_name=\'"+ParseUser.getCurrentUser().getUsername()+"\'",
+                                            null, null, null, DatabaseHelper.ORDER_NUM);
 
             result.getCount();
 
