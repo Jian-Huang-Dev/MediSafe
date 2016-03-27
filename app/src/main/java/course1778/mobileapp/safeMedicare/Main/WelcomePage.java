@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,7 +23,6 @@ import com.parse.ParseUser;
 
 import java.util.List;
 
-import course1778.mobileapp.safeMedicare.Authentication.LoginActivity;
 import course1778.mobileapp.safeMedicare.Helpers.Helpers;
 import course1778.mobileapp.safeMedicare.R;
 
@@ -32,6 +30,7 @@ public class WelcomePage extends Activity {
 
     // Declare Variable
     LinearLayout famMemPageBtn, patientPageBtn;
+    ImageButton famMemBtn, patientBtn;
 //    Button logoutBtn;
     TextView welcomeMsg;
     String usrName;
@@ -54,6 +53,8 @@ public class WelcomePage extends Activity {
         // family member page and patient page buttons
         famMemPageBtn = (LinearLayout) findViewById(R.id.famMemPageBtn);
         patientPageBtn = (LinearLayout) findViewById(R.id.patientPageBtn);
+        patientBtn = (ImageButton) findViewById(R.id.patienBtn);
+        famMemBtn = (ImageButton) findViewById(R.id.famMemBtn);
 //        logoutBtn = (Button) findViewById(R.id.logoutBtn);
 
         // display welcome message
@@ -81,11 +82,27 @@ public class WelcomePage extends Activity {
             }
         });
 
+        famMemBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WelcomePage.this, FamMemActivity.class);
+                startActivity(intent);
+            }
+        });
+
         // direct to patient page upon click
         patientPageBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(WelcomePage.this, PatientActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        patientBtn.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WelcomePage.this, FamMemActivity.class);
                 startActivity(intent);
             }
         });
