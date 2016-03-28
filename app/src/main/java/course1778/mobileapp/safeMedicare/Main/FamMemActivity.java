@@ -68,7 +68,7 @@ public class FamMemActivity extends AppCompatActivity {
                         break;
 
                     case 1:
-                        // drug interaction
+                        // drug interaction page
                         DrugInteractions drugInterac = new DrugInteractions();
                         transaction = getSupportFragmentManager().beginTransaction();
                         transaction.replace(R.id.fragmentContainer, drugInterac);
