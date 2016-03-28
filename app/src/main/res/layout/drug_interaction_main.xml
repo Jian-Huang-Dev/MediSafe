@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#99d9de">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#99d9de"
+              android:orientation="vertical">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="10dp"
         android:text="@string/drug_interaction"
         android:textColor="#ffffff"
-        android:textSize="32dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="10dp" />
+        android:textSize="32dp"/>
 
     <View
         android:layout_width="match_parent"
@@ -22,24 +23,20 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="7dp"
         android:text="@string/askyourdoctor"
         android:textColor="#1067b6"
-        android:textSize="28dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginBottom="7dp" />
+        android:textSize="28dp"/>
 
-
-
-        <ListView
-            android:id="@+id/android:list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="#99d9de"
-            android:dividerHeight="20.0dp"
-            android:background="#ffffff">
-        </ListView>
-
-
+    <ListView
+        android:id="@+id/android:list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#ffffff"
+        android:divider="#99d9de"
+        android:dividerHeight="20.0dp">
+    </ListView>
 
 </LinearLayout>
