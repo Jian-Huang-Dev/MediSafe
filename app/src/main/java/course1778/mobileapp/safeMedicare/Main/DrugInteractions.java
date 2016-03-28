@@ -73,7 +73,7 @@ public class DrugInteractions extends android.support.v4.app.ListFragment {
         crsLocalDatabase = db.getCursor();
         DatabaseInteractionHelper dbInteraction = new DatabaseInteractionHelper(getContext());
         crsInteractionsDynamic = dbInteraction.getCursor();
-        Log.d("mydatabase2", DatabaseUtils.dumpCursorToString(dbInteraction.getCursor()));
+        Log.d("mydatabase5", DatabaseUtils.dumpCursorToString(dbInteraction.getCursor()));
 
         // loop through dynamic drug interaction database
         crsInteractionsDynamic.moveToPosition(-1);

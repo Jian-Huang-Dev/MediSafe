@@ -20,6 +20,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.parse.ParseUser;
+
 public class DatabaseInteractionHelper extends SQLiteOpenHelper {
 	private static final String DATABASE_NAME = "interactions.db";
 	private static final int SCHEMA = 1;
@@ -61,7 +63,8 @@ public class DatabaseInteractionHelper extends SQLiteOpenHelper {
 
 	public Cursor getCursor() {
 		SQLiteDatabase db = this.getReadableDatabase();
-		Cursor res = db.rawQuery("select * from interactions", null);
+		Cursor res = db.rawQuery("select * from interactions WHERE " +
+				"usr_name = '"+ParseUser.getCurrentUser().getUsername()+"'", null);
 		return res;
 	}
 

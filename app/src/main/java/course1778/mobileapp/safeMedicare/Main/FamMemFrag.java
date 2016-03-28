@@ -362,7 +362,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     public void onClick(DialogInterface di, int whichButton) {
         // get strings from edittext boxes, then insert them into database
         ContentValues values = new ContentValues(DatabaseHelper.CONTENT_VALUE_COUNT);
-        ContentValues drugInteractionValues = new ContentValues(3);
+        ContentValues drugInteractionValues = new ContentValues(4);
         Dialog dlg = (Dialog) di;
         EditText title = (EditText) dlg.findViewById(R.id.title);
         TimePicker tp = (TimePicker)dlg.findViewById(R.id.timePicker);
@@ -419,6 +419,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
                     // only insert new drug interactions if they have not yet exist
                     if(!dbInteraction.isDrugInteractionExist(medNameFieldTxt, interactionName)) {
                         // insert the drug interaction into our new dynamic drug interaction db
+                        drugInteractionValues.put(DatabaseInteractionHelper.USR_NAME, ParseUser.getCurrentUser().getUsername());
                         drugInteractionValues.put(DatabaseInteractionHelper.DRUG_NAME, medNameFieldTxt);
                         drugInteractionValues.put(DatabaseInteractionHelper.DRUG_INTERACTION, interactionName);
                         drugInteractionValues.put(

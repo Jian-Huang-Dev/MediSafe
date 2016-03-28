@@ -19,6 +19,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.parse.ParseUser;
+
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "notification.db";
     private static final int SCHEMA = 1;
@@ -81,7 +83,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
   public Cursor getCursor(){
     SQLiteDatabase db = this.getReadableDatabase();
-    Cursor res = db.rawQuery( "select * from notification", null );
+    Cursor res = db.rawQuery( "select * from notification WHERE " +
+            "usr_name = '"+ ParseUser.getCurrentUser().getUsername()+"'", null);
     return res;
   }
 
