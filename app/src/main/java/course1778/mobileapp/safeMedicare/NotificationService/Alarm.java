@@ -61,7 +61,7 @@ public class Alarm extends BroadcastReceiver {
         for (int i = 0; i<length; i++) {
             NOTIFY_ID = (int) title.charAt(i) + NOTIFY_ID;
         }
-        NOTIFY_ID = Integer.parseInt(extras.getString("time_h") +extras.getString("time_m"));
+        NOTIFY_ID = NOTIFY_ID + Integer.parseInt(extras.getString("time_h") +extras.getString("time_m"));
 
 
         //Toast.makeText(context, Integer.toString(NOTIFY_ID), Toast.LENGTH_LONG).show();

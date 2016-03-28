@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -35,6 +36,7 @@ import java.util.List;
 
 import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
 import course1778.mobileapp.safeMedicare.Helpers.Helpers;
+import course1778.mobileapp.safeMedicare.Helpers.MySimpleCursorAdapter;
 import course1778.mobileapp.safeMedicare.NotificationService.Alarm;
 import course1778.mobileapp.safeMedicare.NotificationService.Snooze_Act;
 import course1778.mobileapp.safeMedicare.NotificationService.Taken_Activity;
@@ -131,16 +133,29 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
 
 
 
-        SimpleCursorAdapter adapter =
-                new SimpleCursorAdapter(getActivity(), R.layout.patient_item,
+//        SimpleCursorAdapter adapter =
+//                new SimpleCursorAdapter(getActivity(), R.layout.patient_item,
+//                        current, new String[]{
+//                        DatabaseHelper.TITLE,
+//                        DatabaseHelper.TIME_H,
+//                        DatabaseHelper.TIME_M,
+//                        DatabaseHelper.DOSAGE,
+//                        DatabaseHelper.INSTRUCTION},
+//                        new int[]{R.id.name, R.id.time_h, R.id.time_m, R.id.dosage,R.id.instruction},
+//                        0);
+//
+//        setListAdapter(adapter);
+
+        MySimpleCursorAdapter adapter =
+                new MySimpleCursorAdapter(getActivity(), R.layout.patient_item,
                         current, new String[]{
                         DatabaseHelper.TITLE,
                         DatabaseHelper.TIME_H,
                         DatabaseHelper.TIME_M,
+                        DatabaseHelper.SHAPE,
                         DatabaseHelper.DOSAGE,
                         DatabaseHelper.INSTRUCTION},
-                        new int[]{R.id.name, R.id.time_h, R.id.time_m, R.id.dosage,R.id.instruction},
-                        0);
+                        new int[]{R.id.name, R.id.time_h, R.id.time_m, R.id.shape, R.id.dosage,R.id.instruction});
 
         setListAdapter(adapter);
 
@@ -159,6 +174,14 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
                 } else {
                     return false;
                 }
+            }
+        });
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                retrieveDataFromParse();
             }
         });
 
