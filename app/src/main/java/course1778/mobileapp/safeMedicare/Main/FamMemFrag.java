@@ -467,7 +467,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
                     })
 
                             // ok button
-                    .setPositiveButton(R.string.ok, null).show();
+                    .setPositiveButton(R.string.dismiss, null).show();
 
             TextView interactionResultView = (TextView) resultView.findViewById(R.id.resultView);
 

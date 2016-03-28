@@ -1,13 +1,16 @@
 package course1778.mobileapp.safeMedicare.Helpers;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.database.DatabaseUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
@@ -21,12 +24,12 @@ import course1778.mobileapp.safeMedicare.R;
 public class DrugInteractionCustomAdapter extends BaseAdapter implements ListAdapter {
 	private ArrayList<String> list = new ArrayList<String>();
 	private Context context;
-
-
+	private Activity activity;
 
 	public DrugInteractionCustomAdapter(ArrayList<String> list, Context context) {
 		this.list = list;
 		this.context = context;
+		this.activity = (Activity) context;
 	}
 
 	@Override
@@ -66,20 +69,38 @@ public class DrugInteractionCustomAdapter extends BaseAdapter implements ListAda
 		drug_interaction_name.setText(drugInteractionName);
 
 		//Handle buttons and add onClickListeners
-		Button deleteBtn = (Button)view.findViewById(R.id.delete_button);
+		ImageButton deleteBtn = (ImageButton)view.findViewById(R.id.delete_button);
 
-		deleteBtn.setOnClickListener(new View.OnClickListener(){
+		deleteBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
-				DatabaseInteractionHelper dbInteraction = new DatabaseInteractionHelper(context);
-				dbInteraction.setDrugInteractionShow(
-						drugName, drugInteractionName, DatabaseInteractionHelper.DRUG_INTERACTION_SHOW_FALSE);
-				Log.d("mydeletebutton", DatabaseUtils.dumpCursorToString(dbInteraction.getCursor()));
+				// inflate a dialog to display the drug interactions warning
+				LayoutInflater inflater = activity.getLayoutInflater();
+				View resultView = inflater.inflate(R.layout.drug_interaction_result, null);
+				AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 
-				list.remove(position); //or some other task
+				builder.setTitle(R.string.drug_interaction_result_title).setView(resultView)
+						.setNegativeButton(R.string.cancel, null)
+						.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int which) {
+								// update database and remove this interaction
+								DatabaseInteractionHelper dbInteraction = new DatabaseInteractionHelper(context);
+								dbInteraction.setDrugInteractionShow(
+										drugName, drugInteractionName, DatabaseInteractionHelper.DRUG_INTERACTION_SHOW_FALSE);
+								Log.d("mydeletebutton", DatabaseUtils.dumpCursorToString(dbInteraction.getCursor()));
 
-				notifyDataSetChanged();
+								list.remove(position);
+
+								notifyDataSetChanged();
+							}
+						}).show();
+
+				TextView interactionResultView = (TextView) resultView.findViewById(R.id.resultView);
+
+				// add warning message into the pop up window
+				// display on pop up window
+				interactionResultView.setText(activity.getString(R.string.interaction_delete_warning));
 			}
 		});
 
