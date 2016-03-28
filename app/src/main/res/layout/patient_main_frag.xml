@@ -20,6 +20,8 @@
             android:background="#99d9de" />
 
 
+
+
         <ListView
             android:id="@+id/android:list"
             android:layout_width="match_parent"
@@ -28,6 +30,8 @@
             android:dividerHeight="30.0dp"
             android:background="#ffffff">
         </ListView>
+
+
     </LinearLayout>
 
     <android.support.design.widget.FloatingActionButton
