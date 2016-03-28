@@ -22,6 +22,7 @@ public class Helpers {
     public static final String PARSE_OBJECT_USER = "user";
     public static final String PARSE_OBJECT_VALUE = "my_value";
     public static final String PARSE_OBJECT_DATA_KEY = "data";
+    public static final String STRING_SPLITER = ",";
 //    public static final String NOFITY_ID = "notify_id";
 
     public static String StringFormatter(int num, String formatStyle) {

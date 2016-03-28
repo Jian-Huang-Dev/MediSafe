@@ -60,12 +60,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
+import course1778.mobileapp.safeMedicare.Helpers.DatabaseInteractionHelper;
 import course1778.mobileapp.safeMedicare.Helpers.Helpers;
 import course1778.mobileapp.safeMedicare.R;
 
 public class FamMemFrag extends android.support.v4.app.ListFragment implements
         DialogInterface.OnClickListener {
     private DatabaseHelper db = null;
+    private DatabaseInteractionHelper dbInteraction;
     private Cursor current = null;
     private AsyncTask task = null;
     private int notifyId = 0;
@@ -251,6 +253,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
 
 //        if (current == null) {
             db = new DatabaseHelper(getActivity());
+            dbInteraction = new DatabaseInteractionHelper(getActivity());
             task = new LoadCursorTask().execute();
 //        }
 
@@ -359,6 +362,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
     public void onClick(DialogInterface di, int whichButton) {
         // get strings from edittext boxes, then insert them into database
         ContentValues values = new ContentValues(DatabaseHelper.CONTENT_VALUE_COUNT);
+        ContentValues drugInteractionValues = new ContentValues(4);
         Dialog dlg = (Dialog) di;
         EditText title = (EditText) dlg.findViewById(R.id.title);
         TimePicker tp = (TimePicker)dlg.findViewById(R.id.timePicker);
@@ -409,17 +413,30 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
                     // interaction found
                     Log.d("myinteraction", "Found Interaction");
 
-                    // two line spaces before add new interactoin
-//                    drug_interaction_list.add(htmlString);
-//                    drug_interaction_list.add("<br> <br>");
-
                     String interaction_result =
                             medNameFieldTxt + "/" + interactionName + "\n";
+
+                    // only insert new drug interactions if they have not yet exist
+                    if(!dbInteraction.isDrugInteractionExist(medNameFieldTxt, interactionName)) {
+                        // insert the drug interaction into our new dynamic drug interaction db
+                        drugInteractionValues.put(DatabaseInteractionHelper.USR_NAME, ParseUser.getCurrentUser().getUsername());
+                        drugInteractionValues.put(DatabaseInteractionHelper.DRUG_NAME, medNameFieldTxt);
+                        drugInteractionValues.put(DatabaseInteractionHelper.DRUG_INTERACTION, interactionName);
+                        drugInteractionValues.put(
+                                DatabaseInteractionHelper.DRUG_INTERACTION_SHOW,
+                                DatabaseInteractionHelper.DRUG_INTERACTION_SHOW_TRUE);
+
+                        dbInteraction.getWritableDatabase().insert(DatabaseInteractionHelper.TABLE,
+                                DatabaseInteractionHelper.DRUG_NAME, drugInteractionValues);
+                    }
+
                     drug_interaction_list.add(interaction_result);
                     curr_drug_interaction_list.add(interactionName);
                 }
             }
         }
+
+        Log.d("mydatabase3", DatabaseUtils.dumpCursorToString(dbInteraction.getCursor()));
 
         // display all iteractions in pop window if there is any
         String interaction_results = "\n";
@@ -428,36 +445,38 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
             interaction_results = interaction_results.concat(interaction);
         }
 
-        // inflate a dialog to display the drug interactions warning
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View resultView = inflater.inflate(R.layout.drug_interaction_result, null);
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        if (drug_interaction_list.size() != 0) {
+            // inflate a dialog to display the drug interactions warning
+            LayoutInflater inflater = getActivity().getLayoutInflater();
+            View resultView = inflater.inflate(R.layout.drug_interaction_result, null);
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        builder.setTitle(R.string.drug_interaction_result_title).setView(resultView)
-                // go to drug interaction list button
-                .setNegativeButton(R.string.drug_interaction_list, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // drug interaction page
-                        DrugInteractions drugInterac = new DrugInteractions();
-                        FragmentTransaction transaction;
-                        transaction = getFragmentManager().beginTransaction();
-                        transaction.replace(R.id.fragmentContainer, drugInterac);
-                        transaction.addToBackStack(null);
-                        // Commit the transaction
-                        transaction.commit();
-                    }
-                })
+            builder.setTitle(R.string.drug_interaction_result_title).setView(resultView)
+                    // go to drug interaction list button
+                    .setNegativeButton(R.string.drug_interaction_list, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            // drug interaction page
+                            DrugInteractions drugInterac = new DrugInteractions();
+                            FragmentTransaction transaction;
+                            transaction = getFragmentManager().beginTransaction();
+                            transaction.replace(R.id.fragmentContainer, drugInterac);
+                            transaction.addToBackStack(null);
+                            // Commit the transaction
+                            transaction.commit();
+                        }
+                    })
 
-                // ok button
-                 .setPositiveButton(R.string.ok, null).show();
+                            // ok button
+                    .setPositiveButton(R.string.dismiss, null).show();
 
-        TextView interactionResultView = (TextView) resultView.findViewById(R.id.resultView);
+            TextView interactionResultView = (TextView) resultView.findViewById(R.id.resultView);
 
-        // add warning message into the pop up window
-        interaction_results = interaction_results.concat(getString(R.string.interaction_warning));
+            // add warning message into the pop up window
+            interaction_results = interaction_results.concat(getString(R.string.interaction_warning));
 
-        // display on pop up window
-        interactionResultView.setText(interaction_results);
+            // display on pop up window
+            interactionResultView.setText(interaction_results);
+        }
 
         // write the list of drug interactions into file
         Helpers.writeToFile(getContext(), drug_interaction_list, "drug_interaction_list");
