@@ -487,7 +487,7 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         }
 
 
-        //give different
+
         if (((CheckBox) dlg.findViewById(R.id.MonCheck)).isChecked()){
             monday = monday + 1;
         }
@@ -604,7 +604,36 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
         task = new InsertTask().execute(values);
     }
 
+    public String getWhere(){
+        String day;
+        Calendar c = Calendar.getInstance();
+
+        if (c.get(Calendar.DAY_OF_WEEK) == 1){
+            day = "sunday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 2){
+            day = "monday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 3){
+            day = "tuesday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 4){
+            day = "wednesday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 5){
+            day = "thursday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 6){
+            day = "friday";
+        } else {
+            day = "saturday";
+        }
+
+        String WHERE = "usr_name=\'"+ParseUser.getCurrentUser().getUsername()+"\' AND day_filter='1' ";
+        WHERE = WHERE.replaceAll("day_filter", day);
+
+        return WHERE;
+    }
+
     abstract private class BaseTask<T> extends AsyncTask<T, Void, Cursor> {
+
+        String WHERE = getWhere();
+
         @Override
         public void onPostExecute(Cursor result) {
             ((CursorAdapter) getListAdapter()).changeCursor(result);
@@ -620,7 +649,8 @@ public class FamMemFrag extends android.support.v4.app.ListFragment implements
                             DatabaseHelper.TITLE,
                             DatabaseHelper.TIME_H,
                             DatabaseHelper.TIME_M},
-                            "usr_name=\'"+ParseUser.getCurrentUser().getUsername()+"\'",
+                            //"usr_name=\'"+ParseUser.getCurrentUser().getUsername()+"\'",
+                            WHERE,
                             null, null, null, DatabaseHelper.ORDER_NUM);
 
             result.getCount();

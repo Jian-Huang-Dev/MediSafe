@@ -296,7 +296,38 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
         });
     }
 
+    public String getWhere(){
+        String day;
+        Calendar c = Calendar.getInstance();
+
+        if (c.get(Calendar.DAY_OF_WEEK) == 1){
+            day = "sunday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 2){
+            day = "monday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 3){
+            day = "tuesday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 4){
+            day = "wednesday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 5){
+            day = "thursday";
+        } else if (c.get(Calendar.DAY_OF_WEEK) == 6){
+            day = "friday";
+        } else {
+            day = "saturday";
+        }
+
+        String WHERE = "usr_name=\'"+ParseUser.getCurrentUser().getUsername()+"\' AND day_filter='1' ";
+        WHERE = WHERE.replaceAll("day_filter", day);
+
+        return WHERE;
+    }
+
     abstract private class BaseTask<T> extends AsyncTask<T, Void, Cursor> {
+        //String WHERE =  "TAG1='tagname' OR TAG2='tagname' OR TAG3='tagname' OR TAG4='tagname' OR TAG5='tagname' ";
+
+        //String WHERE = "usr_name=\'"+ParseUser.getCurrentUser().getUsername()+"\' AND \'"+getDay()+"\'='1' ";
+        String WHERE = getWhere();
+
         @Override
         public void onPostExecute(Cursor result) {
             ((CursorAdapter) getListAdapter()).changeCursor(result);
@@ -314,8 +345,9 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
                                             DatabaseHelper.SHAPE,
                                             DatabaseHelper.DOSAGE,
                                             DatabaseHelper.INSTRUCTION},
-                                            "usr_name=\'"+ParseUser.getCurrentUser().getUsername()+"\'",
-                                            null, null, null, DatabaseHelper.ORDER_NUM);
+                                    //"usr_name=\'"+ParseUser.getCurrentUser().getUsername()+"\'",
+                                    WHERE,
+                                    null, null, null, DatabaseHelper.ORDER_NUM);
 
             result.getCount();
 
