@@ -384,7 +384,7 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
         values.put(DatabaseHelper.SUNDAY, parseObject.getString(DatabaseHelper.SUNDAY));
 
         values.put(DatabaseHelper.DOSAGE, parseObject.getString(DatabaseHelper.DOSAGE));
-        values.put(DatabaseHelper.SHAPE, parseObject.getString(DatabaseHelper.SHAPE));
+        values.put(DatabaseHelper.SHAPE, parseObject.getInt(DatabaseHelper.SHAPE));
         values.put(DatabaseHelper.INSTRUCTION, parseObject.getString(DatabaseHelper.INSTRUCTION));
         values.put(DatabaseHelper.ORDER_NUM, parseObject.getString(DatabaseHelper.ORDER_NUM));
 

@@ -53,4 +53,6 @@
     <string name="dosage">Dosage : </string>
     <string name="instruction">Instruction : </string>
     <string name="shape">Shape : </string>
+    <string name="drug_interaction">Drug Interaction</string>
+    <string name="askyourdoctor">Ask your doctor</string>
 </resources>
