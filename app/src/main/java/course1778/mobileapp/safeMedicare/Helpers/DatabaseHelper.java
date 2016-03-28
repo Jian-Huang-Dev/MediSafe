@@ -33,14 +33,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String SHAPE = "shape";
     public static final String NOFITY_ID = "notify_id";
     public static final String ORDER_NUM = "order_num";
-  public static final String MONDAY="monday";
-  public static final String TUESDAY="tuesday";
-  public static final String WEDNESDAY="wednesday";
-  public static final String THURSDAY="thursday";
-  public static final String FRIDAY="friday";
-  public static final String SATURDAY="saturday";
-  public static final String SUNDAY="sunday";
-public static final String TABLE = "notification";
+    public static final String MONDAY="monday";
+    public static final String TUESDAY="tuesday";
+    public static final String WEDNESDAY="wednesday";
+    public static final String THURSDAY="thursday";
+    public static final String FRIDAY="friday";
+    public static final String SATURDAY="saturday";
+    public static final String SUNDAY="sunday";
+    public static final String TABLE = "notification";
 
     // for preloaded database "medicine.db"
     public static final String SHEET_1_DRUG_NAMES = "Drugs";

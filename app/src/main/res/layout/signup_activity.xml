@@ -20,7 +20,7 @@
                 android:id="@+id/loginBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:background="@color/colorDarkBlue"
+                android:background="@color/colorLightBlue"
                 android:src="@drawable/left_arrow" />
 
             <TextView
