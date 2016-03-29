@@ -1,6 +1,8 @@
 package course1778.mobileapp.safeMedicare.Helpers;
 
 import android.content.Context;
+import android.telephony.SmsManager;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -12,6 +14,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import course1778.mobileapp.safeMedicare.Main.PatientActivity;
 import course1778.mobileapp.safeMedicare.R;
 
 /**
@@ -23,7 +26,15 @@ public class Helpers {
     public static final String PARSE_OBJECT_VALUE = "my_value";
     public static final String PARSE_OBJECT_DATA_KEY = "data";
     public static final String STRING_SPLITER = ",";
+    public static String currTitle;
 //    public static final String NOFITY_ID = "notify_id";
+
+    public static void sendmessage(){
+        SmsManager smsManager = SmsManager.getDefault();
+        //smsManager.sendTextMessage("6474013409", null, (Helpers.currTitle+getContext().getString(R.string.msgcontent)), null, null);
+        smsManager.sendTextMessage("12896892386", null, (Helpers.currTitle + "has not been taken in 15 minutes! Please remind him/her by phone"), null, null);
+        //Toast.makeText(PatientActivity.getContext(), "SMS sent.", Toast.LENGTH_LONG).show();
+    }
 
     public static String StringFormatter(int num, String formatStyle) {
         DecimalFormat formatter = new DecimalFormat(formatStyle);

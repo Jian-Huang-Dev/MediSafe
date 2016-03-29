@@ -15,12 +15,12 @@ import course1778.mobileapp.safeMedicare.Main.PatientActivity;
  * Created by lang on 07/03/16.
  */
 public class Taken_Activity extends Activity {
-    Context context = PatientActivity.getContext();
-    //Context context = getActivity().getApplicationContext();
-    //Intent intent = getIntent();
-    private final String REMINDER_BUNDLE = "MyReminderBundle";
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+        Context context = PatientActivity.getContext();
+//Context context = getActivity().getApplicationContext();
+//Intent intent = getIntent();
+private final String REMINDER_BUNDLE = "MyReminderBundle";
+@Override
+public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //int id = intent.getBundleExtra(REMINDER_BUNDLE).getInt("");
         //Toast.makeText(context, Integer.toString(getIntent().getBundleExtra(REMINDER_BUNDLE).getInt("id")), Toast.LENGTH_LONG).show();
@@ -31,17 +31,17 @@ public class Taken_Activity extends Activity {
         AlarmManager alarmMgr = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, Alarm_Msg.class);
         PendingIntent pendingIntent =
-                PendingIntent.getBroadcast(context, getIntent().getBundleExtra(REMINDER_BUNDLE).getInt("id") + 1, intent,
-                        PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent.getBroadcast(context, getIntent().getBundleExtra(REMINDER_BUNDLE).getInt("id") + 1, intent,
+        PendingIntent.FLAG_UPDATE_CURRENT);
         alarmMgr.cancel(pendingIntent);
 
-    }
+        }
 
-    public static void cancelNotification(Context ctx, int notifyId) {
+public static void cancelNotification(Context ctx, int notifyId) {
         String ns = Context.NOTIFICATION_SERVICE;
         NotificationManager nMgr = (NotificationManager) ctx.getSystemService(ns);
         nMgr.cancel(notifyId);
-    }
+        }
 
 
-}
+        }

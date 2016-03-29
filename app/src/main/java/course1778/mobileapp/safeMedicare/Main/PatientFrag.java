@@ -1,12 +1,21 @@
 package course1778.mobileapp.safeMedicare.Main;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.NotificationCompat;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -17,6 +26,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -25,6 +35,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -33,6 +44,9 @@ import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
 import course1778.mobileapp.safeMedicare.Helpers.Helpers;
 import course1778.mobileapp.safeMedicare.Helpers.MySimpleCursorAdapter;
 import course1778.mobileapp.safeMedicare.NotificationService.Alarm;
+import course1778.mobileapp.safeMedicare.NotificationService.Fake_Taken;
+import course1778.mobileapp.safeMedicare.NotificationService.Snooze_Act;
+import course1778.mobileapp.safeMedicare.NotificationService.Taken_Activity;
 import course1778.mobileapp.safeMedicare.R;
 
 /**
@@ -46,6 +60,8 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
     private DatabaseHelper db = null;
     private Cursor current = null;
     private AsyncTask task = null;
+    Handler mHandler;
+    public static MediaPlayer mPlayer;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -201,6 +217,7 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
     }
 
     public void retrieveDataFromParse() {
+
         final ContentValues values = new ContentValues(DatabaseHelper.CONTENT_VALUE_COUNT);
         // get current number of rows in database table
         DatabaseHelper.preNumRows =
@@ -219,11 +236,11 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
 
                     for (ParseObject parseObject : parseObjectList) {
 
-                        String currTitle = parseObject.getString(DatabaseHelper.TITLE);
+                        Helpers.currTitle = parseObject.getString(DatabaseHelper.TITLE);
                         String currHour = parseObject.getString(DatabaseHelper.TIME_H);
                         String currMin = parseObject.getString(DatabaseHelper.TIME_M);
 
-                        if (!db.isNameExitOnDB(currTitle) || !db.isHourExitOnDB(currHour) || !db.isMinOnDB(currMin)) {
+                        if (!db.isNameExitOnDB(Helpers.currTitle) || !db.isHourExitOnDB(currHour) || !db.isMinOnDB(currMin)) {
                             // if local database does not have this item, then add it to local database
 
                             // saving data for alarm use
@@ -247,12 +264,132 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
                                             db.getReadableDatabase(), DatabaseHelper.TABLE);
 
                             // set new alarm for this medication
-                            new Alarm(getActivity().getApplicationContext(), bundle);
+                           // new Alarm(getActivity().getApplicationContext(), bundle);
+
+
+
+
+
+                            NotificationManager mgr= (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                            NotificationCompat.Builder normal=buildNormal(getContext(), Helpers.currTitle);
+                            NotificationCompat.InboxStyle notification= new NotificationCompat.InboxStyle(normal);
+
+//                            mPlayer= MediaPlayer.create(getContext(), R.raw.aironthegstring);
+//                            try {
+//                                mPlayer.prepare();
+//                            } catch (IllegalStateException e2) {
+//                                e2.printStackTrace();
+//                            } catch (IOException e2) {
+//                                e2.printStackTrace();
+//                            }
+//                            mPlayer.start();
+
+                            mgr.notify(1,
+                                    notification
+                                            .addLine(Helpers.currTitle)
+                                            .addLine(getContext().getString(R.string.description))
+                                            .build());
+
+
+                            new CountDownTimer(10000, 1000) { //40000 milli seconds is total time, 1000 milli seconds is time interval
+
+                                public void onTick(long millisUntilFinished) {
+                                    //Toast.makeText(getContext(), Long.toString(millisUntilFinished), Toast.LENGTH_SHORT).show();
+                                }
+                                public void onFinish() {
+
+                                    NotificationManager mgr= (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+                                    NotificationCompat.Builder normal=buildNormal(getContext(), Helpers.currTitle);
+                                    NotificationCompat.InboxStyle notification= new NotificationCompat.InboxStyle(normal);
+//                                    try {
+//                                        mPlayer.prepare();
+//                                    } catch (IllegalStateException e2) {
+//                                        e2.printStackTrace();
+//                                    } catch (IOException e2) {
+//                                        e2.printStackTrace();
+//                                    }
+//                                    mPlayer.start();
+
+
+                                    mgr.notify(1,
+                                            notification
+                                                    .addLine(Helpers.currTitle)
+                                                    .addLine(getContext().getString(R.string.description))
+                                                    .build());
+//                                    try {
+//                                        SmsManager smsManager = SmsManager.getDefault();
+//                                        //smsManager.sendTextMessage("6474013409", null, (Helpers.currTitle+getContext().getString(R.string.msgcontent)), null, null);
+//                                        smsManager.sendTextMessage("12896892386", null, (Helpers.currTitle+PatientActivity.getContext().getString(R.string.msgcontent)), null, null);
+//                                        Toast.makeText(PatientActivity.getContext(), "SMS sent.", Toast.LENGTH_LONG).show();
+//                                    }
+//                                    catch (Exception e3) {
+//
+//                                    }
+                                    Helpers.sendmessage();
+
+
+
+                                }
+                            }.start();
+
+
+
                         }
                     }
                 }
             }
         });
+    }
+
+    private NotificationCompat.Builder buildNormal(Context context, String title) {
+        NotificationCompat.Builder b=new NotificationCompat.Builder(context);
+        //Snooze snooze = new Snooze();
+
+        b.setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setContentTitle(context.getString(R.string.getmed))
+                //.setVisibility(Notification.VISIBILITY_PUBLIC)
+                .setCategory("alarm")
+                .setPriority(2)
+                        //.setContentText(title)
+                        //.setContentIntent(buildPendingIntent(Settings.ACTION_SECURITY_SETTINGS, context))
+                .setSmallIcon(R.drawable.medicine_notify)
+                        //.setLargeIcon(R.drawable.medicine)
+                .setTicker(context.getString(R.string.getmed) + title)
+                .setPriority(Notification.PRIORITY_HIGH)
+                //.setOngoing(true)
+//                .addAction(android.R.drawable.ic_media_play,
+//                        context.getString(R.string.show)
+//                        buildPendingIntent(FamMemActivity.class, context, extras))
+                .addAction(android.R.drawable.ic_media_play,
+                        context.getString(R.string.snooze),
+                        buildPendingIntent(Fake_Taken.class, context))
+                .addAction(android.R.drawable.ic_media_play,
+                        context.getString(R.string.taken),
+                        buildPendingIntent(Fake_Taken.class, context));
+//                .addAction(android.R.drawable.ic_media_play,
+//                        context.getString(R.string.snooze),
+//                        buildPendingIntent(Snooze.class, context, extras));
+        //buildPendingIntent(Settings.ACTION_SETTINGS, context));
+
+        return(b);
+    }
+
+    private PendingIntent buildPendingIntent(Class intentclass, Context context) {
+        //mPlayer.stop();
+        Intent intent=new Intent(context, intentclass);
+        //cancelNotification(context, 1);
+        //mPlayer.stop();
+
+        //int ID= extras.getInt("id");
+        //cancelNotification(context, 1337);
+
+        return(PendingIntent.getActivity(context, 0, intent, 0));
+    }
+    public static void cancelNotification(Context ctx, int notifyId) {
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager nMgr = (NotificationManager) ctx.getSystemService(ns);
+        nMgr.cancel(notifyId);
     }
 
     protected void retrieveDataFromLocalDatabase() {
@@ -322,8 +459,8 @@ public class PatientFrag extends android.support.v4.app.ListFragment {
                                             DatabaseHelper.SHAPE,
                                             DatabaseHelper.DOSAGE,
                                             DatabaseHelper.INSTRUCTION},
-                                    //"usr_name=\'"+ParseUser.getCurrentUser().getUsername()+"\'",
-                                    WHERE,
+                                    "usr_name=\'"+ParseUser.getCurrentUser().getUsername()+"\'",
+                                    //WHERE,
                                     null, null, null, DatabaseHelper.ORDER_NUM);
 
             result.getCount();

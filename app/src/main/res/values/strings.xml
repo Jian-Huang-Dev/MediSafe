@@ -28,7 +28,7 @@
     <string name="show">Show The List</string>
     <string name="description">Description of the medicine!</string>
     <string name="msgcontent">
-        has not been taken in 15 minutes! Please remind him/her by phone.测试短信，收到了告诉我一声
+        has not been taken in 15 minutes! Please remind him/her by phone.
     </string>
     <string name="register_btn">Register</string>
     <string name="email_addr">Email Address</string>
