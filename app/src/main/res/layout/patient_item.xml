@@ -27,7 +27,9 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:textColor="#00B0F0"
-    android:textSize="21dp"
+    android:textStyle="bold"
+    android:textSize="30dp"
+
     android:text="@string/time"/>
 
     <LinearLayout
@@ -37,19 +39,22 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="21dp"
+            android:textStyle="bold"
+            android:textSize="30dp"
             android:id="@+id/time_h"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="21dp"
+            android:textSize="30dp"
+            android:textStyle="bold"
             android:text=" : "/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="21dp"
+            android:textSize="30dp"
+            android:textStyle="bold"
             android:id="@+id/time_m"/>
 
     </LinearLayout>
@@ -58,26 +63,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#00B0F0"
-        android:textSize="21dp"
+        android:textSize="30dp"
+        android:textStyle="bold"
         android:text="@string/dosage"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="21dp"
+        android:textSize="30dp"
+        android:textStyle="bold"
         android:id="@+id/dosage"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#00B0F0"
-        android:textSize="21dp"
+        android:textSize="30dp"
+        android:textStyle="bold"
         android:text="@string/instruction"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="21dp"
+        android:textSize="30dp"
+        android:textStyle="bold"
         android:id="@+id/instruction"/>
 
 </LinearLayout>
