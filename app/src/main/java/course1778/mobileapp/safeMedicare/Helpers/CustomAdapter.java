@@ -7,10 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import course1778.mobileapp.safeMedicare.Main.FamMemActivity;
-import course1778.mobileapp.safeMedicare.Main.MainActivity;
 import course1778.mobileapp.safeMedicare.R;
 
 /**
@@ -21,10 +18,10 @@ public class CustomAdapter extends BaseAdapter {
     Context context;
     int [] imageId;
     private static LayoutInflater inflater=null;
-    public CustomAdapter(FamMemActivity famMemActivity, String[] prgmNameList, int[] prgmImages) {
+    public CustomAdapter(Context context, String[] prgmNameList, int[] prgmImages) {
         // TODO Auto-generated constructor stub
         result=prgmNameList;
-        context=famMemActivity;
+        this.context=context;
         imageId=prgmImages;
         inflater = ( LayoutInflater )context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);

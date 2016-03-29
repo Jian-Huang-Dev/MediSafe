@@ -25,13 +25,20 @@
 
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/add"
-        app:layout_anchor="@id/date"
-        app:layout_anchorGravity="bottom|right|end"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right|bottom">
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/cross"
+            app:layout_anchor="@id/date"
+            app:layout_anchorGravity="bottom|right|end"/>
+
+    </LinearLayout>
 
 </android.support.design.widget.CoordinatorLayout>

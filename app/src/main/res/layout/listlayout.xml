@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#beefef">
+    android:background="@color/colorWhite">
 
     <TextView
         android:id="@+id/listTextView"
@@ -13,5 +13,5 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textStyle="bold"
         android:textColor="#2011ed"
-        android:background="#beefef" />
+        android:background="@color/colorWhite" />
 </LinearLayout>

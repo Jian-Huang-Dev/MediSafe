@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#99d9de">
+                                                 xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                 android:layout_width="match_parent"
+                                                 android:layout_height="match_parent"
+                                                 android:background="#99d9de"
+                                                 android:orientation="vertical">
 
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
@@ -15,38 +16,44 @@
             android:id="@+id/date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="30dp"
-            android:textStyle="bold"
-            android:background="#99d9de"
-            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginLeft="5dp"
-            android:layout_marginBottom="10dp" />
-
-
+            android:layout_marginTop="10dp"
+            android:background="#99d9de"
+            android:textSize="30dp"
+            android:textStyle="bold"/>
 
 
         <ListView
             android:id="@+id/android:list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:divider="#99d9de"
-            android:dividerHeight="30.0dp"
-            android:background="#ffffff"
+            android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
-            android:layout_marginLeft="15dp">
+            android:background="#ffffff"
+            android:divider="#99d9de"
+            android:dividerHeight="30.0dp">
         </ListView>
 
 
     </LinearLayout>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/sync"
-        app:layout_anchor="@id/date"
-        app:layout_anchorGravity="bottom|right|end"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right|bottom">
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            android:src="@drawable/arrows"
+            app:layout_anchor="@id/date"
+            app:layout_anchorGravity="bottom|right|end"/>
+
+    </LinearLayout>
 
 
 </android.support.design.widget.CoordinatorLayout>
