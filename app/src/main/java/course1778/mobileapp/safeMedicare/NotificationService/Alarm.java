@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Random;
 
 import course1778.mobileapp.safeMedicare.Helpers.DatabaseHelper;
 import course1778.mobileapp.safeMedicare.Main.FamMemActivity;
@@ -138,7 +139,7 @@ public class Alarm extends BroadcastReceiver {
                         //.setLargeIcon(R.drawable.medicine)
                 .setTicker(context.getString(R.string.getmed) + title)
                 .setPriority(Notification.PRIORITY_HIGH)
-                .setOngoing(true)
+                //.setOngoing(true)
                 .addAction(android.R.drawable.ic_media_play,
                         context.getString(R.string.show),
                         buildPendingIntent(FamMemActivity.class, context, extras))
@@ -163,7 +164,12 @@ public class Alarm extends BroadcastReceiver {
         //int ID= extras.getInt("id");
         //cancelNotification(context, ID);
 
-        return(PendingIntent.getActivity(context, 0, intent, 0));
+
+//        Random randomGenerator = new Random();
+//        int randomInt = randomGenerator.nextInt(100);
+
+        //return(PendingIntent.getActivity(context, 0, intent, 0));
+        return(PendingIntent.getActivity(context, extras.getInt("id"), intent, PendingIntent.FLAG_UPDATE_CURRENT));
     }
 
 

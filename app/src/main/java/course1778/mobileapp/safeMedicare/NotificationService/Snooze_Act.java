@@ -1,6 +1,7 @@
 package course1778.mobileapp.safeMedicare.NotificationService;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,7 +22,7 @@ public class Snooze_Act extends Activity{
         Intent intent = getIntent();
 
 
-        Taken_Activity.cancelNotification(context, intent.getBundleExtra(REMINDER_BUNDLE).getInt("id"));
+        cancelNotification(context, intent.getBundleExtra(REMINDER_BUNDLE).getInt("id"));
         Alarm.mPlayer.stop();
 
         Bundle bundle = intent.getBundleExtra(REMINDER_BUNDLE);
@@ -29,6 +30,12 @@ public class Snooze_Act extends Activity{
         Snooze snooze = new Snooze(context, bundle);
 
         }
+
+    public static void cancelNotification(Context ctx, int notifyId) {
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager nMgr = (NotificationManager) ctx.getSystemService(ns);
+        nMgr.cancel(notifyId);
+    }
 
 
     }

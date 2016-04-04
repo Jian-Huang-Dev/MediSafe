@@ -129,6 +129,7 @@ public class Snooze extends BroadcastReceiver {
         Intent intent=new Intent(context, intentclass);
         intent.putExtra(REMINDER_BUNDLE, extras);
 
-        return(PendingIntent.getActivity(context, 0, intent, 0));
+        //return(PendingIntent.getActivity(context, 0, intent, 0));
+        return(PendingIntent.getActivity(context, extras.getInt("id"), intent, PendingIntent.FLAG_UPDATE_CURRENT));
     }
 }
