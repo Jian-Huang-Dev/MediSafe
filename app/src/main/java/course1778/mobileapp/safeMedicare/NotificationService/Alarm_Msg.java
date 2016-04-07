@@ -11,6 +11,8 @@ import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.parse.ParseUser;
+
 import course1778.mobileapp.safeMedicare.R;
 
 /**
@@ -68,13 +70,14 @@ public class Alarm_Msg extends BroadcastReceiver {
 
 
         String title = getBundle.getString("title");
+        String number = ParseUser.getCurrentUser().getString(ParseUser.getCurrentUser().getUsername());
 
         Log.i("Send SMS", "");
         Toast.makeText(context, (title+context.getString(R.string.msgcontent)), Toast.LENGTH_SHORT).show();
 
         try {
-            //SmsManager smsManager = SmsManager.getDefault();
-            //smsManager.sendTextMessage("12896892386", null, (title+context.getString(R.string.msgcontent)), null, null);
+            SmsManager smsManager = SmsManager.getDefault();
+            smsManager.sendTextMessage(number, null, (title+context.getString(R.string.msgcontent)), null, null);
             Toast.makeText(context, "SMS sent.", Toast.LENGTH_LONG).show();
         }
 

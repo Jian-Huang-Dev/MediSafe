@@ -52,9 +52,6 @@
         <activity android:name=".NotificationService.Snooze_Taken_Act"
             android:theme="@android:style/Theme.NoDisplay">
         </activity>
-        <activity android:name=".NotificationService.Fake_Taken"
-            android:theme="@android:style/Theme.NoDisplay">
-        </activity>
     </application>
 
 </manifest>
